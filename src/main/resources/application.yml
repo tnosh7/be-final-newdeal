@@ -19,6 +19,7 @@ spring:
     password: 1234
 
 
+
   jpa:
     open-in-view: true
     hibernate:
