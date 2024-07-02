@@ -1,27 +1,41 @@
-/* styles.css */
 body {
     font-family: "Do Hyeon", sans-serif;
     font-weight: 400;
     font-style: normal;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-button {
-    font-family: "Do Hyeon", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    margin: 110px auto 0 auto; /* 상단 마진 110px, 좌우 자동으로 가운데 정렬 */
+    width: 85%;
+    box-sizing: border-box; /* 패딩과 보더를 너비에 포함 */
 }
 
 /* Container for the header */
 .outer-container {
-    margin: 0 auto; /* 가로 가운데 정렬 */
-    width: 82%;
+    margin: 0 auto;
+    width: 85%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #ffffff;
     padding: 10px;
+    position: fixed; /* 헤더를 상단에 고정 */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* 다른 요소들보다 위에 오도록 함 */
 }
 
 /* Left-aligned content */
@@ -38,9 +52,9 @@ button {
 
 /* Right-aligned dropdown */
 .right-aligned {
-    display: flex; /* Flex로 설정하여 내부 요소들을 가로로 정렬 */
-    align-items: center; /* 세로 가운데 정렬 */
-    position: relative; /* 부모 요소를 상대 위치로 설정 */
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
 .host {
@@ -50,9 +64,9 @@ button {
     border-radius: 10px;
     width: 180px;
     min-width: 180px;
-    display: flex; /* 내부 요소들을 가로로 정렬 */
-    justify-content: center; /* 가로 가운데 정렬 */
-    align-items: center; /* 세로 가운데 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .host a {
@@ -65,9 +79,9 @@ button {
 .host a:hover {
     width: 180px;
     background-color: #f1f1f1;
-    display: flex; /* 내부 요소들을 가로로 정렬 */
-    justify-content: center; /* 가로 가운데 정렬 */
-    align-items: center; /* 세로 가운데 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Dropdown button styles */
@@ -80,13 +94,13 @@ button {
     border: 1px solid gray;
     border-radius: 10px;
     cursor: pointer;
-    display: flex; /* Flex로 설정하여 내부 요소들을 가로로 정렬 */
-    align-items: center; /* 세로 가운데 정렬 */
+    display: flex;
+    align-items: center;
 }
 
 /* Dropdown button text styles */
 .dropbtn > div {
-    margin-left: 5px; /* 아이콘과 텍스트 사이의 간격 설정 */
+    margin-left: 5px;
 }
 
 /* Dropdown content */
@@ -98,7 +112,7 @@ button {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    top: calc(100% + 1px); /* 부모 요소 아래에 1px 여유 공간 추가 */
+    top: calc(100% + 1px);
     right: 0;
 }
 
@@ -120,19 +134,16 @@ button {
     display: block;
 }
 
-
 footer {
     border-top: 1px solid #cccccc;
     color: #005241;
     padding: 1em 0;
-    position: fixed;
+    background-color: #ffffff;
     width: 100%;
-    bottom: 0;
-
 }
 
 .ft {
-    width: 80%;
+    width: 85%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -171,66 +182,153 @@ footer .social-icons a {
 }
 
 footer .social-icons a:hover {
-    color: #00aced; /* Example for Twitter */
+    color: #00aced;
 }
 
-.searchBox {
+.searchBox-khs {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 80%; /* 바깥 div의 너비를 화면 너비의 80%로 설정 */
-    margin: 0 auto; /* 가로 가운데 정렬 */
-    /* 추가적인 스타일 */
-    padding: 15px; /* 내부 여백 설정 */
-    border-radius: 8px; /* 모서리 둥글게 설정 */
-    border: 1px solid #ccc; /* 테두리 설정 */
+    margin: 0 auto;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
 
-.button-item {
+.button-item-khs {
     flex: 1;
     padding: 10px;
     background-color: #f1f1f1;
     border: 1px solid #cccccc;
     border-radius: 8px;
     margin: 0 10px;
-    cursor: pointer; /* 마우스를 가져다 대면 손가락 모양으로 변함 */
-    outline: none; /* 클릭 포커스 표시 제거 */
+    cursor: pointer;
+    outline: none;
     font-weight: bold;
     color: lightslategray;
 }
 
-.button-item:hover {
-    background-color: #f1f1f1; /* 호버 효과 배경색 */
+.button-item-khs:hover {
+    background-color: #f1f1f1;
 }
 
-.sb1 {
+.sb1-khs {
     flex: 3;
     text-align: left;
 }
 
-.sb2 {
+.sb2-khs {
     flex: 1;
     text-align: left;
 }
 
-.sb3 {
+.sb3-khs {
     flex: 1;
     text-align: left;
 }
 
-
-.sb4 {
+.sb4-khs {
     flex: 2;
     text-align: left;
 }
 
-.sb5 {
+.sb5-khs {
     flex: 1;
     background-color: #005241;
     color: white;
 }
 
-.sb5:hover {
+.sb5-khs:hover {
     background-color: #005241;
     color: white;
+}
+
+.selCat-khs {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cat-khs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.cat-khs img {
+    width: 70px;
+    height: 70px;
+}
+
+.cat-khs div {
+    text-align: center;
+    margin-top: 10px;
+}
+.accomList-khs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.accom-khs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    cursor: pointer;
+    width: 300px;
+    height: 330px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 0;
+}
+.accom-khs div {
+    font-size: 20px;
+    margin: 5px;
+}
+
+.accom-khs img {
+    width: 100%;
+    height: 50%;
+    border-radius: 10px 10px 0 0;
+}
+
+.accomD1-khs {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 세로 가운데 정렬 */
+}
+
+.accomD1-1-khs {
+    text-align: left; /* 왼쪽 정렬 */
+}
+
+.accomD1-2-khs {
+    text-align: right; /* 오른쪽 정렬 */
+}
+
+.accomD2-khs {
+    width: 95%;
+    text-align: left;
+    padding-left: 13px;
+    color: gray;
+}
+
+.accomD3-khs {
+    width: 95%;
+    text-align: left;
+    padding-left: 13px;
+    color: gray;
+}
+
+.accomD4-khs {
+    width: 95%;
+    text-align: right;
+    padding-right: 13px;
 }
