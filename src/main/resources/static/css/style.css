@@ -1,0 +1,236 @@
+/* styles.css */
+body {
+    font-family: "Do Hyeon", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    font-family: "Do Hyeon", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Container for the header */
+.outer-container {
+    margin: 0 auto; /* 가로 가운데 정렬 */
+    width: 82%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+/* Left-aligned content */
+.left-aligned {
+    color: #0D31B2;
+    font-size: 40px;
+    font-weight: 900;
+    flex: 1;
+}
+
+.logo {
+    width: 150px;
+}
+
+/* Right-aligned dropdown */
+.right-aligned {
+    display: flex; /* Flex로 설정하여 내부 요소들을 가로로 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    position: relative; /* 부모 요소를 상대 위치로 설정 */
+}
+
+.host {
+    margin-left: 30px;
+    margin-right: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    width: 180px;
+    min-width: 180px;
+    display: flex; /* 내부 요소들을 가로로 정렬 */
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+}
+
+.host a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.host a:hover {
+    width: 180px;
+    background-color: #f1f1f1;
+    display: flex; /* 내부 요소들을 가로로 정렬 */
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+}
+
+/* Dropdown button styles */
+.dropbtn {
+    background-color: #ffffff;
+    min-width: 180px;
+    color: black;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex; /* Flex로 설정하여 내부 요소들을 가로로 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+}
+
+/* Dropdown button text styles */
+.dropbtn > div {
+    margin-left: 5px; /* 아이콘과 텍스트 사이의 간격 설정 */
+}
+
+/* Dropdown content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: calc(100% + 1px); /* 부모 요소 아래에 1px 여유 공간 추가 */
+    right: 0;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Hover effect for dropdown links */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show dropdown content on click */
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+
+footer {
+    border-top: 1px solid #cccccc;
+    color: #005241;
+    padding: 1em 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+
+}
+
+.ft {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+}
+
+footer .footer-section {
+    flex: 1;
+    text-align: center;
+}
+
+footer .footer-section h3 {
+    margin-top: 0;
+}
+
+footer .footer-section a {
+    color: #4F9F8A;
+    text-decoration: none;
+    margin: 0 1em;
+}
+
+footer .footer-section p {
+    color: #4F9F8A;
+    text-decoration: none;
+    margin: 0 1em;
+}
+
+footer .footer-section a:hover {
+    text-decoration: underline;
+}
+
+footer .social-icons a {
+    margin: 0 0.5em;
+    color: #4F9F8A;
+    font-size: 1.5em;
+}
+
+footer .social-icons a:hover {
+    color: #00aced; /* Example for Twitter */
+}
+
+.searchBox {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%; /* 바깥 div의 너비를 화면 너비의 80%로 설정 */
+    margin: 0 auto; /* 가로 가운데 정렬 */
+    /* 추가적인 스타일 */
+    padding: 15px; /* 내부 여백 설정 */
+    border-radius: 8px; /* 모서리 둥글게 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+}
+
+.button-item {
+    flex: 1;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    margin: 0 10px;
+    cursor: pointer; /* 마우스를 가져다 대면 손가락 모양으로 변함 */
+    outline: none; /* 클릭 포커스 표시 제거 */
+    font-weight: bold;
+    color: lightslategray;
+}
+
+.button-item:hover {
+    background-color: #f1f1f1; /* 호버 효과 배경색 */
+}
+
+.sb1 {
+    flex: 3;
+    text-align: left;
+}
+
+.sb2 {
+    flex: 1;
+    text-align: left;
+}
+
+.sb3 {
+    flex: 1;
+    text-align: left;
+}
+
+
+.sb4 {
+    flex: 2;
+    text-align: left;
+}
+
+.sb5 {
+    flex: 1;
+    background-color: #005241;
+    color: white;
+}
+
+.sb5:hover {
+    background-color: #005241;
+    color: white;
+}

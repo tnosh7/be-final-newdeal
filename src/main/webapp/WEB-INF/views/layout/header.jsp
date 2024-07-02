@@ -1,100 +1,37 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="${contextPath}/bootstrap/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="${contextPath}/bootstrap/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="${contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="${contextPath}/bootstrap/css/style.css" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>header</title>
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="/js/script.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 </head>
-<style>
-    link {
-        color: #A598FF;
-        text-decoration: none;
-    }
-</style>
 <body>
-    <!-- Spinner Start -->
-    <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" role="status"></div>
+<div class="outer-container">
+    <div class="left-aligned">
+        <img class="logo" src="/images/logo.png" alt="logo">
     </div>
-    <!-- Spinner End -->
-
-    <!-- Navbar start -->
-    <div class="container-fluid fixed-top">
-        <div class="container topbar bg-primary d-none d-lg-block">
-            <div class="d-flex justify-content-between">
-                <div class="top-info ps-2">
-                    <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-                    <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
-                </div>
-                <div class="top-link pe-2">
-                    <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
-                </div>
-            </div>
-        </div>
-        <div class="container px-0">
-            <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                <a href="${contextPath}/" class="navbar-brand"><h1 class="text-primary display-6">StayNest</h1></a>
-                <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="fa fa-bars text-primary"></span>
-                </button>
-                <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                    <div class="navbar-nav mx-auto">
-                        <a href="${contextPath}/" class="nav-item nav-link active">Home</a>
-                        <a href="shop.html" class="nav-item nav-link">Shop</a>
-                        <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a href="cart.html" class="dropdown-item">Cart</a>
-                                <a href="chackout.html" class="dropdown-item">Chackout</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                    <div class="d-flex m-3 me-0">
-                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                        <a href="#" class="position-relative me-4 my-auto">
-                            <i class="fa fa-shopping-bag fa-2x"></i>
-                            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
-                        </a>
-                        <a href="${contextPath}/member/login-page" class="my-auto">
-                            <i class="fas fa-user fa-2x"></i>
-                        </a>
-                    </div>
-                </div>
-            </nav>
+    <div class="host right-aligned"> <a href="#">호스트 모드로 전환 </a></div>
+    <div class="dropdown right-aligned">
+        <button class="dropbtn">
+            <span class="material-symbols-outlined">menu</span>
+            &nbsp;&nbsp;회원가입 / 로그인
+        </button>
+        <div class="dropdown-content">
+            <a href="#">회원가입</a>
+            <a href="#">로그인</a>
         </div>
     </div>
-    <!-- Navbar End -->
-
+</div>
 </body>
 </html>
