@@ -13,4 +13,10 @@ public class ReviewController {
     public ModelAndView login() {
         return new ModelAndView("review/fullReview");
     }
+
+    @GetMapping("/insertReview")
+    public ModelAndView insertReview() {
+        return new ModelAndView("review/insertReview");
+    }
+
 }
