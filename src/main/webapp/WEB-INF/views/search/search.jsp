@@ -5,6 +5,7 @@
 <head>
     <!-- 페이지에 변경할 때마다 타이틀, 바디 부분 변경해주세요 -->
     <title>검색결과</title>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55c1825b3a2528996d0f7f272b884d60"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -33,12 +34,20 @@
             <div class="cat-khs"><img src="/images/hanok.png" alt="">한옥</div>
             <div class="filter-khs"><div><img src="/images/filter.png" alt=""></div> <div>&nbsp;&nbsp;필터</div></div>
         </div>
-        <div class="accomList-khs">
-            <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
-            <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
-            <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
-            <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+
+        <div style="display: flex;">
+            <div class="accomList-khs" style="width: 50%;
+">
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+                </div>
+            <div id="map" style="width:45%; margin: 20px; "></div>
         </div>
+
+
+
     </div>
 
     <jsp:include page="${contextPath}/WEB-INF/views/layout/footer.jsp">

@@ -22,4 +22,9 @@ public class HomeController {
     public ModelAndView reserve() {
         return new ModelAndView("reserve/reserve");
     }
+
+    @GetMapping("/reservecomplete")
+    public ModelAndView reservecomplete() {
+        return new ModelAndView("reserve/reservecomplete");
+    }
 }

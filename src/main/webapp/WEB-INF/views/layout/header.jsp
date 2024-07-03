@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="outer-container">
-    <div class="left-aligned">
+    <div class="left-aligned" onclick="window.location.href='http://localhost:8090/'">
         <img class="logo" src="/images/logo.png" alt="logo">
     </div>
     <div class="host right-aligned"> <a href="#">호스트 모드로 전환 </a></div>

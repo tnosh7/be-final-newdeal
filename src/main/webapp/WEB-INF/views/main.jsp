@@ -20,7 +20,7 @@
             <button class="button-item-khs sb2-khs">체크인</button>
             <button class="button-item-khs sb3-khs">체크아웃</button>
             <button class="button-item-khs sb4-khs">인원</button>
-            <button class="button-item-khs sb5-khs">검색</button>
+            <button class="button-item-khs sb5-khs" onclick="window.location.href='http://localhost:8090/search'">검색</button>
         </div>
         <hr style="margin-top: 30px;border: none; /* 기본 테두리 없애기 */
     height: 1px; /* 선의 두께 */
