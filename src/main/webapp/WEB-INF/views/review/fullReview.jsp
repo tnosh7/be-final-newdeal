@@ -94,9 +94,11 @@
                         <div id="replyModal-cyj" class="modal-re-cyj">
                             <div class="modal-content-re-cyj">
                                 <span class="close-re-cyj" onclick="closeReplyModal()">&times;</span>
-                                <h2>답글 작성</h2>
+                                <h2>답글 작성/수정</h2>
                                 <textarea id="replyText-cyj" class="textarea-re-cyj" rows="5" placeholder="답글을 입력하세요..."></textarea>
                                 <button class="btn-submit-re-cyj" onclick="submitReply()">완료</button>
+                                <button class="btn-submit-re-cyj" onclick="submitReply()">삭제</button>
+                                    <%--삭제 버튼 만들기--%>
                             </div>
                         </div>
                         <div class="review-item-cyj best-cyj">
@@ -108,10 +110,14 @@
                                     <span class="review-username-cyj">블라아이디1</span>
                                     <br>
                                 </div>
-                                <div>
+                                <div class="review-user-id-cyj" data-owner="user1">
                                     <span class="review-stars-cyj">★★★★★</span>
                                     <br>
                                     <span class="review-date-cyj">&nbsp;2024.06.20</span>
+                                    <br>
+                                    <span class="btn-review-edit-delete-box-cyj">
+                                        <a href="#" class="btn-review-edit-delete-cyj">수정/삭제</a>
+                                    </span>
                                 </div>
 
                             </div>
@@ -129,7 +135,7 @@
                                 <h3>호스트의 답글</h3>
                                 <p class="replyContent-cyj">123</p>
                             </div>
-                            <button id="replyButton" class="btn-reply-cyj" onclick="openReplyModal()">답글 작성</button>
+                            <button class="btn-reply-cyj" onclick="openReplyModal()">답글 작성(수정,삭제)</button>
                         </div>
                         <div class="review-item-cyj best-cyj">
                             <div class="review-header-cyj">
@@ -140,10 +146,14 @@
                                     <span class="review-username-cyj">블라아이디1</span>
                                     <br>
                                 </div>
-                                <div>
+                                <div class="review-user-id-cyj" data-owner="user2">
                                     <span class="review-stars-cyj">★★★★★</span>
                                     <br>
                                     <span class="review-date-cyj">&nbsp;2024.06.20</span>
+                                    <br>
+                                    <span class="btn-review-edit-delete-box-cyj">
+                                        <a href="#" class="btn-review-edit-delete-cyj">수정/삭제</a>
+                                    </span>
                                 </div>
 
                             </div>
@@ -161,7 +171,7 @@
                                 <h3>호스트의 답글</h3>
                                 <p class="replyContent-cyj">123</p>
                             </div>
-                            <button id="replyButton" class="btn-reply-cyj" onclick="openReplyModal()">답글 작성</button>
+                            <button class="btn-reply-cyj" onclick="openReplyModal()">답글 작성</button>
                         </div>
                         <div class="review-item-cyj best-cyj">
                             <div class="review-header-cyj">
