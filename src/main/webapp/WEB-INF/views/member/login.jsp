@@ -6,7 +6,10 @@
     <title>로그인</title>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/logins/login-12/assets/css/login-12.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
     <!-- Login -->
@@ -14,8 +17,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="mb-5">
-                        <h2 class="display-5 fw-bold text-center" style="color: #0D31B2">StayNest</h2>
+                    <div class="mb-5" align="center">
+                        <img src="${contextPath}/images/logo.png" alt="로고" width="250" onclick="location.href='${contextPath}/'">
                     </div>
                 </div>
             </div>

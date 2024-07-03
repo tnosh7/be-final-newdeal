@@ -56,7 +56,7 @@
                 <div class="identify-info-ysh col-12" align="center">
                     <div class="register">
                         <h1>회원가입</h1>
-                        <h6>회원가입 유형을 선택해주세요</h6>
+                        <h3>회원가입 유형을 선택해주세요</h3>
                     </div>
                 </div>
                 <br>
@@ -72,8 +72,8 @@
                             </tbody>
                             <tfoot>
                             <tr align="center">
-                                <th>
-                                    <input type="button" class="btn btn-lg btn-dark rounded fs-5" style="color: white; background-color: #0D31B2; border: none;" value="게스트 가입하기">
+                                <th style="color: #0D31B2">
+                                    게스트 가입하기
                                 </th>
                             </tr>
                             </tfoot>
@@ -90,8 +90,8 @@
                             </tbody>
                             <tfoot>
                             <tr align="center">
-                                <th>
-                                    <input type="button" class="btn btn-lg btn-dark rounded fs-5" style="color: white; background-color: #A598FF; border: none;" value="호스트 가입하기">
+                                <th style="color: #A598FF">
+                                    호스트 가입하기
                                 </th>
                             </tr>
                             </tfoot>

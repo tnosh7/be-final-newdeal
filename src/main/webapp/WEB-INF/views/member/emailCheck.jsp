@@ -61,7 +61,7 @@
                 <div class="col-12 col-lg-12 col-xl-12">
                     <div class="email-info-ysh">
                         <div class="email-img-ysh">
-                            <img src="/images/email.png" alt="이메일아이콘" >
+                            <img src="${contextPath}/images/email.png" alt="이메일아이콘" >
                         </div>
                         <br> <h1>이메일 인증</h1>
                         <div class="emailCheck-ysh">
