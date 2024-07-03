@@ -71,6 +71,39 @@ document.querySelector('.btn-review-insert-cyj').addEventListener('click', funct
     }
 });
 
+// 리뷰 수정, 삭제 핸들러
+document.addEventListener('DOMContentLoaded', function() {
+    // 현재 로그인한 사용자의 ID (예시로 "user1" 사용)
+    const currentUserId = 'user1';
+
+    // 모든 리뷰 id를 가져옴
+    const reviews = document.querySelectorAll('.review-user-id-cyj');
+
+    reviews.forEach(function(review) {
+        // 리뷰의 소유자 ID 가져오기
+        const ownerId = review.getAttribute('data-owner');
+
+        // 현재 사용자와 리뷰 소유자가 다르면 수정/삭제 버튼 숨기기
+        if (ownerId !== currentUserId) {
+            const editDeleteButtonBox = review.querySelector('.btn-review-edit-delete-box-cyj');
+            if (editDeleteButtonBox) {
+                editDeleteButtonBox.style.display = 'none';
+            }
+        } else {
+            // 현재 사용자와 리뷰 소유자가 같으면 버튼 클릭 시 페이지 이동
+            const editDeleteButton = review.querySelector('.btn-review-edit-delete-cyj');
+            if (editDeleteButton) {
+                editDeleteButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    // 페이지 이동 (수정/삭제 페이지로 이동하는 URL 지정)
+                    window.location.href = './insertReview'; // 기존 작성한거 나타나게 해야 됨
+                });
+            }
+        }
+    });
+});
+
+
 // 리뷰모달 열기 함수
 function showReviewModal() {
     document.getElementById('review-reservation-modal-cyj').style.display = "block";

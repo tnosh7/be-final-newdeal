@@ -1,6 +1,4 @@
 body {
-    /*font-family: Arial, sans-serif;*/
-    /*background-color: #f5f5f5;*/
     margin: 0;
 }
 
@@ -62,15 +60,36 @@ body {
     margin-bottom: 20px;
 }
 
-.stars-cyj {
-    cursor: pointer;
-    font-size: 24px;
-    color: #ccc;
-    user-select: none;
+.rating-cyj {
+    float: none;
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.stars-cyj.selected {
-    color: #f39c12;
+.rating__input-cyj {
+    display: none;
+}
+
+.rating__label-cyj {
+    width: 20px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.star-icon-cyj {
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: relative;
+    left: 0;
+    background-image: url('https://velog.velcdn.com/images/jellykelly/post/9957327f-f358-4c25-9989-5bb3dd5755d6/image.svg');
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+
+.star-icon-cyj.filled {
+    background-image: url('https://velog.velcdn.com/images/jellykelly/post/10caf033-b0ef-4d58-804b-6e33395e4ea5/image.svg');
 }
 
 .photo-upload-section-cyj {
