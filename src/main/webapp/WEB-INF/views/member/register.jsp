@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/registrations/registration-12/assets/css/registration-12.css">
     <!-- Jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <script>
@@ -127,34 +127,34 @@
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control border-0 border-bottom rounded-0" name="name" id="name" placeholder="name" required>
-                                            <label for="name" class="form-label">성명</label>
+                                            <label for="name" class="form-label-ysh">성명</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control border-0 border-bottom rounded-0" name="phone" id="phone" placeholder="휴대폰 번호" maxlength="11" required onchange="validatePhone();">
-                                            <label for="phone" class="form-label">휴대폰 번호</label>
-                                            <div id="phoneCheckWarn" class="error-message"></div>
+                                            <label for="phone" class="form-label-ysh">휴대폰 번호</label>
+                                            <div id="phoneCheckWarn" class="error-message-ysh"></div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="email" class="form-control border-0 border-bottom rounded-0" name="email" id="email" placeholder="이메일 주소" required onkeyup="checkDuplicateEmail();" >
-                                            <label for="email" class="form-label">이메일</label>
-                                            <div id="emailCheckWarn" class="error-message"></div>
+                                            <label for="email" class="form-label-ysh">이메일</label>
+                                            <div id="emailCheckWarn" class="error-message-ysh"></div>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="password" class="form-control border-0 border-bottom rounded-0" name="password" id="password" value="" placeholder="Password" required maxlength="16">
-                                            <label for="password" class="form-label">비밀번호</label>
+                                            <label for="password" class="form-label-ysh">비밀번호</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="password" class="form-control border-0 border-bottom rounded-0" name="passwordCheck" id="passwordCheck" value="" placeholder="Password" required maxlength="16" onchange="validatePassword();">
-                                            <label for="passwordCheck" class="form-label">비밀번호 확인</label>
-                                            <div id="passwdCheckWarn" class="error-message"></div>
+                                            <label for="passwordCheck" class="form-label-ysh">비밀번호 확인</label>
+                                            <div id="passwdCheckWarn" class="error-message-ysh"></div>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -193,12 +193,12 @@
                                     </svg>
                                     <span class="ms-2 fs-6 flex-grow-1">다음 로그인</span>
                                 </a>
-                                <a href="#!" class="btn bsb-btn-2xl btn-outline-dark rounded-0 d-flex align-items-center">
+                                <a href="${contextPath}/oauth2/authorization/naver" class="btn bsb-btn-2xl btn-outline-dark rounded-0 d-flex align-items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-apple text-dark" viewBox="0 0 16 16">
                                         <path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516.024.034 1.52.087 2.475-1.258.955-1.345.762-2.391.728-2.43Zm3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422.212-2.189 1.675-2.789 1.698-2.854.023-.065-.597-.79-1.254-1.157a3.692 3.692 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56.244.729.625 1.924 1.273 2.796.576.984 1.34 1.667 1.659 1.899.319.232 1.219.386 1.843.067.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758.347-.79.505-1.217.473-1.282Z" />
                                         <path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516.024.034 1.52.087 2.475-1.258.955-1.345.762-2.391.728-2.43Zm3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422.212-2.189 1.675-2.789 1.698-2.854.023-.065-.597-.79-1.254-1.157a3.692 3.692 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56.244.729.625 1.924 1.273 2.796.576.984 1.34 1.667 1.659 1.899.319.232 1.219.386 1.843.067.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758.347-.79.505-1.217.473-1.282Z" />
                                     </svg>
-                                    <span class="ms-2 fs-6 flex-grow-1">네이버 로그인</span>
+                                    <span class="ms-2 fs-6 flex-grow-1" >네이버 로그인</span>
                                 </a>
                             </div>
                         </div>
