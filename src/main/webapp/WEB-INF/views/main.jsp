@@ -46,6 +46,7 @@
         </div>
     </div>
 
+
     <jsp:include page="${contextPath}/WEB-INF/views/layout/footer.jsp">
         <jsp:param name="pageName" value="footer"/>
     </jsp:include>

@@ -1,3 +1,5 @@
+
+/* styles.css */
 body {
     font-family: "Do Hyeon", sans-serif;
     font-weight: 400;
@@ -20,6 +22,13 @@ body {
     margin: 110px auto 0 auto; /* 상단 마진 110px, 좌우 자동으로 가운데 정렬 */
     width: 85%;
     box-sizing: border-box; /* 패딩과 보더를 너비에 포함 */
+=======
+}
+
+button {
+    font-family: "Do Hyeon", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 /* Container for the header */
@@ -36,6 +45,7 @@ body {
     left: 0;
     right: 0;
     z-index: 1000; /* 다른 요소들보다 위에 오도록 함 */
+
 }
 
 /* Left-aligned content */
@@ -64,9 +74,9 @@ body {
     border-radius: 10px;
     width: 180px;
     min-width: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* 내부 요소들을 가로로 정렬 */
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
 }
 
 .host a {
@@ -79,9 +89,9 @@ body {
 .host a:hover {
     width: 180px;
     background-color: #f1f1f1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* 내부 요소들을 가로로 정렬 */
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
 }
 
 /* Dropdown button styles */
@@ -94,13 +104,13 @@ body {
     border: 1px solid gray;
     border-radius: 10px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
+    display: flex; /* Flex로 설정하여 내부 요소들을 가로로 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
 }
 
 /* Dropdown button text styles */
 .dropbtn > div {
-    margin-left: 5px;
+    margin-left: 5px; /* 아이콘과 텍스트 사이의 간격 설정 */
 }
 
 /* Dropdown content */
@@ -112,7 +122,7 @@ body {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    top: calc(100% + 1px);
+    top: calc(100% + 1px); /* 부모 요소 아래에 1px 여유 공간 추가 */
     right: 0;
 }
 
@@ -196,14 +206,30 @@ footer .social-icons a:hover {
 }
 
 .button-item-khs {
+    color: #00aced; /* Example for Twitter */
+}
+
+.searchBox {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%; /* 바깥 div의 너비를 화면 너비의 80%로 설정 */
+    margin: 0 auto; /* 가로 가운데 정렬 */
+    /* 추가적인 스타일 */
+    padding: 15px; /* 내부 여백 설정 */
+    border-radius: 8px; /* 모서리 둥글게 설정 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+}
+
+.button-item {
     flex: 1;
     padding: 10px;
     background-color: #f1f1f1;
     border: 1px solid #cccccc;
     border-radius: 8px;
     margin: 0 10px;
-    cursor: pointer;
-    outline: none;
+    cursor: pointer; /* 마우스를 가져다 대면 손가락 모양으로 변함 */
+    outline: none; /* 클릭 포커스 표시 제거 */
     font-weight: bold;
     color: lightslategray;
 }
@@ -213,6 +239,12 @@ footer .social-icons a:hover {
 }
 
 .sb1-khs {
+=======
+.button-item:hover {
+    background-color: #f1f1f1; /* 호버 효과 배경색 */
+}
+
+.sb1 {
     flex: 3;
     text-align: left;
 }
@@ -231,6 +263,7 @@ footer .social-icons a:hover {
     flex: 2;
     text-align: left;
 }
+
 
 .sb5-khs {
     flex: 1;
@@ -331,4 +364,9 @@ footer .social-icons a:hover {
     width: 95%;
     text-align: right;
     padding-right: 13px;
+}
+=======
+.sb5:hover {
+    background-color: #005241;
+    color: white;
 }

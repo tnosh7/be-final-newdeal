@@ -18,4 +18,5 @@ public class ReviewController {
     public ModelAndView insertReview() {
         return new ModelAndView("review/insertReview");
     }
+
 }
