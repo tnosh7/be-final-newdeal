@@ -12,5 +12,9 @@ public class HomeController {
         return new ModelAndView("main");
     }
 
+    @GetMapping("/search")
+    public ModelAndView search() {
+        return new ModelAndView("search/search");
+    }
 
 }
