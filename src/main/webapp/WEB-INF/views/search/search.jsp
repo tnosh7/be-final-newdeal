@@ -4,7 +4,7 @@
 <html>
 <head>
     <!-- 페이지에 변경할 때마다 타이틀, 바디 부분 변경해주세요 -->
-    <title>StayNest</title>
+    <title>검색결과</title>
 </head>
 <body>
 <div class="wrapper">

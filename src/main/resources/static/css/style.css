@@ -9,6 +9,12 @@ body {
     min-height: 100vh;
 }
 
+button {
+    font-family: "Do Hyeon", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -110,7 +116,7 @@ body {
     background-color: #f9f9f9;
     border-radius: 10px;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     top: calc(100% + 1px);
     right: 0;
@@ -268,6 +274,7 @@ footer .social-icons a:hover {
     text-align: center;
     margin-top: 10px;
 }
+
 .accomList-khs {
     display: flex;
     flex-wrap: wrap;
@@ -287,6 +294,7 @@ footer .social-icons a:hover {
     border-radius: 10px;
     padding: 0;
 }
+
 .accom-khs div {
     font-size: 20px;
     margin: 5px;
@@ -350,7 +358,7 @@ footer .social-icons a:hover {
     margin-right: 30px;
     cursor: pointer;
     border: 1px solid gainsboro;
-    padding : 10px;
+    padding: 10px;
     border-radius: 10px;
     height: min-content;
 }
@@ -362,4 +370,33 @@ footer .social-icons a:hover {
 
 .filter-khs div {
     font-size: 25px;
+}
+
+.reservebox-khs {
+    border-bottom: 1px solid gray;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.reservebox1-khs {
+    padding-top: 10px;
+}
+
+.reservebox-khs input {
+    width: 80%;
+    min-height: 50px;
+}
+
+.paybtn {
+    margin-top: 20px;
+}
+
+.paybtn button {
+    width: 100px;
+    height: 30px;
+    background-color: #4F9F8A;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid gray;
+    cursor: pointer;
 }
