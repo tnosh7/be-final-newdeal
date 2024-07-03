@@ -6,10 +6,14 @@
     <title>비밀번호 재설정</title>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/logins/login-12/assets/css/login-12.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <style>
     .password-btn-ysh input {
-        background-color: #4F9F8A;
+        background-color: #0D31B2;
         color: white;
         margin-bottom: 20px;
         text-align: center;
@@ -40,7 +44,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="mb-5" align="center">
-                    <img src="/images/logo.png" alt="로고" width="250" onclick="location.href='${contextPath}/'">
+                    <img src="${contextPath}/images/logo.png" alt="로고" width="250" onclick="location.href='${contextPath}/'">
                 </div>
             </div>
         </div>
