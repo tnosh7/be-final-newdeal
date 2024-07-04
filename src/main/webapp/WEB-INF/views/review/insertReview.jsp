@@ -4,7 +4,7 @@
 <html>
     <meta charset="UTF-8">
     <title>reviewInsert</title>
-    <link rel="stylesheet" href="${contextPath}/bootstrap/css/insertReview.css">
+    <link rel="stylesheet" href="${contextPath}/css/insertReview.css">
 </head>
     <body>
     <div class="wrapper">
@@ -66,12 +66,12 @@
                     </div>
                 </div>
             </div>
-            <jsp:include page="${contextPath}/WEB-INF/views/layout/footer.jsp">
-                <jsp:param name="pageName" value="footer"/>
-            </jsp:include>
         </div>
+        <jsp:include page="${contextPath}/WEB-INF/views/layout/footer.jsp">
+            <jsp:param name="pageName" value="footer"/>
+        </jsp:include>
     </div>
 
-    <script src="${contextPath}/bootstrap/js/insertReview.js"></script>
+    <script src="${contextPath}/js/insertReview.js"></script>
     </body>
 </html>

@@ -14,6 +14,10 @@ function toggleActive(button) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    gotoPage(1, { target: document.querySelector('.page-button-cyj') });
+});
+
 function gotoPage(pageNum, event) {
     // 페이지 번호에 따라 스크롤 위치 계산 혹은 다른 페이지 리뷰 로드 처리
     const reviewItems = document.querySelectorAll('.review-item-cyj');
@@ -40,6 +44,7 @@ function gotoPage(pageNum, event) {
     });
     event.target.classList.add('active-cyj'); // 클릭된 버튼에 active 클래스 추가
 }
+
 
 // 예약 여부를 나타내는 변수
 var isReserved = false; // false로 해놓고 백에서 처리해야되는걸 바로 밑에서 처리해야됨

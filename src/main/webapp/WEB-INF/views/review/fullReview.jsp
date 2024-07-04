@@ -3,7 +3,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
     <head>
-        <link rel="stylesheet" href="${contextPath}/bootstrap/css/fullReview.css">
+        <link rel="stylesheet" href="${contextPath}/css/fullReview.css">
         <title>FullReview</title>
     </head>
     <body>
@@ -94,7 +94,7 @@
                         <div id="replyModal-cyj" class="modal-re-cyj">
                             <div class="modal-content-re-cyj">
                                 <span class="close-re-cyj" onclick="closeReplyModal()">&times;</span>
-                                <h2>답글 작성/수정</h2>
+                                <h2>답글 작성</h2>
                                 <textarea id="replyText-cyj" class="textarea-re-cyj" rows="5"
                                           placeholder="답글을 입력하세요..."></textarea>
                                 <button class="btn-submit-re-cyj" onclick="submitReply()">완료</button>
@@ -106,7 +106,8 @@
                             <div class="review-header-cyj">
                                 <div class="review-user-info-cyj">
                                     <span class="profile-image-cyj">
-                                        <img src="https://cdn-icons-png.flaticon.com/128/4202/4202831.png" alt="profile Image 1">
+                                        <img src="https://cdn-icons-png.flaticon.com/128/4202/4202831.png"
+                                             alt="profile Image 1">
                                     </span>
                                     <span class="review-username-cyj">블라아이디1</span>
                                     <br>
@@ -128,12 +129,14 @@
                                 </div>
                                 <div class="review-content-cyj">
                                     <p>
-                                        블라블라블라블라블라블라블라블라블라블라블좋았고 블라블랄브라라발발발발블라라라행복했고 블라블라블라블라블라블라블라블라블라블라블좋았고 블라블랄브라라발발발발블라라라행복했고 블라블라블라블라블라블라블라블라블라블라블좋았고 블라블랄브라라발발발발블라라라행복했고 블라 했습니다.</p>
+                                        블라블라블라블라블라블라블라블라블라블라블좋았고 블라블랄브라라발발발발블라라라행복했고 블라블라블라블라블라블라블라블라블라블라블좋았고
+                                        블라블랄브라라발발발발블라라라행복했고 블라블라블라블라블라블라블라블라블라블라블좋았고 블라블랄브라라발발발발블라라라행복했고 블라 했습니다.</p>
                                 </div>
                             </div>
                             <div class="reply-container-cyj">
-                                <p class="re-host-cyj">호스트의 답글</p>
-                                <p class="replyContent-cyj">이용해주셔서 감사하고 감사하고 감사하고 또 감사하고 이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고
+                                <p class="re-host-cyj"><span>호스트의 답글</span> <span
+                                        class="re-host-date-cyj">2024.07.04</span></p>
+                                <p class="replyContent-cyj">이용해주셔서 감사하고 감사하고 감사하고 또 감사하고 이용해주셔서 감사하고 감사하고 감사하고 또감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고
                                 </p>
                             </div>
                             <button class="btn-reply-cyj" onclick="openReplyModal()">답글 작성(수정,삭제)</button>
@@ -319,10 +322,11 @@
                     </div>
                 </div>
             </div>
+
             <jsp:include page="${contextPath}/WEB-INF/views/layout/footer.jsp">
                 <jsp:param name="pageName" value="footer"/>
             </jsp:include>
         </div>
-        <script src="${contextPath}/bootstrap/js/fullReview.js"></script>
+        <script src="${contextPath}/js/fullReview.js"></script>
     </body>
 </html>
