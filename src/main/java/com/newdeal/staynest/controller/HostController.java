@@ -22,4 +22,10 @@ public class HostController {
         return new ModelAndView("host/hostReservation");
     }
 
+    //숙소 메인
+    @GetMapping("/")
+    public ModelAndView hostMain() {
+        return new ModelAndView("host/hostMain");
+    }
+
 }
