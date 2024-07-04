@@ -1,13 +1,12 @@
 package com.newdeal.staynest.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/api/hosts")
+@RequestMapping("/host")
 public class HostController {
 
     // 숙소 등록 페이지
@@ -35,5 +34,11 @@ public class HostController {
     public ModelAndView hostMain() {
         return new ModelAndView("host/hostMain");
     }
+    //호스트 가입
+    @GetMapping("/register")
+    public ModelAndView hostRegister() {
+        return new ModelAndView("host/hostRegister");
+    }
+
 
 }
