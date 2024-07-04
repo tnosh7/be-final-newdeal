@@ -3,7 +3,6 @@ package com.newdeal.staynest.controller;
 import com.newdeal.staynest.dto.MemberDto;
 import com.newdeal.staynest.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +32,7 @@ public class MemberController {
     //회원가입 페이지
     @GetMapping("/register")
     public ModelAndView register() {
-        return new ModelAndView("member/register");
+        return new ModelAndView("member/memberRegister");
     }
     //회원가입
    @PostMapping("/register")
@@ -44,7 +43,7 @@ public class MemberController {
            mv.setViewName("/member/login");
        } catch (Exception e) {
            mv.addObject("message", "회원가입 중 오류가 발생했습니다.");
-           mv.setViewName("/member/register");
+           mv.setViewName("member/memberRegister");
        }
         return mv;
     }
