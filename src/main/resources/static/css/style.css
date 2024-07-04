@@ -575,3 +575,81 @@ footer .social-icons a:hover {
     justify-content: space-between;
     align-items: center;
 }
+
+.modal-notification-cyj {
+    position: relative;
+    margin-left: 20px;
+}
+
+.modal-notification-icon-cyj {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.modal-notification-count-cyj {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 12px;
+}
+
+.modal-notification-dropdown-cyj {
+    display: none;
+    position: absolute;
+    right: 0;
+    left: 0px;
+    top: 41px;
+    width: 400px;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/*.modal-notification-cyj:hover .modal-notification-dropdown-cyj {*/
+/*    display: block;*/
+/*}*/
+.modal-notification-header-cyj {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.modal-notification-title-cyj {
+    color: rgba(79, 159, 138, 1);
+    font-size: 20px;
+}
+
+
+.modal-notification-item-cyj {
+    border-bottom: 1px solid lightgray;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    color: black;
+    cursor: pointer;
+}
+
+.modal-notification-item-cyj:hover {
+    background-color: #f1f1f1;
+}
+.modal-is-read-notify{
+    /*background-color: #f1f1f1;*/
+    background-color: gainsboro;
+}
+.view-all-cyj {
+    display: block;
+    padding: 12px 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #f9f9f9;
+    color: black;
+}
+
+.view-all-cyj:hover {
+    background-color: #f1f1f1;
+}
