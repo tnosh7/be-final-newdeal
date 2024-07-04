@@ -32,18 +32,18 @@
                                 </div>
                             </div>
                             <div class="notification-item-cyj">
-                                <div class="notification-header-cyj">
-                                    <span class="notification-title-cyj">2[리뷰] 숙소이용이 완료되었습니다!</span>
-                                    <span class="notification-date-cyj">2023-07-03</span>
-                                </div>
-                                <div class="notification-body-cyj">
-                                    사진과 함께 리뷰 작성을 해주세요!
-                                </div>
-                                <div class="notification-actions-cyj">
-                                    <button class="submit-button-submit-cyj">확인</button>
-                                    <button class="submit-button-delete-cyj">삭제</button>
-                                </div>
+                            <div class="notification-header-cyj">
+                                <span class="notification-title-cyj">2[리뷰] 숙소이용이 완료되었습니다!</span>
+                                <span class="notification-date-cyj">2023-07-03</span>
                             </div>
+                            <div class="notification-body-cyj">
+                                사진과 함께 리뷰 작성을 해주세요!
+                            </div>
+                            <div class="notification-actions-cyj">
+                                <button class="submit-button-submit-cyj">확인</button>
+                                <button class="submit-button-delete-cyj">삭제</button>
+                            </div>
+                        </div>
                             <div class="notification-item-cyj">
                                 <div class="notification-header-cyj">
                                     <span class="notification-title-cyj">3[퇴실] 추천숙소가 도착했습니다. </span>

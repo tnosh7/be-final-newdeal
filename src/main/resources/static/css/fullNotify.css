@@ -80,7 +80,7 @@ body {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #28a745;
+    background-color: rgba(13, 49, 178, 1);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -91,7 +91,7 @@ body {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #dc3545;
+    background-color: rgba(165, 152, 255, 1);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -107,6 +107,7 @@ body {
     background-color: transparent;
     color: #A598FF;
     border: none;
+    margin-bottom: 18px;
     padding: 8px 16px;
     cursor: pointer;
     font-size: 16px;
@@ -118,3 +119,4 @@ body {
     background-color: #A598FF;
     color: #ffffff;
 }
+
