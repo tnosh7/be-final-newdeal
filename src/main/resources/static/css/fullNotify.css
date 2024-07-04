@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+}
+.fullNotify-box-cyj{
+    width: 100%;
+    /*padding: 20px 150px;*/
+}
+.fullNotify-container-cyj {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    margin: 20px auto; /* Center the container horizontally */
+    border: 1px solid #ececec; /* Add border to distinguish container */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content inside the container */
+    /*padding: 20px 150px;*/
+}
+
+/* Title styling */
+.fullNotify-container-cyj h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ececec;
+    padding-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Notifications list styling */
+.notifications-cyj {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* Ensure notifications take full width of the container */
+}
+
+.notification-item-cyj {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    width: 90%;
+}
+
+.notification-header-cyj {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.notification-title-cyj {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.notification-date-cyj {
+    font-size: 14px;
+    color: #999;
+}
+
+.notification-body-cyj {
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.notification-actions-cyj {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.submit-button-submit-cyj {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.submit-button-delete-cyj {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+.fullNotify-pagination-cyj {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.fullNotify-page-button-cyj {
+    background-color: transparent;
+    color: #A598FF;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.fullNotify-page-button-cyj:hover,
+.fullNotify-page-button-cyj.active-cyj {
+    background-color: #A598FF;
+    color: #ffffff;
+}
