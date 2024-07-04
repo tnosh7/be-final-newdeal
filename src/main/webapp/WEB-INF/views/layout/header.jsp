@@ -55,7 +55,7 @@
             </div>
             <div class="modal-notification-item-cyj">
                 <div class="modal-notification-header-cyj">
-                    <span class="modal-notification-title-cyj">퇴실 시간 1시간 전입니다</span>
+                    <span class="modal-notification-title-cyj">퇴실 시간이 1시간 남았습니다!</span>
                     <span class="modal-notification-date-cyj">2023-07-04</span>
                 </div>
                 <div class="modal-notification-body-cyj">
