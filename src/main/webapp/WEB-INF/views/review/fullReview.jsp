@@ -95,10 +95,11 @@
                             <div class="modal-content-re-cyj">
                                 <span class="close-re-cyj" onclick="closeReplyModal()">&times;</span>
                                 <h2>답글 작성/수정</h2>
-                                <textarea id="replyText-cyj" class="textarea-re-cyj" rows="5" placeholder="답글을 입력하세요..."></textarea>
+                                <textarea id="replyText-cyj" class="textarea-re-cyj" rows="5"
+                                          placeholder="답글을 입력하세요..."></textarea>
                                 <button class="btn-submit-re-cyj" onclick="submitReply()">완료</button>
                                 <button class="btn-submit-re-cyj" onclick="submitReply()">삭제</button>
-                                    <%--삭제 버튼 만들기--%>
+                                <%--삭제 버튼 만들기--%>
                             </div>
                         </div>
                         <div class="review-item-cyj best-cyj">
@@ -119,7 +120,6 @@
                                         <a href="#" class="btn-review-edit-delete-cyj">수정/삭제</a>
                                     </span>
                                 </div>
-
                             </div>
                             <div class="review-body-cyj">
                                 <div class="review-image-cyj">
@@ -128,12 +128,13 @@
                                 </div>
                                 <div class="review-content-cyj">
                                     <p>
-                                        블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라.</p>
+                                        블라블라블라블라블라블라블라블라블라블라블좋았고 블라블랄브라라발발발발블라라라행복했고 블라블라블라블라블라블라블라블라블라블라블좋았고 블라블랄브라라발발발발블라라라행복했고 블라블라블라블라블라블라블라블라블라블라블좋았고 블라블랄브라라발발발발블라라라행복했고 블라 했습니다.</p>
                                 </div>
                             </div>
-                            <div class="reply-container-cyj" style="display: none;">
-                                <h3>호스트의 답글</h3>
-                                <p class="replyContent-cyj">123</p>
+                            <div class="reply-container-cyj">
+                                <p class="re-host-cyj">호스트의 답글</p>
+                                <p class="replyContent-cyj">이용해주셔서 감사하고 감사하고 감사하고 또 감사하고 이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고
+                                </p>
                             </div>
                             <button class="btn-reply-cyj" onclick="openReplyModal()">답글 작성(수정,삭제)</button>
                         </div>
@@ -141,7 +142,8 @@
                             <div class="review-header-cyj">
                                 <div class="review-user-info-cyj">
                                     <span class="profile-image-cyj">
-                                        <img src="https://cdn-icons-png.flaticon.com/128/4202/4202831.png" alt="profile Image 1">
+                                        <img src="https://cdn-icons-png.flaticon.com/128/4202/4202831.png"
+                                             alt="profile Image 1">
                                     </span>
                                     <span class="review-username-cyj">블라아이디1</span>
                                     <br>
