@@ -23,6 +23,7 @@
         font-size: 18px; /* 글꼴 크기 조절 */
         width: 100%;
         height: 50px;
+        border-radius: 10px;
     }
     .password-btn-ysh input {
         display: flex;

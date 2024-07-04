@@ -19,15 +19,15 @@
         align-items: center;
         justify-content: center;
         border: none;
-        border-radius: 5px;
+        border-radius: 10px;
         padding: 10px 20px;
         font-size: 16px;
         cursor: pointer;
-        width: 100%; /* 기본 너비 100% */
+        width: 100%;
     }
     .kakao-register-symbol, .naver-register-symbol {
         margin-right: 10px;
-        border: none; /* 이미지 테두리 제거 */
+        border: none;
     }
     .naver-register-btn {
         background-color: #03C75A;
@@ -36,13 +36,14 @@
         align-items: center;
         justify-content: center;
         border: none;
-        border-radius: 5px;
+        border-radius: 10px;
         padding: 10px 20px;
         font-size: 16px;
         cursor: pointer;
         width: 100%; /* 기본 너비 100% */
+
     }
-    .kakao-btn:hover, .naver-btn:hover {
+    .kakao-register-btn:hover, .naver-register-btn:hover {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 적당한 그림자 효과 */
     }
 </style>
@@ -203,7 +204,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-lg btn-dark rounded-0 fs-6"  style="color: white; background-color: #0D31B2" type="submit">회원가입</button>
+                                            <button class="btn btn-lg btn-dark rounded-10 fs-6"  style="color: white; background-color: #0D31B2" type="submit">회원가입</button>
                                         </div>
                                     </div>
                                     <div class="col-12">
