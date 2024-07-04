@@ -244,6 +244,7 @@ footer .social-icons a:hover {
     background-color: #005241;
     color: white;
 }
+
 .carousel-item img {
     max-width: 100%; /* 컨테이너 너비에 맞추기 */
     width: 400px;
@@ -398,6 +399,7 @@ footer .social-icons a:hover {
     padding: 10px;
     border-radius: 10px;
     height: min-content;
+    background-color: white;
 }
 
 .filter-khs img {
@@ -436,4 +438,82 @@ footer .social-icons a:hover {
     border-radius: 10px;
     border: 1px solid gray;
     cursor: pointer;
+}
+
+.grl-khs {
+    margin-top: 20px;
+    border-top: 1px solid gainsboro;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.grld1-khs {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 20px;
+}
+
+.grld2-khs {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: gray;
+}
+
+.grlb1-khs {
+    width: 100px;
+    height: 30px;
+    background-color: #4F9F8A;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+.grt-khs {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.grt-khs th {
+    border-bottom: 1px solid gainsboro;
+    padding: 15px;
+}
+
+.grt-khs td {
+    border-bottom: 1px solid gainsboro;
+    padding: 10px;
+}
+
+.hm-khs {
+    display: flex;
+    margin-top: 20px;
+}
+
+.hmd1-khs {
+    display: flex;
+    align-items: center; /* 세로 가운데 정렬 */
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+}
+
+.hmdd-khs {
+    align-content: center;
+    margin: 20px;
+    text-align: right;
+    padding: 5px;
+}
+
+.hmd2-khs {
+    text-align: center;
+    align-content: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+.hmain-khs {
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
 }

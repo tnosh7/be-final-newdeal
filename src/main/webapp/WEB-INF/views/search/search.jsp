@@ -6,6 +6,12 @@
     <!-- 페이지에 변경할 때마다 타이틀, 바디 부분 변경해주세요 -->
     <title>검색결과</title>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55c1825b3a2528996d0f7f272b884d60"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS 및 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -32,7 +38,33 @@
             <div class="cat-khs"><img src="/images/oneRoom.png" alt="">원룸</div>
             <div class="cat-khs"> <img src="/images/pension.png" alt="">펜션</div>
             <div class="cat-khs"><img src="/images/hanok.png" alt="">한옥</div>
-            <div class="filter-khs"><div><img src="/images/filter.png" alt=""></div> <div>&nbsp;&nbsp;필터</div></div>
+            <button type="button" class="filter-khs" data-toggle="modal" data-target="#myModal">
+                <img src="/images/filter.png" alt="">필터
+            </button>
+            <!-- 모달 구조 -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">가격 필터링</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="margin:0 auto; text-align:center;">
+                            <div style=" display: flex; align-items: center;">
+                                <input type="text"/>
+                                <div>&nbsp;원 -&nbsp;</div>
+                                <input type="text"/>
+                                <div>&nbsp;원</div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="grlb1-khs" data-dismiss="modal">검색하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div style="display: flex;">

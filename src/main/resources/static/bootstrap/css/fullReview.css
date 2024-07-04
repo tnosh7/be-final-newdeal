@@ -169,6 +169,38 @@ body {
     cursor: pointer;
 }
 
+/* 호스트 답글 컨테이너 */
+.reply-container-cyj {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid #ccc; /* 선택 사항: 시각적 구분을 위한 테두리 */
+    border-radius: 5px; /* 선택 사항: 둥근 모서리 추가 */
+    background-color: #f9f9f9; /* 선택 사항: 배경색 추가 */
+    margin: 2% 3% 1% 12%;
+}
+
+.replyContent-cyj {
+    flex: 1;
+    word-wrap: break-word; /* 긴 단어 줄바꿈 */
+    overflow-wrap: break-word; /* 긴 내용 줄바꿈 */
+    white-space: pre-wrap; /* 줄바꿈 보존 및 긴 내용 줄바꿈 */
+    margin: 0; /* 기본 마진 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    color: rgba(0, 82, 65, 1);
+}
+
+.re-host-cyj {
+    margin-bottom: 10px; /* 기본 마진 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    height: 20px; /* 높이 설정 */
+    font-size: 14px; /* 폰트 크기 조절 */
+    color: rgba(165, 152, 255, 1);
+}
+
+
+
+
 /* 답글 버튼 스타일 */
 .btn-reply-cyj {
     height: 2%;
@@ -276,7 +308,7 @@ body {
 
 .review-user-info-cyj {
     font-size: 0.9em;
-    color: #4F9F8A;
+    color: rgba(13, 49, 178, 1);
 }
 
 .profile-image-cyj {
