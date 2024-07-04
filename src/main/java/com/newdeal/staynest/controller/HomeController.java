@@ -17,4 +17,14 @@ public class HomeController {
         return new ModelAndView("search/search");
     }
 
+
+    @GetMapping("/reserve")
+    public ModelAndView reserve() {
+        return new ModelAndView("reserve/reserve");
+    }
+
+    @GetMapping("/reservecomplete")
+    public ModelAndView reservecomplete() {
+        return new ModelAndView("reserve/reservecomplete");
+    }
 }

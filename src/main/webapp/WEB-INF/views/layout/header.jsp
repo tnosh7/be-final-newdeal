@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="outer-container">
-    <div class="left-aligned">
+    <div class="left-aligned" onclick="window.location.href='http://localhost:8090/'">
         <img class="logo" src="/images/logo.png" alt="logo">
     </div>
     <div class="host right-aligned"> <a href="#">호스트 모드로 전환 </a></div>
@@ -28,8 +28,8 @@
             &nbsp;&nbsp;회원가입 / 로그인
         </button>
         <div class="dropdown-content">
-            <a href="#">회원가입</a>
-            <a href="#">로그인</a>
+            <a href="${contextPath}/member/identify">회원가입</a>
+            <a href="${contextPath}/member/identify">로그인</a>
         </div>
     </div>
 </div>
