@@ -32,6 +32,7 @@ dependencies {
 //  서버 재시작 없이 jsp 수정사항 반영
     implementation 'org.springframework.boot:spring-boot-devtools'
 
+
     //jsp 의존성 추가
     implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
     //스프링부트 3.0 이상

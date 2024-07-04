@@ -237,6 +237,42 @@ footer .social-icons a:hover {
     background-color: #005241;
     color: white;
 }
+.carousel-item img {
+    max-width: 100%; /* 컨테이너 너비에 맞추기 */
+    width: 400px;
+    height: auto; /* 비율 유지 */
+}
+
+
+/* 정보 섹션 스타일 */
+.info-section-mjp {
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 예약 정보 박스 스타일 */
+.reservation-box-mjp {
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    border: 1px solid #ccc; /* 테두리 설정 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 그림자 설정 */
+    margin-top: 20px;
+}
+
+/* 지도 컨테이너 스타일 */
+.map-container-mjp {
+    height: 400px; /* 원하는 높이로 조정 */
+}
+
+.review-item-mjp {
+    background-color: #f0f0f0;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
 
 .sb5-khs:hover {
     background-color: #005241;
