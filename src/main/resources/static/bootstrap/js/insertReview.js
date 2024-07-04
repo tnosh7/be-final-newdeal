@@ -97,3 +97,15 @@ photoUpload.addEventListener('change', function() {
     }
 });
 
+
+// 리뷰 쓰기 버튼 클릭 이벤트 핸들러
+document.querySelector('.submit-button-cyj').addEventListener('click', function (event) {
+        // 여기 서버로 보내는 로직 짜고 전체 페이지로 이동
+        window.location.href = './fullReview?type=insert'; // 실제 리뷰 쓰기 페이지 URL로 변경
+});
+
+// 리뷰 삭제 버튼 클릭 이벤트 핸들러
+document.querySelector('.delete-button-cyj').addEventListener('click', function (event) {
+    // 여기 서버로 보내는 로직 짜고 전체 페이지로 이동
+    window.location.href = './fullReview?type=delete'; // 실제 리뷰 쓰기 페이지 URL로 변경
+});

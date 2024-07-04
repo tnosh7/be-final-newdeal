@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/api/guests")
+@RequestMapping("/guests")
 public class GuestController {
     
     // 회원정보수정
@@ -18,7 +18,7 @@ public class GuestController {
     // 예약 내역 정보
     @GetMapping("/reservations")
     public ModelAndView guestReservation() {
-        return new ModelAndView("guest/guestReservations");
+        return new ModelAndView("guest/guestReservation");
     }
 
     // 찜한 숙소 리스트

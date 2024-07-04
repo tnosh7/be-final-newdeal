@@ -62,6 +62,7 @@
                     </div>
                     <div class="submit-button-section-cyj">
                         <button class="submit-button-cyj">완료</button>
+                        <button class="delete-button-cyj">삭제</button>
                     </div>
                 </div>
             </div>
