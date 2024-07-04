@@ -320,6 +320,25 @@ footer .social-icons a:hover {
     margin-top: 20px;
 }
 
+/* 웹킷 기반 브라우저용 스크롤바 스타일 */
+.accomList-khs::-webkit-scrollbar {
+    width: 12px; /* 스크롤바 너비 */
+}
+
+.accomList-khs::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 스크롤바 트랙 배경색 */
+    border-radius: 10px; /* 둥근 모서리 */
+}
+
+.accomList-khs::-webkit-scrollbar-thumb {
+    background: #888; /* 스크롤바 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+}
+
+.accomList-khs::-webkit-scrollbar-thumb:hover {
+    background: #555; /* 스크롤바 색상(호버시) */
+}
+
 .accom-khs {
     display: flex;
     flex-direction: column;
@@ -521,15 +540,19 @@ footer .social-icons a:hover {
 .container-kti {
     display: flex;
     width: 75%;
-    margin: 0 auto;
+    margin: 0 auto 30px auto;
 }
 
 #screen1 {
     width: 55%;
+    margin: 20px;
 }
 
 #screen2 {
     width: 25%;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    margin: 20px;
 }
 
 #title-kti {
@@ -538,7 +561,17 @@ footer .social-icons a:hover {
 }
 
 #bottom-kti {
-    border-bottom: 1px solid lightslategray;
-    padding: 30px;
-    margin-bottom: 30px;
+    padding: 10px;
+    margin: 20px;
+}
+
+.gad1-khs {
+    border-bottom: 1px solid gainsboro;
+    margin: 20px;
+}
+
+.gad2-khs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

@@ -62,7 +62,7 @@ public class MemberDto implements Serializable {
                 .role(dto.getRole())
                 .joinDt(dto.getJoinDt())
                 .expireDt(dto.getExpireDt())
-                .refreshToken(dto.getRefreshToken())
+                /*.refreshToken(dto.getRefreshToken())*/
                 .build();
     }
 
