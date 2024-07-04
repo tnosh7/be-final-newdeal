@@ -517,3 +517,28 @@ footer .social-icons a:hover {
     text-align: center;
     width: 80%;
 }
+
+.container-kti {
+    display: flex;
+    width: 75%;
+    margin: 0 auto;
+}
+
+#screen1 {
+    width: 55%;
+}
+
+#screen2 {
+    width: 25%;
+}
+
+#title-kti {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#bottom-kti {
+    border-bottom: 1px solid lightslategray;
+    padding: 30px;
+    margin-bottom: 30px;
+}

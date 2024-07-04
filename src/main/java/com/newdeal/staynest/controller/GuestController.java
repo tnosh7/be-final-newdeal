@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/api/guests")
+@RequestMapping("/guests")
 public class GuestController {
     
     // 회원정보수정
