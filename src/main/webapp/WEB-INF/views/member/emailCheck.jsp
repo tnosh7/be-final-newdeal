@@ -32,6 +32,7 @@
         width: 35%;
         height: 50px;
         margin-bottom: 80px;
+        border-radius: 10px;
     }
     .email-btn-ysh {
         display: flex;

@@ -24,7 +24,7 @@
     @media (max-width: 768px) {
         #kakao-login-btn, #naver-login-btn {
             max-width: 100%;
-
+            border-radius: 10px;
         }
         #kakao-login-btn img, #naver-login-btn img {
             width: 100%;
@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button class="btn btn-lg btn-dark rounded-0 fs-6" style="color: white; background-color: #0D31B2" type="submit">로그인</button>
+                                            <button class="btn btn-lg btn-dark rounded-10 fs-6" style="color: white; background-color: #0D31B2" type="submit">로그인</button>
                                         </div>
                                     </div>
                                     <div class="col-12">
