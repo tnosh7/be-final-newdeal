@@ -54,7 +54,7 @@
                     <div class="col-12 col-lg-5">
                         <form action="#" method="post">
                             <div class="row gy-3 overflow-hidden">
-                                <span>비밀번호를 재설정할 이메일을 입력해 주세요.</span>
+                                <span style="color: #005241">비밀번호를 재설정할 이메일을 입력해 주세요.</span>
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control border-0 border-bottom rounded-0" name="email" id="email" placeholder="name@example.com" required maxlength="30">
@@ -69,7 +69,7 @@
                                         <div id="emailNumberWarn" class="error-message"></div>
                                     </div>
                                 </div>
-                                <span>새로 설정할 비밀번호를 입력해 주세요.</span>
+                                <span style="color: #005241">새로 설정할 비밀번호를 입력해 주세요.</span>
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <input type="password" class="form-control border-0 border-bottom rounded-0" name="password" id="password" placeholder="비밀번호" required maxlength="16">

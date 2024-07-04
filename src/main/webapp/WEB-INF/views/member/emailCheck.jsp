@@ -73,7 +73,7 @@
                         </div>
                         <br>
                     <div class="email-btn-ysh">
-                        <input type="button"  value="확 인"></input>
+                        <input type="button"  value="인증 확인"></input>
                     </div>
                 </div>
             </form>
