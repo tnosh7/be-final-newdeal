@@ -58,4 +58,18 @@ public class MemberController {
 //        System.out.println("=================================");
         return memberService.checkDuplicateEmail(email);
     }
+
+    @GetMapping("/emailCheck")
+    public ModelAndView emailCheck() {
+        return new ModelAndView("member/emailCheck");
+    }
+    @GetMapping("/identify")
+    public ModelAndView identify() {
+        return new ModelAndView("member/identify");
+    }
+    @GetMapping("/passwordUpdate")
+    public ModelAndView passwordUpdate() {
+        return new ModelAndView("member/passwordUpdate");
+    }
+
 }
