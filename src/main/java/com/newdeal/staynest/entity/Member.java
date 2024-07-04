@@ -43,9 +43,6 @@ public class Member {
     @Column(name = "expire_dt", nullable = false)
     private LocalDateTime expireDt;
 
-    @Column(name = "refresh_token", length = 255)
-    private String refreshToken;
-
     @PrePersist
     protected void onCreate() {
         this.joinDt = LocalDateTime.now();
@@ -56,7 +53,7 @@ public class Member {
     public Member() {
     }
 
-    public Member(long id, String name, String email, String password, String phone, UserRoleEnum role, LocalDateTime joinDt, LocalDateTime expireDt, String refreshToken) {
+    public Member(long id, String name, String email, String password, String phone, UserRoleEnum role, LocalDateTime joinDt, LocalDateTime expireDt) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -65,7 +62,7 @@ public class Member {
         this.role = role;
         this.joinDt = joinDt;
         this.expireDt = expireDt;
-        this.refreshToken = refreshToken;
+
     }
 
     public static MemberDto toDto(Member member) {
@@ -78,7 +75,6 @@ public class Member {
                 .role(member.getRole())
                 .joinDt(member.getJoinDt())
                 .expireDt(member.getExpireDt())
-                .refreshToken(member.getRefreshToken())
                 .build();
     }
 
