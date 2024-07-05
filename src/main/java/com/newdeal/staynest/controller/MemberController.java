@@ -1,9 +1,8 @@
 package com.newdeal.staynest.controller;
 
-import com.newdeal.staynest.dto.MemberDto;
+import com.newdeal.staynest.dto.GuestDto;
 import com.newdeal.staynest.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,20 +30,20 @@ public class MemberController {
 //    }
 
     //회원가입 페이지
-    @GetMapping("/register")
+    @GetMapping("/memberRegister")
     public ModelAndView register() {
-        return new ModelAndView("member/register");
+        return new ModelAndView("member/memberRegister");
     }
     //회원가입
-   @PostMapping("/register")
-    public ModelAndView register(HttpServletRequest request, MemberDto memberDto) {
+   @PostMapping("/memberRegister")
+    public ModelAndView register(HttpServletRequest request, GuestDto guestDto) {
         ModelAndView mv = new ModelAndView();
        try {
-           memberService.registerMember(memberDto);
+           memberService.registerMember(guestDto);
            mv.setViewName("/member/login");
        } catch (Exception e) {
            mv.addObject("message", "회원가입 중 오류가 발생했습니다.");
-           mv.setViewName("/member/register");
+           mv.setViewName("member/memberRegister");
        }
         return mv;
     }
@@ -58,4 +57,18 @@ public class MemberController {
 //        System.out.println("=================================");
         return memberService.checkDuplicateEmail(email);
     }
+
+    @GetMapping("/emailCheck")
+    public ModelAndView emailCheck() {
+        return new ModelAndView("member/emailCheck");
+    }
+    @GetMapping("/identify")
+    public ModelAndView identify() {
+        return new ModelAndView("member/identify");
+    }
+    @GetMapping("/passwordUpdate")
+    public ModelAndView passwordUpdate() {
+        return new ModelAndView("member/passwordUpdate");
+    }
+
 }

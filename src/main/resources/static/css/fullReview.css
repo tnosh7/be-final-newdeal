@@ -172,6 +172,7 @@ body {
 /* 호스트 답글 컨테이너 */
 .reply-container-cyj {
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     padding: 10px;
     border: 1px solid #ccc; /* 선택 사항: 시각적 구분을 위한 테두리 */
@@ -191,11 +192,21 @@ body {
 }
 
 .re-host-cyj {
+    display: flex;
+    justify-content: space-between; /* 양쪽 끝으로 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
     margin-bottom: 10px; /* 기본 마진 제거 */
     padding: 0; /* 기본 패딩 제거 */
     height: 20px; /* 높이 설정 */
     font-size: 14px; /* 폰트 크기 조절 */
     color: rgba(165, 152, 255, 1);
+}
+
+.re-host-date-cyj {
+    margin-left: auto; /* 자동 왼쪽 마진으로 오른쪽 정렬 */
+}
+.re-host-date-cyj{
+    margin: 10px;
 }
 
 
@@ -204,8 +215,7 @@ body {
 /* 답글 버튼 스타일 */
 .btn-reply-cyj {
     height: 2%;
-    width: 10%;
-    font-size: 0.8em;
+    width: 12%;
     background-color: rgba(165, 152, 255, 0.8); /* 초록색 배경 */
     border: none; /* 테두리 없음 */
     color: white; /* 흰색 글자 */
@@ -213,7 +223,7 @@ body {
     text-align: center; /* 중앙 정렬 */
     text-decoration: none; /* 밑줄 없음 */
     display: inline-block; /* 인라인 블록 */
-    font-size: 12px; /* 글자 크기 */
+    font-size: 14px; /* 글자 크기 */
     margin: 0% -0%; /* 마진 */
     cursor: pointer; /* 마우스 커서 포인터 */
     border-radius: 5px; /* 둥근 테두리 */
@@ -370,7 +380,7 @@ body {
 }
 
 .page-button-cyj:hover,
-.page-button-cyj.active {
+.page-button-cyj.active-cyj {
     background-color: #A598FF;
     color: #ffffff;
 }
