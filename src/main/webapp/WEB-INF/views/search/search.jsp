@@ -68,14 +68,21 @@
         </div>
 
         <div style="display: flex;">
-            <div class="accomList-khs" style="width: 50%;
-">
+            <div class="accomList-khs" style="width: 50%; height:600px; overflow-y: scroll;" >
                 <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
                 <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
                 <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
                 <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
-                </div>
-            <div id="map" style="width:45%; margin: 20px; "></div>
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+                <div class="accom-khs"><img src="/images/room.png" alt=""><div class="accomD1-khs"><div class="accomD1-1-khs">가산아네스트오피스텔</div><div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5</div></div><div class="accomD2-khs">도심 속 숙소</div><div class="accomD3-khs">방1개, 침대 2개</div><div class="accomD4-khs">50000 원 / 박</div></div>
+            </div>
+            <div id="map" style="width:45%; height:600px; margin: 20px; "></div>
         </div>
 
 
