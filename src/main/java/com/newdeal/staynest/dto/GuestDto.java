@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 @Builder
 public class GuestDto implements Serializable {
 
-    long guestId;
+    Long guestId;
 
     @NotNull
     String guestName;
@@ -43,10 +43,10 @@ public class GuestDto implements Serializable {
     @NotNull
     UserRoleEnum role;
 
-    @NotNull
+    @Null
     LocalDateTime joinDt;
 
-    @NotNull
+    @Null
     LocalDateTime expireDt;
 
     @Null
