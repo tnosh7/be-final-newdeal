@@ -29,9 +29,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
-//  서버 재시작 없이 jsp 수정사항 반영
+    //  서버 재시작 없이 jsp 수정사항 반영
     implementation 'org.springframework.boot:spring-boot-devtools'
-
 
     //jsp 의존성 추가
     implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
@@ -39,9 +38,11 @@ dependencies {
     implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
+    //oauth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     // JWT
     compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
-//  서버 재시작 없이 jsp 수정사항 반영
+    //  서버 재시작 없이 jsp 수정사항 반영
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
