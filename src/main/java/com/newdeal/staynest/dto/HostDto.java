@@ -1,8 +1,8 @@
 package com.newdeal.staynest.dto;
 
 import com.newdeal.staynest.entity.Guest;
+import com.newdeal.staynest.entity.Host;
 import com.newdeal.staynest.entity.UserRoleEnum;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Pattern;
@@ -12,24 +12,23 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * DTO for {@link Guest}
+ * DTO for {@link Host}
  */
-
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
-public class GuestDto implements Serializable {
+public class HostDto implements Serializable {
 
-    Long guestId;
-
-    @NotNull
-    String guestName;
+    Long hostId;
 
     @NotNull
-    @Email
+    @Pattern(regexp = "^[^0-9]*$")
+    String hostName;
+
+    @NotNull
     String email;
 
     @NotNull
@@ -52,19 +51,17 @@ public class GuestDto implements Serializable {
     @Null
     String image;
 
-    public static Guest toEntity(GuestDto guestDto) {
-        return Guest.builder()
-                .id(guestDto.getGuestId())
-                .guestName(guestDto.getGuestName())
-                .email(guestDto.getEmail())
-                .password(guestDto.getPassword())
-                .phone(guestDto.getPhone())
-                .role(guestDto.getRole())
-                .joinDt(guestDto.getJoinDt())
-                .expireDt(guestDto.getExpireDt())
-                .image(guestDto.getImage())
+    public static Host toEntity(HostDto hostDto) {
+        return Host.builder()
+                .id(hostDto.getHostId())
+                .hostName(hostDto.getHostName())
+                .email(hostDto.getEmail())
+                .password(hostDto.getPassword())
+                .phone(hostDto.getPhone())
+                .role(hostDto.getRole())
+                .joinDt(hostDto.getJoinDt())
+                .expireDt(hostDto.getExpireDt())
+                .image(hostDto.getImage())
                 .build();
     }
-
-
 }

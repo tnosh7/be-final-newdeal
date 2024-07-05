@@ -20,25 +20,24 @@ public class HostController {
     public ModelAndView hostReservation() {
         return new ModelAndView("host/hostReservation");
     }
-    // 숙소 등록
+    // 호스트 숙소 등록
     @GetMapping("/accomEnroll")
     public ModelAndView accomEnroll() {
         return new ModelAndView("host/accomEnroll");
     }
+
+    // 호스트 숙소 수정
     @GetMapping("/accomUpdate")
     public ModelAndView accomUpdate() {
         return new ModelAndView("host/accomUpdate");
     }
+
     //숙소 메인
     @GetMapping("/")
     public ModelAndView hostMain() {
         return new ModelAndView("host/hostMain");
     }
-    //호스트 가입
-    @GetMapping("/register")
-    public ModelAndView hostRegister() {
-        return new ModelAndView("host/hostRegister");
-    }
+
 
 
 }
