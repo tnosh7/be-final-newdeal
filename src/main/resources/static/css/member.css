@@ -1,0 +1,210 @@
+button:hover {
+    cursor: pointer;
+}
+h1 {
+    font-size: 35px
+}
+/*identify.jsp start*/
+.tables-container-ysh {
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+.identify-table-ysh table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.identify-table-ysh table:hover {
+    border: 5px solid #4F9F8A;
+}
+.identify-table-ysh th {
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.identify-table-ysh th img {
+    width: 200px; /* 이미지 크기 조정 */
+    height: auto;
+    display: block;
+    margin: 0 auto; /* 이미지를 가운데 정렬 */
+}
+.identify-table-ysh th img:hover,
+.identify-table-ysh th img:focus {
+    transform: scale(1.2); /* 이미지를 1.2배 확대 */
+}
+/*identify.jsp end*/
+
+
+/*register.jsp start*/
+/* 팝업 스타일 */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 500px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    overflow-y: auto;
+    max-height: 80%;
+}
+.popup-content {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+.popup-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #0D31B2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.kakao-register-btn {
+    background-color: #FEE500;
+    color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+.kakao-register-symbol, .naver-register-symbol {
+    margin-right: 10px;
+    border: none;
+}
+.naver-register-btn {
+    background-color: #03C75A;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%; /* 기본 너비 100% */
+
+}
+.kakao-register-btn:hover, .naver-register-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 적당한 그림자 효과 */
+}
+/*register.jsp end*/
+
+/*login.jsp start*/
+.identify-ysh {
+    margin-bottom: 80px;
+}
+#kakao-login-btn img, #naver-login-btn img {
+    width: 100%;
+}
+
+#kakao-login-btn:hover, #naver-login-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 적당한 그림자 효과 */
+
+}
+/* 반응형 처리 */
+@media (max-width: 768px) {
+    #kakao-login-btn, #naver-login-btn {
+        max-width: 100%;
+        border-radius: 10px;
+
+    }
+    #kakao-login-btn img, #naver-login-btn img {
+        width: 100%;
+        height: auto;
+        object-fit: contain; /* 이미지 비율을 유지하며 크기 조정 */
+
+    }
+}
+
+/*passwordUpdate.jsp start*/
+.password-btn-ysh input {
+    background-color: #0D31B2;
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center; /* 버튼을 가운데 정렬 */
+    border: none; /* 버튼 테두리 제거 */
+    font-size: 18px; /* 글꼴 크기 조절 */
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+}
+.password-btn-ysh input {
+    display: flex;
+    justify-content: center; /* 버튼을 가운데 정렬 */
+    margin-top: 20px; /* 위쪽 마진 추가 */
+}
+
+.text-end-ysh {
+    text-align: right;
+}
+/*passwordUpdate.jsp end*/
+
+/*emailCheck.jsp start*/
+.email-info-ysh {
+    text-align: center;
+    margin: 80px auto 0 auto;
+}
+.emailCheck-ysh {
+    display: flex;
+    justify-content: center; /* 컨테이너를 가운데 정렬 */
+    align-items: center; /* 수직 정렬 */
+    flex-direction: column; /* 세로 정렬 */
+}
+.emailCheck-ysh input {
+    width: 35%; /* 너비 조절 */
+    height: 50px; /* 높이 조절 */
+    padding: 10px; /* 패딩 조절 */
+    font-size: 16px; /* 글꼴 크기 조절 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 5px; /* 테두리 둥글게 */
+    margin-bottom: 10px; /* 입력 필드 간 간격 추가 */
+}
+.emailCheck-ysh button:hover{
+    border-color: #A598FF;
+    box-shadow: 0 0 5px rgba(79, 159, 138, 0.5);
+}
+.email-btn-ysh {
+    display: flex;
+    justify-content: center; /* 컨테이너를 가운데 정렬 */
+    align-items: center; /* 수직 정렬 */
+    flex-direction: column; /* 세로 정렬 */
+}
+.email-btn-ysh button {
+    background-color: #4F9F8A;
+    color: white;
+    text-align: center;
+    font-size: 18px; /* 글꼴 크기 조절 */
+    width: 35%;
+    height: 50px;
+    margin-top: 20px; /* 위쪽 마진 추가 */
+    margin-bottom: 80px;
+    border: none; /* 버튼 테두리 제거 */
+    border-radius: 10px;
+}
+/*emailCheck.jsp end*/

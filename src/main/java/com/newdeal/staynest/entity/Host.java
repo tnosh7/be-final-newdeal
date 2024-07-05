@@ -1,6 +1,7 @@
 package com.newdeal.staynest.entity;
 
 import com.newdeal.staynest.dto.GuestDto;
+import com.newdeal.staynest.dto.HostDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,16 +15,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "guest")
-public class Guest {
+@Table(name = "host")
+public class Host {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="guest_id")
+    @Column(name="host_id")
     private Long id;
 
     @Column(nullable = false)
-    private String guestName;
+    private String hostName;
 
     @Column(nullable = false)
     private String email;
@@ -54,10 +55,10 @@ public class Guest {
         this.expireDt = LocalDateTime.now().plusDays(7);
     }
 
-    public GuestDto toDto() {
-        return GuestDto.builder()
-                .guestId(this.id)
-                .guestName(this.guestName)
+    public HostDto toDto() {
+        return HostDto.builder()
+                .hostId(this.id)
+                .hostName(this.hostName)
                 .email(this.email)
                 .password(this.password)
                 .phone(this.phone)
