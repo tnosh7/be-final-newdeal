@@ -1,6 +1,6 @@
 package com.newdeal.staynest.controller;
 
-import com.newdeal.staynest.dto.MemberDto;
+import com.newdeal.staynest.dto.GuestDto;
 import com.newdeal.staynest.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -30,16 +30,16 @@ public class MemberController {
 //    }
 
     //회원가입 페이지
-    @GetMapping("/register")
+    @GetMapping("/memberRegister")
     public ModelAndView register() {
         return new ModelAndView("member/memberRegister");
     }
     //회원가입
-   @PostMapping("/register")
-    public ModelAndView register(HttpServletRequest request, MemberDto memberDto) {
+   @PostMapping("/memberRegister")
+    public ModelAndView register(HttpServletRequest request, GuestDto guestDto) {
         ModelAndView mv = new ModelAndView();
        try {
-           memberService.registerMember(memberDto);
+           memberService.registerMember(guestDto);
            mv.setViewName("/member/login");
        } catch (Exception e) {
            mv.addObject("message", "회원가입 중 오류가 발생했습니다.");

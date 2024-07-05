@@ -1,9 +1,10 @@
 package com.newdeal.staynest.dto;
 
-import com.newdeal.staynest.entity.Member;
+import com.newdeal.staynest.entity.Guest;
 import com.newdeal.staynest.entity.UserRoleEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * DTO for {@link Member}
+ * DTO for {@link Guest}
  */
 
 @Setter
@@ -20,12 +21,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 @Builder
-public class MemberDto implements Serializable {
+public class GuestDto implements Serializable {
 
-    long memberId;
+    long guestId;
 
     @NotNull
-    String name;
+    String guestName;
 
     @NotNull
     @Email
@@ -48,21 +49,20 @@ public class MemberDto implements Serializable {
     @NotNull
     LocalDateTime expireDt;
 
-    @NotNull
-    String refreshToken;
-    
+    @Null
+    String image;
 
-    public static Member toEntity(MemberDto dto) {
-        return Member.builder()
-                .id(dto.getMemberId())
-                .name(dto.getName())
-                .email(dto.getEmail())
-                .password(dto.getPassword())
-                .phone(dto.getPhone())
-                .role(dto.getRole())
-                .joinDt(dto.getJoinDt())
-                .expireDt(dto.getExpireDt())
-                /*.refreshToken(dto.getRefreshToken())*/
+    public static Guest toEntity(GuestDto guestDto) {
+        return Guest.builder()
+                .id(guestDto.getGuestId())
+                .guestName(guestDto.getGuestName())
+                .email(guestDto.getEmail())
+                .password(guestDto.getPassword())
+                .phone(guestDto.getPhone())
+                .role(guestDto.getRole())
+                .joinDt(guestDto.getJoinDt())
+                .expireDt(guestDto.getExpireDt())
+                .image(guestDto.getImage())
                 .build();
     }
 
