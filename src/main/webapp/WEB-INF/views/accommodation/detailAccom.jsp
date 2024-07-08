@@ -17,74 +17,56 @@
 
 <!-- body start -->
     <div class="main-content">
-    <div class="container mt-5-mjp">
-        <div class="row align-items-center-mjp">
-            <div class="col-md-6">
-                <h1>오션스퀘어 스위트(객실이름)</h1>
-            </div>
-            <div class="col-md-6 text-end">
+        <input type="hidden" id="contextPath" value="${contextPath}" />
+        <div class="container mt-5-mjp">
+            <div class="row align-items-center-mjp">
+                <div class="col-md-6">
+                    <h1 id="accommodation-name">오션스퀘어 스위트(객실이름)</h1>
+                </div>
+                <div class="col-md-6 text-end">
                     <span id="heartIcon" class="unliked-mjp">♡</span> 저장
+                </div>
             </div>
         </div>
+    </div>
 
          <hr style="border-top: 1px solid #cccccc;"/> <!-- 회색 얇은 선 -->
-        <div class="container mt-5">
-            <!-- 메인 사진 -->
-            <div class="row justify-content-center mb-4">
-                <div class="col-6">
-                    <img src="${contextPath}/images/room.png" class="img-fluid" alt="Main Image">
-                </div>
-            </div>
 
-            <!-- Carousel -->
-
-            <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <div class="col">
-                                <img src="${contextPath}/images/test.png" class="d-block w-100" style="max-width: 100%; height: auto;" alt="Image 1">
-                            </div>
-                            <div class="col">
-                                <img src="${contextPath}/images/room.png" class="d-block w-100" style="max-width: 100%; height: auto;" alt="Image 2">
-                            </div>
-                            <div class="col">
-                                <img src="${contextPath}/images/room.png" class="d-block w-100" style="max-width: 100%; height: auto;" alt="Image 3">
-                            </div>
-                            <div class="col">
-                                <img src="${contextPath}/images/test.png" class="d-block w-100" style="max-width: 100%; height: auto;" alt="Image 4">
-                            </div>
+        <div class="container mt-5" >
+            <!-- Carousel Container -->
+            <div class="carousel-container-mjp">
+                <!-- Carousel -->
+                <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="${contextPath}/images/test.png" class="d-block w-100 fixed-image-mjp" alt="Image 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="${contextPath}/images/room.png" class="d-block w-100 fixed-image-mjp" alt="Image 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="${contextPath}/images/star.png" class="d-block w-100 fixed-image-mjp" alt="Image 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="${contextPath}/images/test.png" class="d-block w-100 fixed-image-mjp" alt="Image 4">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="${contextPath}/images/room.png" class="d-block w-100 fixed-image-mjp" alt="Image 5">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="${contextPath}/images/star.png" class="d-block w-100 fixed-image-mjp" alt="Image 6">
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <div class="row">
-                            <div class="col">
-                                <img src="${contextPath}/images/test.png" class="d-block w-100" style="max-width: 100%; height: auto;" alt="Image 5">
-                            </div>
-                            <div class="col">
-                                <img src="${contextPath}/images/room.png" class="d-block w-100" style="max-width: 100%; height: auto;" alt="Image 6">
-                            </div>
-                            <div class="col">
-                                <img src="${contextPath}/images/star.png" class="d-block w-100" style="max-width: 100%; height: auto;" alt="Image 7">
-                            </div>
-                            <div class="col">
-                                <img src="${contextPath}/images/oneRoom.png" class="d-block w-100" style="max-width: 100%; height: auto;" alt="Image 8">
-                            </div>
-                        </div>
-                    </div>
+                    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#imageCarousel" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
                 </div>
-                <a class="carousel-control-prev" href="#imageCarousel" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#imageCarousel" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </a>
             </div>
-        </div>
-
-
 
         <!-- 예제 내용 -->
             <div class="details-section">
@@ -108,22 +90,8 @@
                             자연 그대로의 풍광과 함께 자연의 소리를 들을수 있는 숙소에서...</p>
                     </div>
                 </div>
-<%--                <div class="col-md-8">--%>
-<%--                    <div class="info-section-mjp">--%>
-<%--                        <hr style="border-top: 1px solid #cccccc;"/> <!-- 회색 얇은 선 -->--%>
-<%--                        <h1>성산읍, 서귀포시 한국의 리조트의 개인실</h1>--%>
-<%--                        <h3>최대 인원4명 , 침실2개, 욕실2개</h3>--%>
-<%--                        <p> ★ 5.0  후기 17개</p>--%>
 
-<%--                        <hr style="border-top: 1px solid #cccccc;"/> <!-- 회색 얇은 선 -->--%>
-<%--                        <p>호스트 : Minsuk</p>--%>
 
-<%--                        <hr style="border-top: 1px solid #cccccc;"/> <!-- 회색 얇은 선 -->--%>
-<%--                        <p>원하시는 날짜에 이미 예약이 완료되어 있다면 저희 프로필 사진을 클릭하여 다른 숙소들도 확인해 주시길 바랍니다</p>--%>
-<%--                        <p>제주 동쪽 성산 일출봉과 섭지코지를 가까이 둔 고요한 마을 온평리에 위치한 힐링 숙소 입니다. 아늑하고 편안한 객실과--%>
-<%--                            자연 그대로의 풍광과 함께 자연의 소리를 들을수 있는 숙소에서...</p>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
                 <!-- 1/3 부분 -->
                 <div class="col-md-4">
                     <div class="mb-5"></div>
@@ -278,7 +246,7 @@
         <div class="mb-5"></div>
 
 
-        </div>
+</div>
 
     <!-- body end -->
 
@@ -290,6 +258,7 @@
 
     </div>
 </div>
+<script src="${contextPath}/static/js/roomDetail.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
