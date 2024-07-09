@@ -36,6 +36,7 @@
             <!-- Carousel Container -->
             <div class="carousel-container-mjp">
                 <!-- Carousel -->
+                <div style="width: 500px; height: 400px;">
                 <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -65,6 +66,7 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </a>
+                </div>
                 </div>
             </div>
 
