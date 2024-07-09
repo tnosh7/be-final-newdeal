@@ -26,4 +26,12 @@ public class ReviewImg {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    public Long getId() {
+        return reviewImgId;
+    }
+
+    public String getUrl() {
+        return imgUrl;
+    }
 }
