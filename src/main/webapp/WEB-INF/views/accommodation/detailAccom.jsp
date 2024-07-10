@@ -102,7 +102,8 @@
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">78,000원 /박 </h5>
-                                <form action="${contextPath}/reserve" method="post">
+                                <!-- hidden input을 사용하여 숙소 ID를 설정 -->
+                                <input type="hidden" id="hotelId" value="1"> <!-- 추후에 들어오는 hotel_id로 변경 -->
                                     <div class="mb-3">
                                         <label for="checkInDate" class="form-label">체크인</label>
                                         <input type="date" class="form-control" id="checkInDate" name="checkInDate" required>
@@ -121,11 +122,11 @@
                                             <option value="5">5명</option>
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn" style="background-color: #4F9F8A; color: white; width: 200px; height: 40px;">예약하기</button>
+                                    <button type="button" class="btn" style="background-color: #4F9F8A; color: white; width: 200px; height: 40px;" onclick="submitReservation()">예약하기</button>
 
                                     <hr>
                                     <p>예약확정 전에는 요금이 청구 되지않습니다.</p>
-                                </form>
+
                                 <hr style="border-top: 1px solid #cccccc;"/> <!-- 회색 얇은 선 -->
                                 <p>78,000원 * 5박 = 390,000원</p>
                                 <p>수수료 150,000</p>

@@ -17,6 +17,7 @@
 
     <!-- flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="/js/search.js"></script>
 </head>
 <body>
 <div class="wrapper">

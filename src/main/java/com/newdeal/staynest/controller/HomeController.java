@@ -5,13 +5,16 @@ import com.newdeal.staynest.entity.accommodation.Accommodation;
 import com.newdeal.staynest.service.AccommodationService;
 import com.newdeal.staynest.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class HomeController {
@@ -36,10 +39,14 @@ public class HomeController {
         return mav;
     }
 
-
     @GetMapping("/reserve")
-    public ModelAndView reserve() {
-        return new ModelAndView("reserve/reserve");
+    public ModelAndView reserveAccommodations() { return new ModelAndView("reserve/reserve");}
+
+
+    @PostMapping("/reserve")
+    public ResponseEntity<String> reserve() {
+        // 클라이언트로부터 받은 예약 정보 처리
+        return ResponseEntity.ok("예약정보보내기!");
     }
 
     @GetMapping("/reservecomplete")
