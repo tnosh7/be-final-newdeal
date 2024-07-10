@@ -1,5 +1,6 @@
 package com.newdeal.staynest.dto.Acoomodation;
 
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,5 +26,6 @@ public class AccommodationDto {
     private double latitude;
     private double longitude;
     private List<String> imgUrls;
+    private int avg;
 }
 

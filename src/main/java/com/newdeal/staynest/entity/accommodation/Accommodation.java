@@ -1,6 +1,8 @@
 package com.newdeal.staynest.entity.accommodation;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.newdeal.staynest.entity.Host;
+import com.newdeal.staynest.entity.Review;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,9 +20,11 @@ import java.util.List;
 public class Accommodation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long accommId;
+    @JoinColumn(name = "accomm_id")
+    private Long id;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "host_id")
     private Host host;
 
@@ -54,11 +58,17 @@ public class Accommodation {
     @Column(name = "accomm_content", nullable = false)
     private String content;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AccommodationImg> images;
 
     private LocalDateTime createdAt;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews;
+
+    private int avg;
 
     private double latitude;
     private double longitude;

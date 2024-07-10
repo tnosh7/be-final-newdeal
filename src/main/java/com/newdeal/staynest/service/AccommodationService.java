@@ -87,6 +87,7 @@ public class AccommodationService {
                 .checkIn(accommDto.getCheckIn())
                 .checkOut(accommDto.getCheckOut())
                 .content(accommDto.getContent())
+                .avg(accommDto.getAvg())
                 .createdAt(LocalDateTime.now())
                 .build();
 

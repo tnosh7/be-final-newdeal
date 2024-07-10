@@ -1,5 +1,6 @@
 package com.newdeal.staynest.entity;
 
+import com.newdeal.staynest.entity.accommodation.Accommodation;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,4 +34,8 @@ public class Review {
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewImg> images;
+
+    @ManyToOne
+    @JoinColumn(name = "accomm_id", nullable = false)
+    private Accommodation accommodation;
 }
