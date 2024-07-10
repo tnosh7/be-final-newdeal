@@ -1,7 +1,6 @@
 package com.newdeal.staynest.dto.review;
 
 public record ReviewRequest(
-        int reservation_id,
         int star,
         String content
 ) {
