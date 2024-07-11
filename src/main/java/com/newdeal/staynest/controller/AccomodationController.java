@@ -19,6 +19,17 @@ public class AccomodationController {
         return new ModelAndView("accommodation/detailAccom");
     }
 
+    @GetMapping("/detailAccom/{id}")
+    public ModelAndView detailAccom(@PathVariable Long id) {
+        ModelAndView mav = new ModelAndView("accommodation/detailAccom");
+        Accommodation accommodation = accommodationService.getAccommodationById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid accommodation Id:" + id));
+        mav.addObject("accommodation", accommodation);
+        return mav;
+    }
+
+
+//--------기능 --------------------------------------------------
     @PostMapping
     public ResponseEntity<Accommodation> registerAccomm(@RequestBody AccommodationDto accommDto) {
         Accommodation accomm = accommodationService.registerAccomm(accommDto);

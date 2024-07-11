@@ -1,5 +1,6 @@
-package com.newdeal.staynest.entity.accommodation;
+package com.newdeal.staynest.repository;
 
+import com.newdeal.staynest.entity.accommodation.Accommodation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
