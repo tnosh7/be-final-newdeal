@@ -11,43 +11,39 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/style.css">
     <link rel="stylesheet" href="${contextPath}/css/member.css">
     <script src="${contextPath}/js/member.js"></script>
 </head>
 <script>
-    // $(document).ready(function () {
-    //     // 토큰 삭제
-    //     Cookies.remove('JwtAuthorizationFilter', {path: '/'});
-    // });
-    // const host = 'http://' + window.location.host;
-    //
-    // const href = location.href;
-    // const queryString = href.substring(href.indexOf("?")+1)
-    // if (queryString === 'error') {
-    //     const errorDiv = document.getElementById('login-failed');
-    //     errorDiv.style.display = 'block';
-    // }
-    //
-    // function onLogin() {
-    //     let username = $('#username').val();
-    //     let password = $('#password').val();
-    //
-    // $.ajax({
-    //     type: "POST",
-    //     url: `/member/login`,
-    //     contentType: "application/json",
-    //     data: JSON.stringify({username: username, password: password}),
-    // })
-    //     .done(function (res, status, xhr) {
-    //         window.location.href = host;
-    //     })
-    //     .fail(function (xhr, textStatus, errorThrown) {
-    //         console.log('statusCode: ' + xhr.status);
-    //         window.location.href = host + '/member/login-page?error'
-    //     });
-    // }
 
+$(document).ready(function() {
+    Cookies.remove('JwtAuthorizationFilter', {path: '/'});
+});
+
+function loginBtn() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    $.ajax({
+        url: '/member/login',
+        method: 'POST',
+        data: {
+            "email" : email,
+            "password" : password,
+            "role" : "ROLE_GUEST"
+        },
+        success: function(data, status, xhr) {
+            // 응답 헤더에서 JWT 토큰 읽기
+            const token = xhr.getResponseHeader('Authorization').split(' ')[1];
+            sessionStorage.setItem("token", token);
+            location.href="${contextPath}/"
+        },
+        error: function(error) {
+            console.error('로그인 실패:', error);
+        }
+    });
+}
 </script>
 <body>
 <!-- Login -->
@@ -58,10 +54,11 @@
                 <div class="mb-5" align="center">
                     <img src="${contextPath}/images/logo.png" alt="로고" width="250"
                          onclick="location.href='${contextPath}/'">
+                    <h1>게스트 로그인</h1>
                 </div>
             </div>
         </div>
-        <form action="${contextPath}/member/login" method="post">
+        <form action="${contextPath}/member/login" method="post" id="login-form">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8">
                 <div class="row gy-5 justify-content-center">
@@ -85,7 +82,7 @@
                                 <div class="col-12">
                                     <div class="d-grid">
                                         <button class="btn btn-lg btn-dark rounded-10 fs-6"
-                                                style="color: white; background-color: #0D31B2" type="submit">로그인
+                                                style="color: white; background-color: #0D31B2" type="button" onclick="loginBtn()">로그인
                                         </button>
                                     </div>
                                 </div>

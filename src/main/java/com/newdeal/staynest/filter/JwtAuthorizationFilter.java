@@ -42,7 +42,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter  {
                 log.error("Token Error");
                 return;
             }
-
             Claims info = tokenProvider.getUserInfoFromToken(tokenValue);
 
             try {
