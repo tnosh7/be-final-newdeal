@@ -29,16 +29,16 @@ arrow_back_ios
                 <div class="reservebox-khs">
                     <div>예약 정보</div>
                     <div class="reservebox1-khs">날짜</div>
-                    <div>2024.07.03 ~ 2024.07.05</div>
+                    <div>${reservation.checkInDate} ~ ${reservation.checkOutDate}</div>
                     <div class="reservebox1-khs">게스트 인원</div>
-                    <div>2명</div>
+                    <div>${reservation.guests}명</div>
                 </div>
                 <div class="reservebox-khs">
                     <div>호스트에게 보낸 메세지</div>
-                    <div style="margin-top: 5px;">늦게 체크인할거 같아요.</div>
+                    <div style="margin-top: 5px;">${reservation.message}</div>
                 </div>
                 <div class="paybtn">
-                    <button onclick="">메인으로</button>
+                    <button onclick="finishReservation()">메인으로</button>
                 </div>
             </div>
             <div style="width:400px; height:50%; padding:20px; margin: 20px; border: 1px solid gray; border-radius: 10px">

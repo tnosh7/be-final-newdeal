@@ -16,10 +16,11 @@
     <link rel="stylesheet" href="${contextPath}/css/member.css">
 </head>
 <script>
+    let emailCheckNumberInput = null;
     // Validator 객체 정의 - 유효성 검사용
     const Validator = {
         isValid: true,
-        //비밀번호 유효성 검사
+
         validatePassword: function () {
             const password = document.getElementById("password").value;
             const passwordCheck = document.getElementById("passwordCheck").value;
@@ -41,7 +42,7 @@
             }
             return this.isValid;
         },
-        //핸드폰 유효성 검사
+
         validatePhone: function () {
             const phone = document.getElementById("phone").value;
             const phoneCheckWarn = document.getElementById("phoneCheckWarn");
@@ -57,10 +58,9 @@
             }
             return this.isValid;
         },
-        // 폼 유효성 검사
+
         validateForm: function () {
             this.isValid = true; // 초기화
-
             const isPasswordValid = this.validatePassword();
             const isPhoneValid = this.validatePhone();
             if (!isPasswordValid || !isPhoneValid) {
@@ -86,9 +86,9 @@
         // 제출 전 유효성 검사
         $("form").submit(function (event) {
             if (!Validator.validateForm()) {
-                //컨트롤러에서 예외처리 메시지 전송
+
                 alert(${message});
-                event.preventDefault(); // 폼 제출을 막음
+                event.preventDefault();
             }
         });
     });
@@ -96,9 +96,13 @@
     function checkDuplicateEmail() {
         const email = document.getElementById("email").value;
         const emailCheckWarn = document.getElementById("emailCheckWarn");
-
+        if (email === "") {
+            emailCheckWarn.innerText="이메일을 정확히 입력해주세요."
+            emailCheckWarn.style.color = "red";
+            return;
+        }
         $.ajax({
-            url: '/member/duplicateEmail?identity=host',
+            url: '/member/duplicateEmail?identity=guest',
             type: 'POST',
             data: {email: email},
             success: function (response) {
@@ -110,6 +114,38 @@
                 emailCheckWarn.style.color = "red";
             }
         });
+    }
+    function emailCheckNumber() {
+        const email = document.getElementById("email").value;
+        const emailCheckNumber = document.getElementById("emailCheckNumber");
+        if (!Validator.validateForm()) {
+        }
+        else {
+            $("#register-btn").show();
+            $("#emailCheckYn-btn").hide();
+            $.ajax({
+                url: '/member/emailCheck',
+                type: 'POST',
+                data: {email: email},
+                success: function (response) {
+                    emailCheckNumberInput = response;
+                },
+                error: function (error) {
+                    alert("error")
+                }
+            })
+        }
+    }
+    function varifiedEmailNunber() {
+        const userNumber = document.getElementById("emailCheckYn").value;
+        const emailCheckYnWarn = document.getElementById("emailCheckYnWarn");
+        if (emailCheckNumberInput !== userNumber) {
+            emailCheckYnWarn.innerText ="인증번호를 바르게 입력해주세요.";
+            emailCheckYnWarn.style.color = "red";
+        } else {
+            emailCheckYnWarn.innerText ="";
+            $("button[type='submit']").prop('disabled', false);
+        }
     }
 </script>
 <body>
@@ -143,7 +179,7 @@
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control border-0 border-bottom rounded-0"
                                                name="phone" id="phone" placeholder="휴대폰 번호" maxlength="11" required
-                                               onchange="validatePhone();">
+                                               onfocusout="validatePhone();">
                                         <label for="phone" class="form-label-ysh">휴대폰 번호</label>
                                         <div id="phoneCheckWarn" class="error-message-ysh"></div>
                                     </div>
@@ -152,7 +188,7 @@
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control border-0 border-bottom rounded-0"
                                                name="email" id="email" placeholder="이메일 주소" required
-                                               onkeyup="checkDuplicateEmail();">
+                                               onfocusout="checkDuplicateEmail();">
                                         <label for="email" class="form-label-ysh">이메일</label>
                                         <div id="emailCheckWarn" class="error-message-ysh"></div>
                                     </div>
@@ -169,12 +205,20 @@
                                     <div class="form-floating mb-3">
                                         <input type="password" class="form-control border-0 border-bottom rounded-0"
                                                name="passwordCheck" id="passwordCheck" value="" placeholder="Password"
-                                               required maxlength="16" onchange="validatePassword();">
+                                               required maxlength="16" onfocusout="validatePassword();">
                                         <label for="passwordCheck" class="form-label-ysh">비밀번호 확인</label>
                                         <div id="passwdCheckWarn" class="error-message-ysh"></div>
                                     </div>
                                 </div>
-
+                                <div class="col-12" id="emailCheckNumber-div">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control border-0 border-bottom rounded-0"
+                                               name="emailCheckYn" id="emailCheckYn" placeholder="이메일 인증번호" required  maxlength="6" onfocusout="varifiedEmailNunber()">
+                                        <label for="email" class="form-label-ysh" >이메일 인증번호</label>
+                                        <input type="hidden" id=" emailCheckNumber" value="">
+                                        <div id="emailCheckYnWarn" class="error-message-ysh"></div>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" name="iAgree"
@@ -188,8 +232,9 @@
                                     <div class="popup" id="popup">
                                         <div class="popup-content" id="popupContent">
                                             <!--이용약관-->
-                                            <p>개인정보보호법에 따라 StayNest에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의
-                                                보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기
+                                            <p>
+                                                개인정보보호법에 따라 StayNest에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적,
+                                                개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기
                                                 바랍니다.<br>
 
                                                 1. 수집하는 개인정보<br>
@@ -245,10 +290,10 @@
                                                 제공할 수 있습니다. 이용자는 쿠키에 대한 선택권을 가지고 있으며, 웹브라우저에서 옵션을 설정함으로써 모든 쿠키를 허용하거나,
                                                 쿠키가 저장될 때마다 확인을 거치거나, 아니면 모든 쿠키의 저장을 거부할 수도 있습니다. 다만, 쿠키의 저장을 거부할 경우에는
                                                 로그인이 필요한 네이버 일부 서비스의 이용에 불편이 있을 수 있습니다.<br>
-                                                [웹 브라우저에서 쿠키 허용/차단 방법]<br>
+                                                [웹 브라우저에서 쿠키 허용 & 차단 방법]<br>
                                                 - 크롬(Chrome) : 웹 브라우저 설정 > 개인정보 보호 및 보안 > 인터넷 사용 기록 삭제<br>
                                                 - 엣지(Edge) : 웹 브라우저 설정 > 쿠키 및 사이트 권한 > 쿠키 및 사이트 데이터 관리 및 삭제<br>
-                                                [모바일 브라우저에서 쿠키 허용/차단]<br>
+                                                [모바일 브라우저에서 쿠키 허용 & 차단]<br>
                                                 - 크롬(Chrome) : 모바일 브라우저 설정 > 개인정보 보호 및 보안 > 인터넷 사용 기록 삭제<br>
                                                 - 사파리(Safari) : 모바일 기기 설정 > 사파리(Safari) > 고급 > 모든 쿠키 차단<br>
                                                 - 삼성 인터넷 : 모바일 브라우저 설정 > 인터넷 사용 기록 > 인터넷 사용 기록 삭제<br>
@@ -294,10 +339,12 @@
                                                 로그인 기록: 3개월<br>
                                                 4. 개인정보 수집 및 이용 동의를 거부할 권리<br>
                                                 이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한
-                                                수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.</p>
+                                                수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.
+                                            </p>
                                         </div>
                                         <button class="popup-button" id="popupButton" type="button">확인</button>
                                     </div>
+
                                     <script>
                                         document.getElementById("staynestLow").addEventListener('click', function (event) {
                                             event.preventDefault();
@@ -318,10 +365,17 @@
                                         });
                                     </script>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12" id="emailCheckYn-btn" >
+                                    <div class="d-grid" >
+                                        <button class="btn btn-lg btn-dark rounded-10 fs-6"
+                                                style="color: white; background-color: #0D31B2" type="button" onclick="emailCheckNumber()">인증요청
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12" id="register-btn">
                                     <div class="d-grid">
                                         <button class="btn btn-lg btn-dark rounded-10 fs-6"
-                                                style="color: white; background-color: #0D31B2" type="submit">회원가입
+                                                style="color: white; background-color: #0D31B2" type="submit" disabled >회원가입
                                         </button>
                                     </div>
                                 </div>
@@ -329,7 +383,8 @@
                                     <div class="d-grid">
                                         <p class="text-center m-0">Already have an account? <a
                                                 href="${contextPath}/member/login-page"
-                                                class="link-primary text-decoration-none">로그인</a></p>
+                                                class="link-primary text-decoration-none">로그인</a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -366,3 +421,4 @@
 </section>
 </body>
 </html>
+

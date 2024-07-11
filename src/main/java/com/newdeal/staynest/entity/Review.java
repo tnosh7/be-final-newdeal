@@ -19,9 +19,9 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-//    @OneToOne
-//    @JoinColumn(name = "reservation_id")
-//    private Reservation reservation;
+    @OneToOne
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
 
     @Column(name = "star", nullable = false)
     private int star;

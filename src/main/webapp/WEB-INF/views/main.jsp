@@ -13,6 +13,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/search.js"></script>
 </head>
 <body>
 <%
@@ -44,12 +45,12 @@
                 </div>
                 <div style="width: 18%;">
                     <div class="searchtitle-khs">체크인</div>
-                    <input type="date" class="button-item-khs sb2-khs" name="startdate" id="startdate"
+                    <input type="date" class="button-item-khs sb2-khs" name="checkInDate" id="checkInDate"
                            value="<%= todayDate %>">
                 </div>
                 <div style="width: 18%;">
                     <div class="searchtitle-khs">체크아웃</div>
-                    <input type="date" class="button-item-khs sb3-khs" name="enddate" id="enddate"
+                    <input type="date" class="button-item-khs sb3-khs" name="checkOutDate" id="checkOutDate"
                            value="<%= tomorrowDate %>">
                 </div>
                 <div style="width: 13%;">

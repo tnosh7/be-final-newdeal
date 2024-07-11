@@ -18,7 +18,6 @@ spring:
     username: root
     password: 1234
 
-
   jpa:
     open-in-view: true
     hibernate:
@@ -27,6 +26,17 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: modudig@gmail.com
+    password: adtksmwufpnchgsa
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.timeout: 5000
+      mail.smtp.connection timeout: 5000
 
   security:
     user:
@@ -55,8 +65,20 @@ spring:
             user_name_attribute: response
 
 
-#    jwt:
-#      header: Authorization
-#      secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-#      token-validity-in-seconds: 86400
-#http://localhost:8090/login/oauth2/code/naver
+
+jwt:
+  header: JwtAuthorizationFilter
+  secret:
+    key: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  token-validity-in-seconds: 86400
+  expired-time:
+    token:
+      access: 2500000000
+      refresh: 25000000000000
+
+logging:
+  level:
+    root: info
+
+
+

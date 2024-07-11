@@ -1,5 +1,7 @@
 package com.newdeal.staynest.controller;
 
+import com.newdeal.staynest.entity.UserRoleEnum;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +36,7 @@ public class HostController {
 
     //숙소 메인
     @GetMapping("/")
+    @Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView hostMain() {
         return new ModelAndView("host/hostMain");
     }

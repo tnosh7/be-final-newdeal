@@ -82,8 +82,9 @@
                 &nbsp;&nbsp;회원가입 / 로그인
             </button>
             <div class="dropdown-content"> <!-- (알림) 드롭다운 메뉴를 오른쪽 정렬 -->
-                <a href="${contextPath}/member/identify">회원가입</a>
+                <a href="${contextPath}/member/identify" >회원가입</a>
                 <a href="${contextPath}/member/login-page">로그인</a>
+
             </div>
         </div>
     </div>

@@ -2,11 +2,21 @@ package com.newdeal.staynest.controller;
 
 import com.newdeal.staynest.dto.GuestDto;
 import com.newdeal.staynest.dto.HostDto;
+import com.newdeal.staynest.jwt.TokenProvider;
 import com.newdeal.staynest.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -14,22 +24,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class MemberController {
 
     private final MemberService memberService;
-
-    public MemberController(MemberService memberService) {
+    private final AuthenticationManager authenticationManager;
+    private final TokenProvider tokenProvider;
+    private final UserDetailsService userDetailsService;
+    public MemberController(MemberService memberService, AuthenticationManager authenticationManager, TokenProvider tokenProvider, UserDetailsService userDetailsService) {
         this.memberService = memberService;
+        this.authenticationManager = authenticationManager;
+        this.tokenProvider = tokenProvider;
+        this.userDetailsService = userDetailsService;
     }
-
-    //로그인 페이지
-    @GetMapping("/login-page")
-    public ModelAndView login() {
-        return new ModelAndView("member/login");
-    }
-    //로그인
-//    @PostMapping("/login")
-//    public void login(@ModelAttribute("member") MemberDto memberDto,  HttpServletResponse res) {
-//        memberService.login(memberDto, res);
-//
-//    }
 
     // 게스트 회원가입 페이지
     @GetMapping("/guestRegister")
@@ -67,7 +70,30 @@ public class MemberController {
         }
         return mv;
     }
+    //로그인 페이지
+    @GetMapping("/login-page")
+    public ModelAndView login() {
+        return new ModelAndView("member/login");
+    }
 
+    //로그인
+    @PostMapping("/login")
+    public Map<String, String> login(@RequestParam String email, @RequestParam String password) {
+
+        UsernamePasswordAuthenticationToken authenticationToken
+                = new UsernamePasswordAuthenticationToken(email, password);
+        Authentication authentication;
+        try {
+            authentication = authenticationManager.authenticate(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (AuthenticationException e) {
+            throw new RuntimeException("loginController : 로그인 실패");
+        }
+        String jwt = tokenProvider.createToken(authentication);
+        Map<String, String> response = new HashMap<>();
+        response.put("token", jwt);
+        return response;
+    }
 
     // 게스트&호스트 이메일 중복 확인
     @PostMapping("/duplicateEmail")
@@ -76,11 +102,14 @@ public class MemberController {
         return (identity.equals("guest")) ?
                 memberService.checkDuplicateGuestEmail(email) : memberService.checkDuplicateHostEmail(email);
     }
-
-    @GetMapping("/emailCheck")
-    public ModelAndView emailCheck() {
-        return new ModelAndView("member/emailCheck");
+    // 이메일 인증
+    @PostMapping("/emailCheck")
+    public @ResponseBody String emailCheck(@RequestParam String email) {
+        String emailCheckCode;
+        emailCheckCode = memberService.sendEmailCheck(email);
+        return emailCheckCode;
     }
+
 
     @GetMapping("/identify")
     public ModelAndView identify() {

@@ -36,6 +36,12 @@ h1 {
 
 
 /*register.jsp start*/
+#emailCheckNumber {
+    display: none;
+}
+#register-btn {
+    display: none;
+}
 /* 팝업 스타일 */
 .popup-overlay {
     display: none;
