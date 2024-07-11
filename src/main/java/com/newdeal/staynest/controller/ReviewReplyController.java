@@ -40,12 +40,12 @@ public class ReviewReplyController {
     public ModelAndView insertReview(
             @RequestBody ReviewRequest reviewRequest,
             @PathVariable Long reservationId,
-            @PathVariable Long accomId,
-            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader
+            @PathVariable Long accomId
+//            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader
     ) {
-        String token = authorizationHeader.substring(7); // "Bearer " 제거
+//        String token = authorizationHeader.substring(7); // "Bearer " 제거
 //        if (jwtUtil.validateToken(token)) {
-            reviewReplyService.ReviewSave(reviewRequest, reservationId);
+            reviewReplyService.ReviewSave(reviewRequest, reservationId, accomId);
 
             ModelAndView mav = new ModelAndView();
             mav.setViewName("review/fullReview/{reservationId}");
@@ -61,7 +61,7 @@ public class ReviewReplyController {
 
     @GetMapping("/fullReview/{accommId}")
     public ModelAndView fullReview(@PathVariable Long accommId) {
-        List<ReviewResponse> reviewResponses = reviewReplyService.fullReview(accommId);
+        List<ReviewResponse> reviewResponses = reviewReplyService.getReviewsByAccommodationId(accommId);
         ModelAndView mav = new ModelAndView("review/fullReview"); // 뷰 이름을 지정하여 ModelAndView 객체 생성
         mav.addObject("reviewResponses", reviewResponses);
         return mav; // ModelAndView 객체 반환

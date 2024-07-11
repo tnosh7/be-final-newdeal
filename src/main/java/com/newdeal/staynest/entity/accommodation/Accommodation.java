@@ -16,10 +16,10 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Accommodation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "accomm_id")
     private Long id;
 
     @ManyToOne
