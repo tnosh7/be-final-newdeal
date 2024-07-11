@@ -3,7 +3,6 @@ package com.newdeal.staynest.service;
 import com.newdeal.staynest.core.exception.ResourceNotFoundException;
 import com.newdeal.staynest.dto.guest.GuestResponse;
 import com.newdeal.staynest.entity.Guest;
-import com.newdeal.staynest.exception.ResourceNotFoundException;
 import com.newdeal.staynest.repository.GuestRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +28,10 @@ public class GuestService {
      * @param guestId
      * @return
      */
+    @Transactional
     public Guest getGuestById(Long guestId) {
-        return guestRepository.findById(guestId).orElseThrow(() -> new ResourceNotFoundException("Guest not found with id " + guestId));
 
+        return guestRepository.findById(guestId).orElseThrow(() -> new ResourceNotFoundException("Guest not found with id " + guestId));
     }
 
     @Transactional
@@ -89,10 +89,5 @@ public class GuestService {
                 guest.getPhone(),
                 guest.getAddress()
         );
-    }
-
-    public Guest getGuestById(Long id) {
-        return guestRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Guest not found with id " + id));
     }
 }
