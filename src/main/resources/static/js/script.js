@@ -116,4 +116,78 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// 토글 드롭다운 메뉴
+function toggleDropdown() {
+    var dropdownMenu = document.getElementById("myDropdown-khs");
+    if (dropdownMenu.style.display === "block") {
+        dropdownMenu.style.display = "none";
+    } else {
+        dropdownMenu.style.display = "block";
+    }
+}
 
+// 정렬 옵션에 따른 동작 함수들
+function sortByLatest() {
+    console.log('최신순으로 정렬');
+    // 여기에 최신순 정렬 처리 로직 추가
+}
+
+function sortByRating() {
+    console.log('평점순으로 정렬');
+    // 여기에 평점순 정렬 처리 로직 추가
+}
+
+function sortByPriceLow() {
+    console.log('가격 낮은 순으로 정렬');
+    // 여기에 가격 낮은 순 정렬 처리 로직 추가
+}
+
+// 클릭 이외의 영역 클릭 시 드롭다운 메뉴 닫기
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn-khs')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content-khs");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.style.display === 'block') {
+                openDropdown.style.display = 'none';
+            }
+        }
+    }
+}
+
+
+function submitReservation() {
+    const checkInDate = document.getElementById('checkInDate').value;
+    const checkOutDate = document.getElementById('checkOutDate').value;
+    const guests = document.getElementById('guests').value;
+    const hotelId = document.getElementById('hotelId').value; // 숙소 ID 가져오기
+
+    const data = {
+        hotelId: hotelId,
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+        guests: guests
+    };
+
+    fetch('/reserve', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log("여기오냐");
+            window.location.href = `/reserve`;
+        })
+        .catch(error => {
+            console.error('Error submitting reservation:', error);
+
+        });
+}

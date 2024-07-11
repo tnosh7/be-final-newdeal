@@ -50,11 +50,11 @@ button {
     font-size: 40px;
     font-weight: 900;
     flex: 1;
-    cursor: pointer;
 }
 
 .logo {
     width: 150px;
+    cursor: pointer;
 }
 
 /* Right-aligned dropdown */
@@ -118,7 +118,7 @@ button {
     border-radius: 10px;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    z-index: 1000;
     top: calc(100% + 1px);
     right: 0;
 }
@@ -195,15 +195,16 @@ footer .social-icons a:hover {
 .searchBox-khs {
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    margin: 0 auto;
     padding: 15px;
     border-radius: 8px;
     border: 1px solid #ccc;
 }
 
+.searchtitle-khs {
+    padding-left: 12px;
+}
+
 .button-item-khs {
-    flex: 1;
     padding: 10px;
     background-color: #f1f1f1;
     border: 1px solid #cccccc;
@@ -216,41 +217,100 @@ footer .social-icons a:hover {
 }
 
 .button-item-khs:hover {
-    background-color: #f1f1f1;
+    background-color: gainsboro;
 }
 
-.sb1-khs {
-    flex: 3;
+.sb1-khs, .sb2-khs, .sb3-khs {
     text-align: left;
-}
-
-.sb2-khs {
-    flex: 1;
-    text-align: left;
-}
-
-.sb3-khs {
-    flex: 1;
-    text-align: left;
+    width: 100%;
 }
 
 .sb4-khs {
-    flex: 2;
-    text-align: left;
+    position: relative;
+    width: 100%;
 }
 
 .sb5-khs {
-    flex: 1;
+    width: 100%;
     background-color: #005241;
     color: white;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    margin: 0 10px;
+    cursor: pointer;
+    outline: none;
+    font-weight: bold;
 }
+
+.sb5-khs:hover {
+    background-color: #4F9F8A;
+}
+
+.num-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: row; /* 수평으로 정렬되도록 수정 */
+}
+
+.num-input {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+}
+
+.num-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 25px;
+    z-index: 1000;
+    display: none;
+    width: 100px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.num-dropdown.show {
+    display: block;
+}
+
+.num-btn {
+    width: 30px;
+    height: 30px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.num-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.num-value {
+    display: inline-block;
+    padding: 0 8px;
+}
+
 
 .carousel-item img {
-    max-width: 100%; /* 컨테이너 너비에 맞추기 */
-    width: 400px;
-    height: auto; /* 비율 유지 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 잘리지 않고 채워지도록 설정 */
+    object-position: center; /* 이미지를 가운데 정렬 */
 }
-
 
 /* 정보 섹션 스타일 */
 .info-section-mjp {
@@ -282,12 +342,9 @@ footer .social-icons a:hover {
     border: 1px solid #ccc;
 }
 
-.sb5-khs:hover {
-    background-color: #005241;
-    color: white;
-}
 
 .selCat-khs {
+    width: 85%;
     margin-top: 15px;
     display: flex;
     flex-wrap: wrap;
@@ -652,4 +709,47 @@ footer .social-icons a:hover {
 
 .view-all-cyj:hover {
     background-color: #f1f1f1;
+}
+
+
+/* Dropdown button styles */
+.dropdown-khs {
+    width: 13%;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle; /* 세로 정렬을 위해 추가 */
+}
+
+.dropbtn-khs {
+    background-color: white; /* 기본 배경색 */
+    color: black;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid gainsboro;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none; /* 기본 focus 효과 제거 */
+    transition: border-color 0.3s ease; /* 트랜지션 추가 */
+}
+
+.dropdown-content-khs {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content-khs a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.dropdown-content-khs a:hover {
+    background-color: #d3d3d3; /* hover 효과 */
 }

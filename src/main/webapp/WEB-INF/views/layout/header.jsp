@@ -18,8 +18,8 @@
 </head>
 <body>
 <div class="outer-container">
-    <div class="left-aligned" onclick="window.location.href='http://localhost:8090/'">
-        <img class="logo" src="/images/logo.png" alt="logo">
+    <div class="left-aligned">
+        <img class="logo"  onclick="window.location.href='http://localhost:8090/'" src="/images/logo.png" alt="logo">
     </div>
     <div class="modal-notification-cyj"> <!-- (알림) 알림 버튼 스타일 추가 -->
         <img src="https://cdn-icons-png.flaticon.com/128/3607/3607235.png" alt="알림" class="modal-notification-icon-cyj"> <!-- (알림) 알림 아이콘 스타일 추가 -->
