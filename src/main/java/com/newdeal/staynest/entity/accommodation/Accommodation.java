@@ -14,7 +14,6 @@ import java.util.List;
 @Table(name = "accommodation")
 @Getter
 @Setter
-@Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Accommodation {
