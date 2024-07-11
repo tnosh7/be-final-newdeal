@@ -1,8 +1,7 @@
 package com.newdeal.staynest.service;
 
 import com.newdeal.staynest.entity.accommodation.Accommodation;
-import com.newdeal.staynest.entity.accommodation.AccommodationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.newdeal.staynest.repository.AccommodationRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

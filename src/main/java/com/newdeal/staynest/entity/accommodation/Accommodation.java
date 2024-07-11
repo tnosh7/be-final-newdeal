@@ -72,4 +72,7 @@ public class Accommodation {
 
     private double latitude;
     private double longitude;
+
+
+
 }

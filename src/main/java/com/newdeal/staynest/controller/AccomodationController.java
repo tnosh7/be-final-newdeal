@@ -28,6 +28,8 @@ public class AccomodationController {
         return mav;
     }
 
+
+//--------기능 --------------------------------------------------
     @PostMapping
     public ResponseEntity<Accommodation> registerAccomm(@RequestBody AccommodationDto accommDto) {
         Accommodation accomm = accommodationService.registerAccomm(accommDto);

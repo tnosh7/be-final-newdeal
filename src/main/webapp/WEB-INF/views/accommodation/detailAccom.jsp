@@ -139,13 +139,13 @@
             <!-- 정보 섹션 끝 -->
             <!-- 지도 삽입 -->
             <hr style="border-top: 1px solid #cccccc;"/> <!-- 회색 얇은 선 -->
-            <div class="row mt-5">
-                <h2>숙소위치</h2>
-                <div class="col-md-12">
-                    <jsp:include page="${contextPath}/WEB-INF/views/accommodation/map.jsp"/>
+                <div class="row mt-5">
+                    <h2>숙소위치</h2>
+                    <div class="col-md-12">
+                        <jsp:include page="${contextPath}/WEB-INF/views/accommodation/map.jsp"/>
+                    </div>
                 </div>
-            </div>
-            <!-- 지도 삽입끝 -->
+                <!-- 지도 삽입 끝 -->
 
             <!-- 리뷰 섹션  -->
             <hr style="border-top: 1px solid #ccc;"/> <!-- 회색 얇은 선 -->
