@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 // Flatpickr 설정
-    var startDatePicker = flatpickr("#startdate", {
+    var startDatePicker = flatpickr("#checkInDate", {
         dateFormat: "Y-m-d",
         minDate: "today", // 오늘 날짜부터 선택 가능
-        defaultDate: document.getElementById('startdate').value ? document.getElementById('startdate').value : getTodayDate(), // value 값이 있으면 그 값을 사용, 없으면 오늘 날짜로 초기값 설정
+        defaultDate: document.getElementById('checkInDate').value ? document.getElementById('checkInDate').value : getTodayDate(), // value 값이 있으면 그 값을 사용, 없으면 오늘 날짜로 초기값 설정
         onChange: function(selectedDates, dateStr, instance) {
             var minCheckoutDate = new Date(selectedDates[0]);
             minCheckoutDate.setDate(minCheckoutDate.getDate() + 1); // 체크인 날짜 이후 날짜로 설정
@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    var endDatePicker = flatpickr("#enddate", {
+    var endDatePicker = flatpickr("#checkOutDate", {
         dateFormat: "Y-m-d",
-        minDate: document.getElementById('enddate').value ? document.getElementById('enddate').value : getTomorrowDate(), // value 값이 있으면 그 값을 사용, 없으면 내일 날짜로 초기값 설정
-        defaultDate: document.getElementById('enddate').value ? document.getElementById('enddate').value : getTomorrowDate(), // value 값이 있으면 그 값을 사용, 없으면 내일 날짜로 초기값 설정
+        minDate: document.getElementById('checkOutDate').value ? document.getElementById('checkOutDate').value : getTomorrowDate(), // value 값이 있으면 그 값을 사용, 없으면 내일 날짜로 초기값 설정
+        defaultDate: document.getElementById('checkOutDate').value ? document.getElementById('checkOutDate').value : getTomorrowDate(), // value 값이 있으면 그 값을 사용, 없으면 내일 날짜로 초기값 설정
     });
 
     // 인원 선택 영역

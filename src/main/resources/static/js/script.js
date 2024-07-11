@@ -160,10 +160,10 @@ function submitReservation() {
     const checkInDate = document.getElementById('checkInDate').value;
     const checkOutDate = document.getElementById('checkOutDate').value;
     const guests = document.getElementById('guests').value;
-    const hotelId = document.getElementById('hotelId').value; // 숙소 ID 가져오기
+    const accommodationId = document.getElementById('accommodationId').value; // 숙소 ID 가져오기
 
     const data = {
-        hotelId: hotelId,
+        accommodationId: accommodationId,
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
         guests: guests
@@ -183,8 +183,34 @@ function submitReservation() {
             return response.text();
         })
         .then(data => {
-            console.log("여기오냐");
             window.location.href = `/reserve`;
+        })
+        .catch(error => {
+            console.error('Error submitting reservation:', error);
+
+        });
+}
+
+function finishReservation() {
+
+    const message = document.getElementById('message').value;
+
+    // 여기에 결제 관련 처리도 추가해야함
+    fetch('/reserveComplete', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(message)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            window.location.href = `/reserveComplete`;
         })
         .catch(error => {
             console.error('Error submitting reservation:', error);

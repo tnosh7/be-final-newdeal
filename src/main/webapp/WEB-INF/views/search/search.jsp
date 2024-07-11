@@ -37,13 +37,13 @@
                 </div>
                 <div style="width: 18%;">
                     <div class="searchtitle-khs">체크인</div>
-                    <input type="date" class="button-item-khs sb2-khs" name="startdate" id="startdate"
-                           value="${requestDTO.startdate}">
+                    <input type="date" class="button-item-khs sb2-khs" name="checkInDate" id="checkInDate"
+                           value="${requestDTO.checkInDate}">
                 </div>
                 <div style="width: 18%;">
                     <div class="searchtitle-khs">체크아웃</div>
-                    <input type="date" class="button-item-khs sb3-khs" name="enddate" id="enddate"
-                           value="${requestDTO.enddate}">
+                    <input type="date" class="button-item-khs sb3-khs" name="checkOutDate" id="checkOutDate"
+                           value="${requestDTO.checkOutDate}">
                 </div>
                 <div style="width: 13%;">
                     <div class="searchtitle-khs">인원</div>

@@ -2,6 +2,7 @@ package com.newdeal.staynest.service;
 
 import com.newdeal.staynest.dto.guest.GuestRequest;
 import com.newdeal.staynest.entity.Guest;
+import com.newdeal.staynest.exception.ResourceNotFoundException;
 import com.newdeal.staynest.repository.GuestRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,10 @@ public class GuestService {
     public ResponseEntity<?> updateGuest(Long guestId, GuestRequest.UpdateDTO dto) {
         Optional<Guest> guestFindId = guestRepository.findById(guestId);
         return null;
+    }
+
+    public Guest getGuestById(Long id) {
+        return guestRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Guest not found with id " + id));
     }
 }

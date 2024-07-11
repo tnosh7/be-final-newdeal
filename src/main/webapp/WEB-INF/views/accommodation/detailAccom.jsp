@@ -103,7 +103,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">78,000원 /박 </h5>
                                 <!-- hidden input을 사용하여 숙소 ID를 설정 -->
-                                <input type="hidden" id="hotelId" value="1"> <!-- 추후에 들어오는 hotel_id로 변경 -->
+                                <input type="hidden" id="accommodationId" value="1"> <!-- 추후에 들어오는 hotel_id로 변경 -->
                                     <div class="mb-3">
                                         <label for="checkInDate" class="form-label">체크인</label>
                                         <input type="date" class="form-control" id="checkInDate" name="checkInDate" required>

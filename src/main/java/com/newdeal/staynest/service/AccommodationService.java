@@ -6,6 +6,7 @@ import com.newdeal.staynest.entity.accommodation.Accommodation;
 import com.newdeal.staynest.entity.accommodation.AccommodationImg;
 import com.newdeal.staynest.entity.accommodation.AccommodationImgRepository;
 import com.newdeal.staynest.entity.accommodation.AccommodationRepository;
+import com.newdeal.staynest.exception.ResourceNotFoundException;
 import com.newdeal.staynest.repository.HostRepository;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -163,5 +164,8 @@ public class AccommodationService {
         accommodationRepository.delete(existingAccomm);
     }
 
-
+    public Accommodation getAccomById(Long id) {
+        return accommodationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Accommodation not found with id " + id));
+    }
 }
