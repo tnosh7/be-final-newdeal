@@ -52,6 +52,9 @@ public class GuestDto implements Serializable {
     @Null
     String image;
 
+    @Null
+    private String emailCheckYn;
+
     public static Guest toEntity(GuestDto guestDto) {
         return Guest.builder()
                 .id(guestDto.getGuestId())
