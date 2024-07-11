@@ -8,5 +8,7 @@ public interface MemberService {
     public String checkDuplicateHostEmail(String email);
     public void registerGuest(GuestDto guestDto);
     public void registerHost(HostDto hostDto);
+    public String sendEmailCheck(String email);
+
     //public void login(MemberDto memberDto,  HttpServletResponse res);
 }
