@@ -8,6 +8,7 @@
     <title>header</title>
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="/js/script.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -19,10 +20,11 @@
 <body>
 <div class="outer-container">
     <div class="left-aligned">
-        <img class="logo"  onclick="window.location.href='http://localhost:8090/'" src="/images/logo.png" alt="logo">
+        <img class="logo" onclick="window.location.href='http://localhost:8090/'" src="/images/logo.png" alt="logo">
     </div>
     <div class="modal-notification-cyj"> <!-- (알림) 알림 버튼 스타일 추가 -->
-        <img src="https://cdn-icons-png.flaticon.com/128/3607/3607235.png" alt="알림" class="modal-notification-icon-cyj"> <!-- (알림) 알림 아이콘 스타일 추가 -->
+        <img src="https://cdn-icons-png.flaticon.com/128/3607/3607235.png" alt="알림" class="modal-notification-icon-cyj">
+        <!-- (알림) 알림 아이콘 스타일 추가 -->
         <span class="modal-notification-count-cyj">5</span> <!-- (알림) 알림 개수 스타일 추가 -->
         <div class="modal-notification-dropdown-cyj"> <!-- (알림) 알림 드롭다운 스타일 추가 -->
             <div class="modal-notification-item-cyj" data-id="1" data-type="checkout">

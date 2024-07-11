@@ -90,13 +90,24 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/member/login-page")
+                        .loginPage("/member/hostLogin-page")
+                        .loginProcessingUrl("/member/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .successForwardUrl("/host/")
+                        .failureUrl("/member/hostLogin-page?error=true")
+                        .permitAll()
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/member/guestLogin-page")
                         .loginProcessingUrl("/member/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .successForwardUrl("/")
-                        .failureUrl("/member/login-page?error=true")
-                        .permitAll())
+                        .failureUrl("/member/guestLogin-page?error=true")
+                        .permitAll()
+                )
+
                 .logout(logout -> logout
                         .deleteCookies("JSESSIONID")
                         .logoutSuccessUrl("/")

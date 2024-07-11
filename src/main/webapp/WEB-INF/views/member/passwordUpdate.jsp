@@ -13,6 +13,67 @@
     <link rel="stylesheet" href="${contextPath}/css/member.css">
     <script src="${contextPath}/js/member.js"></script>
 </head>
+<script>
+    let emailCheckNumberInput = null;
+    function checkDuplicateEmail() {
+        const email = document.getElementById("email").value;
+        const emailCheckWarn = document.getElementById("emailCheckWarn");
+        if (email === "") {
+            emailCheckWarn.innerText="이메일을 정확히 입력해주세요."
+            emailCheckWarn.style.color = "red";
+            return;
+        }
+        $.ajax({
+            url: '/member/duplicateEmail?identity=guest',
+            type: 'POST',
+            data: {email: email},
+            success: function (response) {
+                emailCheckWarn.innerText = response;
+                emailCheckWarn.style.color = "green";
+
+            },
+            error: function (error) {
+                emailCheckWarn.innerText = "이미 가입된 이메일입니다.";
+                emailCheckWarn.style.color = "red";
+            }
+        });
+    }
+    function emailCheckNumber() {
+        const email = document.getElementById("email").value;
+        const emailCheckNumber = document.getElementById("emailCheckNumber");
+        if (!Validator.validateForm()) {
+        }
+        else {
+            $("#register-btn").show();
+            $("#emailCheckYn-btn").hide();
+            $.ajax({
+                url: '/member/emailCheck',
+                type: 'POST',
+                data: {email: email},
+                success: function (response) {
+                    alert("emailCheckNumberInput");
+                    emailCheckNumberInput = response;
+                },
+                error: function (error) {
+                    alert("error")
+                }
+            })
+        }
+    }
+    function varifiedEmailNunber() {
+        const userNumber = document.getElementById("emailCheckYn").value;
+        const emailCheckYnWarn = document.getElementById("emailCheckYnWarn");
+        alert("emailCheckNumberInput");
+        if (emailCheckNumberInput !== userNumber) {
+            emailCheckYnWarn.innerText ="인증번호를 바르게 입력해주세요.";
+            emailCheckYnWarn.style.color = "red";
+        } else {
+            emailCheckYnWarn.innerText ="";
+            $("button[type='submit']").prop('disabled', false);
+        }
+    }
+
+</script>
 <body>
 <!-- Login -->
 <section class="py-3 py-md-5 py-xl-8">
@@ -35,36 +96,37 @@
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control border-0 border-bottom rounded-0"
-                                               name="email" id="email" placeholder="name@example.com" required
-                                               maxlength="30">
+                                               name="email" id="email" placeholder="이메일" required
+                                               maxlength="30" onfocusout="checkDuplicateEmail();">
                                         <label for="email" class="email-label">이메일</label>
                                         <div id="emailCheckWarn" class="error-message"></div>
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12" id="emailCheckNumber-div">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control border-0 border-bottom rounded-0"
-                                               name="emailNumber" id="emailNumber" placeholder="인증번호" required
-                                               maxlength="6">
-                                        <label for="emailNumber" class="emailNumber-label">인증번호 입력</label>
-                                        <div id="emailNumberWarn" class="error-message"></div>
+                                               name="emailCheckYn" id="emailCheckYn" placeholder="이메일 인증번호" required maxlength="6" onfocusout="varifiedEmailNunber()">
+                                        <label for="email" class="form-label-ysh" >이메일 인증번호</label>
+                                        <input type="hidden" id=" emailCheckNumber" value="">
+                                        <div id="emailCheckYnWarn" class="error-message-ysh"></div>
                                     </div>
                                 </div>
                                 <span style="color: #005241; font-size: 20px;">새로 설정할 비밀번호를 입력해 주세요.</span>
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <input type="password" class="form-control border-0 border-bottom rounded-0"
-                                               name="password" id="password" placeholder="비밀번호" required maxlength="16">
-                                        <label for="password" class="password-label">비밀번호</label>
+                                               name="password" id="password" value="" placeholder="Password" required
+                                               maxlength="16">
+                                        <label for="password" class="form-label-ysh">비밀번호</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <input type="password" class="form-control border-0 border-bottom rounded-0"
-                                               name="passwordCheck" id="passwordCheck" value=""
-                                               placeholder="passwordCheck" required maxlength="16">
-                                        <label for="passwordCheck" class="passwordCheck-label">비밀번호 확인</label>
-                                        <div id="passwordCheckWarn" class="error-message"></div>
+                                               name="passwordCheck" id="passwordCheck" value="" placeholder="Password"
+                                               required maxlength="16" onfocusout="validatePassword();">
+                                        <label for="passwordCheck" class="form-label-ysh">비밀번호 확인</label>
+                                        <div id="passwdCheckWarn" class="error-message-ysh"></div>
                                     </div>
                                 </div>
                                 <div class="col-12">

@@ -17,6 +17,19 @@
             <%--        <br><br><br><br>--%>
             <%-- content 시작 전 전체를 <div class="main-content"> 로 감싸야됨--%>
             <div class="main-content">
+                <c:forEach var="response" items="${reviewResponses}">
+                    <div>
+                        <p>Review ID: ${response.reviewId}</p>
+                        <p>Star: ${response.star}</p>
+                        <p>Content: ${response.content}</p>
+                        <p>Created At: ${response.createdAt}</p>
+                        <p>Images:</p>
+                        <c:forEach var="image" items="${response.images}">
+                            <img src="${image.url}" alt="Review Image"/>
+                        </c:forEach>
+                    </div>
+                </c:forEach>
+                <hr>
                 <div class="review-box-cyj">
                     <div class="review-summary-cyj">
                         <div class="summary-header-cyj">

@@ -26,7 +26,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
+        String memberRole = memberRole();
         if (email == null) {
             throw new UsernameNotFoundException("이메일 값이 null임.");
         }
@@ -38,15 +38,19 @@ public class PrincipalDetailsService implements UserDetailsService {
     }
 
     private UserDetails findUserByEmail(String email) {
-        Guest guest = guestRepository.findByEmail(email);
-        if (guest != null) {
+        String memberRole = memberRole();
+        if (memberRole.equals("ROLE_GUEST")) {
+            Guest guest = guestRepository.findByEmail(email);
             return new PrincipalDetails(guest);
         }
-        Host host = hostRepository.findByEmail(email);
-        if (host != null) {
+        else if (memberRole.equals("ROLE_HOST")) {
+            Host host = hostRepository.findByEmail(email);
             return new PrincipalDetails(host);
         }
         return null;
     }
 
+    public String memberRole() {
+        return request.getParameter("role");
+    }
 }
