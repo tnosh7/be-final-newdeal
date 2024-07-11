@@ -51,6 +51,9 @@ public class HostDto implements Serializable {
     @Null
     String image;
 
+    @Null
+    private String emailCheckYn;
+
     public static Host toEntity(HostDto hostDto) {
         return Host.builder()
                 .id(hostDto.getHostId())

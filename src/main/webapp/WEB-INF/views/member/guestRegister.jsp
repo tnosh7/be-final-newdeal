@@ -16,10 +16,11 @@
     <link rel="stylesheet" href="${contextPath}/css/member.css">
 </head>
 <script>
+    let emailCheckNumberInput = null;
     // Validator 객체 정의 - 유효성 검사용
     const Validator = {
         isValid: true,
-        //비밀번호 유효성 검사
+
         validatePassword: function () {
             const password = document.getElementById("password").value;
             const passwordCheck = document.getElementById("passwordCheck").value;
@@ -41,7 +42,7 @@
             }
             return this.isValid;
         },
-        //핸드폰 유효성 검사
+
         validatePhone: function () {
             const phone = document.getElementById("phone").value;
             const phoneCheckWarn = document.getElementById("phoneCheckWarn");
@@ -57,7 +58,7 @@
             }
             return this.isValid;
         },
-        // 폼 유효성 검사
+
         validateForm: function () {
             this.isValid = true; // 초기화
 
@@ -69,6 +70,7 @@
             }
             return true;
         }
+
     };
 
     $(document).ready(function () {
@@ -86,9 +88,9 @@
         // 제출 전 유효성 검사
         $("form").submit(function (event) {
             if (!Validator.validateForm()) {
-                //컨트롤러에서 예외처리 메시지 전송
+
                 alert(${message});
-                event.preventDefault(); // 폼 제출을 막음
+                event.preventDefault();
             }
         });
     });
@@ -96,7 +98,11 @@
     function checkDuplicateEmail() {
         const email = document.getElementById("email").value;
         const emailCheckWarn = document.getElementById("emailCheckWarn");
-
+        if (email === "") {
+            emailCheckWarn.innerText="이메일을 정확히 입력해주세요."
+            emailCheckWarn.style.color = "red";
+            return;
+        }
         $.ajax({
             url: '/member/duplicateEmail?identity=guest',
             type: 'POST',
@@ -104,12 +110,45 @@
             success: function (response) {
                 emailCheckWarn.innerText = response;
                 emailCheckWarn.style.color = "green";
+
             },
             error: function (error) {
                 emailCheckWarn.innerText = "이미 가입된 이메일입니다.";
                 emailCheckWarn.style.color = "red";
             }
         });
+    }
+    function emailCheckNumber() {
+        const email = document.getElementById("email").value;
+        const emailCheckNumber = document.getElementById("emailCheckNumber");
+        if (!Validator.validateForm()) {
+        }
+        else {
+            $("#register-btn").show();
+            $("#emailCheckYn-btn").hide();
+            $.ajax({
+                url: '/member/emailCheck',
+                type: 'POST',
+                data: {email: email},
+                success: function (response) {
+                    emailCheckNumberInput = response;
+                },
+                error: function (error) {
+                    alert("error")
+                }
+            })
+        }
+    }
+    function varifiedEmailNunber() {
+        const userNumber = document.getElementById("emailCheckYn").value;
+        const emailCheckYnWarn = document.getElementById("emailCheckYnWarn");
+        if (emailCheckNumberInput !== userNumber) {
+            emailCheckYnWarn.innerText ="인증번호를 바르게 입력해주세요.";
+            emailCheckYnWarn.style.color = "red";
+        } else {
+            emailCheckYnWarn.innerText ="";
+            $("button[type='submit']").prop('disabled', false);
+        }
     }
 </script>
 <body>
@@ -143,7 +182,7 @@
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control border-0 border-bottom rounded-0"
                                                name="phone" id="phone" placeholder="휴대폰 번호" maxlength="11" required
-                                               onchange="validatePhone();">
+                                               onfocusout="validatePhone();">
                                         <label for="phone" class="form-label-ysh">휴대폰 번호</label>
                                         <div id="phoneCheckWarn" class="error-message-ysh"></div>
                                     </div>
@@ -152,7 +191,7 @@
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control border-0 border-bottom rounded-0"
                                                name="email" id="email" placeholder="이메일 주소" required
-                                               onkeyup="checkDuplicateEmail();">
+                                               onfocusout="checkDuplicateEmail();">
                                         <label for="email" class="form-label-ysh">이메일</label>
                                         <div id="emailCheckWarn" class="error-message-ysh"></div>
                                     </div>
@@ -169,12 +208,20 @@
                                     <div class="form-floating mb-3">
                                         <input type="password" class="form-control border-0 border-bottom rounded-0"
                                                name="passwordCheck" id="passwordCheck" value="" placeholder="Password"
-                                               required maxlength="16" onchange="validatePassword();">
+                                               required maxlength="16" onfocusout="validatePassword();">
                                         <label for="passwordCheck" class="form-label-ysh">비밀번호 확인</label>
                                         <div id="passwdCheckWarn" class="error-message-ysh"></div>
                                     </div>
                                 </div>
-
+                                <div class="col-12" id="emailCheckNumber-div">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control border-0 border-bottom rounded-0"
+                                               name="emailCheckYn" id="emailCheckYn" placeholder="이메일 인증번호" required maxlength="6" onfocusout="varifiedEmailNunber()">
+                                        <label for="email" class="form-label-ysh" >이메일 인증번호</label>
+                                        <input type="hidden" id=" emailCheckNumber" value="">
+                                        <div id="emailCheckYnWarn" class="error-message-ysh"></div>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" name="iAgree"
@@ -300,6 +347,7 @@
                                         </div>
                                         <button class="popup-button" id="popupButton" type="button">확인</button>
                                     </div>
+
                                     <script>
                                         document.getElementById("staynestLow").addEventListener('click', function (event) {
                                             event.preventDefault();
@@ -320,10 +368,17 @@
                                         });
                                     </script>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12" id="emailCheckYn-btn" >
+                                    <div class="d-grid" >
+                                        <button class="btn btn-lg btn-dark rounded-10 fs-6"
+                                                style="color: white; background-color: #0D31B2" type="button" onclick="emailCheckNumber()">인증요청
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12" id="register-btn">
                                     <div class="d-grid">
                                         <button class="btn btn-lg btn-dark rounded-10 fs-6"
-                                                style="color: white; background-color: #0D31B2" type="submit">회원가입
+                                                style="color: white; background-color: #0D31B2" type="submit" disabled >회원가입
                                         </button>
                                     </div>
                                 </div>
