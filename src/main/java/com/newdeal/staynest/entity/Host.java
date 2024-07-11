@@ -1,16 +1,13 @@
 package com.newdeal.staynest.entity;
 
-import com.newdeal.staynest.dto.GuestDto;
 import com.newdeal.staynest.dto.HostDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -50,6 +47,7 @@ public class Host {
 
     @Column(name="email_check_yn", nullable = false)
     private String emailCheckYn;
+
 
     @PrePersist
     protected void onCreate() {
