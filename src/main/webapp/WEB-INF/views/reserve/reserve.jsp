@@ -29,14 +29,14 @@ arrow_back_ios
                 <div class="reservebox-khs">
                     <div>예약 정보</div>
                     <div class="reservebox1-khs">날짜</div>
-                    <div>2024.07.03 ~ 2024.07.05</div>
+                    <div>${reserveDto.checkInDate} ~ ${reserveDto.checkOutDate}</div>
                     <div class="reservebox1-khs">게스트 인원</div>
-                    <div>2명</div>
+                    <div>${reserveDto.guests}명</div>
                 </div>
                 <div class="reservebox-khs">
                     <div>호스트에게 메시지 보내기</div>
                     <div style="margin-top: 5px;">여행목적, 동반 일행 등을 알려주세요.</div>
-                    <input type="text"/>
+                    <input type="text" id="message" name="message"/>
                 </div>
                 <div class="reservebox-khs">
                     <div>기본 규칙</div>
@@ -45,7 +45,7 @@ arrow_back_ios
                     <div>- 호스트의 집도 자신의 집처럼 아껴주세요.</div>
                 </div>
                 <div class="paybtn">
-                    <button onclick="">결제하기</button>
+                    <button onclick="finishReservation()">결제하기</button>
                 </div>
             </div>
             <div style="width:400px; height:50%; padding:20px; margin: 20px; border: 1px solid gray; border-radius: 10px">

@@ -310,6 +310,7 @@ footer .social-icons a:hover {
     height: 100%;
     object-fit: cover; /* 이미지가 잘리지 않고 채워지도록 설정 */
     object-position: center; /* 이미지를 가운데 정렬 */
+    /*margin-top: -200px;  이미지를 위로 30px 올립니다 */
 }
 
 /* 정보 섹션 스타일 */

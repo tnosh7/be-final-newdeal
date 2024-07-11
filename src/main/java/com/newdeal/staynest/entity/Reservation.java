@@ -3,6 +3,8 @@ package com.newdeal.staynest.entity;
 import com.newdeal.staynest.entity.accommodation.Accommodation;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Reservation {
 
     @Id
@@ -37,6 +40,7 @@ public class Reservation {
     @Column(name = "guests", nullable = false)
     private int guests;
 
+    @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
