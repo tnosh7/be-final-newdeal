@@ -1,15 +1,13 @@
 package com.newdeal.staynest.entity;
 
-import com.newdeal.staynest.dto.GuestDto;
+import com.newdeal.staynest.dto.guest.GuestRequest;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,6 +42,9 @@ public class Guest {
     @Column(name = "expire_dt",nullable = false)
     private LocalDateTime expireDt;
 
+    @Column(nullable = false)
+    private String address;
+
     @Column
     private String image;
 
@@ -59,8 +60,8 @@ public class Guest {
         this.emailCheckYn = "N";
     }
 
-    public GuestDto toDto() {
-        return GuestDto.builder()
+    public GuestRequest toDto() {
+        return GuestRequest.builder()
                 .guestId(this.id)
                 .guestName(this.guestName)
                 .email(this.email)
