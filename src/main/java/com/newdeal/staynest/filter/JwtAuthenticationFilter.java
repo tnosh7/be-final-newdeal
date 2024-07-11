@@ -30,7 +30,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
-
         return this.getAuthenticationManager().authenticate(authenticationToken);
     }
 
@@ -39,23 +38,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.info("로그인 성공");
         String token = tokenProvider.createToken(authResult);
         log.info("토큰: {}", token);
+        response.addHeader("Authorization", "Bearer " + token);
 
-        if (authResult.getAuthorities().stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))) {
-            redirectUrl = "/admin/";
-        } else if (authResult.getAuthorities().stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_GUEST"))) {
-            redirectUrl = "/";
-        } else if (authResult.getAuthorities().stream().anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_HOST"))) {
-            redirectUrl = "/host/";
-        }
-
-        log.info("redirect URL: {}", redirectUrl);
-
-        // 응답이 커밋되지 않았을 경우에만 리다이렉트 처리
-        if (!response.isCommitted()) {
-            response.sendRedirect(redirectUrl);
-        } else {
-            log.warn("Response is already committed. Cannot redirect.");
-        }
     }
 
     @Override
