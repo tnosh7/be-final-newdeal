@@ -1,8 +1,8 @@
 package com.newdeal.staynest.controller;
 
-import com.newdeal.staynest.dto.GuestDto;
 import com.newdeal.staynest.dto.HostDto;
 import com.newdeal.staynest.jwt.TokenProvider;
+import com.newdeal.staynest.dto.guest.GuestRequest;
 import com.newdeal.staynest.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -49,7 +49,7 @@ public class MemberController {
     // 게스트&호스트 회원가입
     @PostMapping("/register")
     public ModelAndView register(HttpServletRequest request,
-                                 GuestDto guestDto, HostDto hostDto,
+                                 GuestRequest guestDto, HostDto hostDto,
                                  @RequestParam("identity") String identity) {
         ModelAndView mv = new ModelAndView();
         //가입

@@ -1,7 +1,7 @@
 package com.newdeal.staynest.service;
 
-import com.newdeal.staynest.dto.GuestDto;
 import com.newdeal.staynest.dto.HostDto;
+import com.newdeal.staynest.dto.guest.GuestRequest;
 import com.newdeal.staynest.entity.Guest;
 import com.newdeal.staynest.entity.Host;
 import com.newdeal.staynest.entity.UserRoleEnum;
@@ -46,13 +46,18 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+<<<<<<< Updated upstream
     public void registerGuest(GuestDto guestDto) {
 
+=======
+    public void registerGuest(GuestRequest guestDto) {
+        // 비밀번호 암호화
+>>>>>>> Stashed changes
         String encodedPassword = passwordEncoder.encode(guestDto.getPassword());
         guestDto.setPassword(encodedPassword);
 
         guestDto.setRole(UserRoleEnum.GUEST);
-        Guest guest = GuestDto.toEntity(guestDto);
+        Guest guest = GuestRequest.toEntity(guestDto);
         guestRepository.save(guest);
     }
     @Override

@@ -33,7 +33,7 @@
                                     이름
                                 </div>
                                 <div>
-                                    userName
+                                    ${guest.guestName}
                                 </div>
                             </div>
                             <div>
@@ -48,7 +48,7 @@
                                     이메일
                                 </div>
                                 <div>
-                                    dafsdaf@aaaa.com
+                                    ${guest.email}
                                 </div>
                             </div>
                             <div>
@@ -63,7 +63,7 @@
                                     전화번호
                                 </div>
                                 <div>
-                                    010-0000-0000
+                                    ${guest.phone}
                                 </div>
                             </div>
                             <div>
@@ -78,7 +78,7 @@
                                     주소
                                 </div>
                                 <div>
-                                    서울 어딘가어딘가어딘가
+                                    ${guest.address}
                                 </div>
                             </div>
                             <div>
