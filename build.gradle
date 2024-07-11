@@ -40,10 +40,11 @@ dependencies {
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
     //oauth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    // JWT
-    compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
     //  서버 재시작 없이 jsp 수정사항 반영
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    // JWT
+    compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
     compileOnly 'org.projectlombok:lombok'

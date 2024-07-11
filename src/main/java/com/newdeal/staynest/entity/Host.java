@@ -48,11 +48,14 @@ public class Host {
     @Column
     private String image;
 
+    @Column(name="email_check_yn", nullable = false)
+    private String emailCheckYn;
+
     @PrePersist
     protected void onCreate() {
         this.joinDt = LocalDateTime.now();
-        //일단 7일로 설정함. 이메일 인증 안하면 자동 탈퇴하는 방식으로 구현할 예정.
         this.expireDt = LocalDateTime.now().plusDays(7);
+        this.emailCheckYn = "N";
     }
 
     public HostDto toDto() {

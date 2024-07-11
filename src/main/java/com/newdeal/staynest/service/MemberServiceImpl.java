@@ -7,11 +7,10 @@ import com.newdeal.staynest.entity.Host;
 import com.newdeal.staynest.entity.UserRoleEnum;
 import com.newdeal.staynest.repository.GuestRepository;
 import com.newdeal.staynest.repository.HostRepository;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
+
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -19,11 +18,14 @@ public class MemberServiceImpl implements MemberService {
     private final GuestRepository guestRepository;
     private final HostRepository hostRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
+    private static final String AUTH_CODE_PREFIX = "AuthCode";
 
-    public MemberServiceImpl(GuestRepository guestRepository, HostRepository hostRepository, PasswordEncoder passwordEncoder) {
+    public MemberServiceImpl(GuestRepository guestRepository, HostRepository hostRepository, PasswordEncoder passwordEncoder, MailService mailService) {
         this.guestRepository = guestRepository;
         this.hostRepository = hostRepository;
         this.passwordEncoder = passwordEncoder;
+        this.mailService = mailService;
     }
 
 // ADMIN_TOKEN
@@ -45,23 +47,38 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void registerGuest(GuestDto guestDto) {
-        // 비밀번호 암호화
+
         String encodedPassword = passwordEncoder.encode(guestDto.getPassword());
         guestDto.setPassword(encodedPassword);
-        // 기본 롤 세팅 - GUEST임
+
         guestDto.setRole(UserRoleEnum.GUEST);
         Guest guest = GuestDto.toEntity(guestDto);
         guestRepository.save(guest);
     }
     @Override
     public void registerHost(HostDto hostDto) {
-        // 비밀번호 암호화
+
         String encodedPassword = passwordEncoder.encode(hostDto.getPassword());
         hostDto.setPassword(encodedPassword);
-        // 기본 롤 세팅 - HOST임
+
         hostDto.setRole(UserRoleEnum.HOST);
         Host host = HostDto.toEntity(hostDto);
         hostRepository.save(host);
+    }
+
+    @Override
+    public String sendEmailCheck(String email) {
+        String authCode = this.createCode();
+        String title = "Stay Nest 이메일 인증 번호";
+        String content = "인증번호는 " + authCode + "입니다.";
+               content += "해당 인증번호를 인증번호 확인란에 입력해주세요.";
+        mailService.sendEmail(email, title, content, authCode);
+        return authCode;
+    }
+
+    private String createCode() {
+        String code = String.valueOf((int)((Math.random() * 900000) + 100000));
+        return code;
     }
 
 //    @Override

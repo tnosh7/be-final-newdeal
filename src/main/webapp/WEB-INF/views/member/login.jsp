@@ -14,8 +14,41 @@
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/style.css">
     <link rel="stylesheet" href="${contextPath}/css/member.css">
     <script src="${contextPath}/js/member.js"></script>
-
 </head>
+<script>
+    // $(document).ready(function () {
+    //     // 토큰 삭제
+    //     Cookies.remove('JwtAuthorizationFilter', {path: '/'});
+    // });
+    // const host = 'http://' + window.location.host;
+    //
+    // const href = location.href;
+    // const queryString = href.substring(href.indexOf("?")+1)
+    // if (queryString === 'error') {
+    //     const errorDiv = document.getElementById('login-failed');
+    //     errorDiv.style.display = 'block';
+    // }
+    //
+    // function onLogin() {
+    //     let username = $('#username').val();
+    //     let password = $('#password').val();
+    //
+    // $.ajax({
+    //     type: "POST",
+    //     url: `/member/login`,
+    //     contentType: "application/json",
+    //     data: JSON.stringify({username: username, password: password}),
+    // })
+    //     .done(function (res, status, xhr) {
+    //         window.location.href = host;
+    //     })
+    //     .fail(function (xhr, textStatus, errorThrown) {
+    //         console.log('statusCode: ' + xhr.status);
+    //         window.location.href = host + '/member/login-page?error'
+    //     });
+    // }
+
+</script>
 <body>
 <!-- Login -->
 <section class="py-3 py-md-5 py-xl-8">
@@ -28,6 +61,7 @@
                 </div>
             </div>
         </div>
+        <form action="${contextPath}/member/login" method="post">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8">
                 <div class="row gy-5 justify-content-center">
@@ -44,7 +78,7 @@
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <input type="password" class="form-control border-0 border-bottom rounded-0"
-                                               name="password" id="password" value="" placeholder="Password" required>
+                                               name="password" id="password" placeholder="Password" required>
                                         <label for="password" class="form-label">비밀번호</label>
                                     </div>
                                 </div>
@@ -83,7 +117,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>
 </section>
 </body>
 </html>
