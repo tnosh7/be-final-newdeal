@@ -1,8 +1,11 @@
 package com.newdeal.staynest.dto.review;
 
+import java.util.List;
+
 public record ReviewRequest(
         int star,
-        String content
+        String content,
+        List<String> imgUrl
 ) {
     public ReviewRequest {
         if (star < 1 || star > 5) {

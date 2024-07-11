@@ -27,7 +27,7 @@ public class Accommodation {
     @Column(name = "accomm_name", nullable = false)
     private String name;
 
-    @Column(name = "accomm_category", nullable = false)
+    @Column(name = "accomm_category", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'default_category'")
     private String category;
 
     @Column(name = "room_category", nullable = false)
