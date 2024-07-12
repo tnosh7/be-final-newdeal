@@ -131,7 +131,6 @@
                 type: 'POST',
                 data: {email: email},
                 success: function (response) {
-                    alert(emailCheckNumber);
                     emailCheckNumberInput = response;
                 },
                 error: function (error) {
@@ -170,7 +169,7 @@
                 <div class="row gy-5 justify-content-center">
                     <div class="col-12 col-lg-5">
                         <!--폼 시작-->
-                        <form action="${contextPath}/member/register?identity=guest" method="post">
+                        <form action="${contextPath}/member/register?identify=guest" method="post">
                             <div class="row gy-3 overflow-hidden">
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
@@ -217,7 +216,7 @@
                                 <div class="col-12" id="emailCheckNumber-div">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control border-0 border-bottom rounded-0"
-                                               name="emailCheckYn" id="emailCheckYn" placeholder="이메일 인증번호" required maxlength="6" onfocusout="varifiedEmailNunber()">
+                                               name="emailCheckYn" id="emailCheckYn" placeholder="이메일 인증번호" required maxlength="6" onkeyup="varifiedEmailNunber()">
                                         <label for="email" class="form-label-ysh" >이메일 인증번호</label>
                                         <input type="hidden" id=" emailCheckNumber" value="">
                                         <div id="emailCheckYnWarn" class="error-message-ysh"></div>
@@ -386,7 +385,7 @@
                                 <div class="col-12">
                                     <div class="d-grid">
                                         <p class="text-center m-0">Already have an account? <a
-                                                href="${contextPath}/member/login"
+                                                href="${contextPath}/member/guestLogin-page"
                                                 class="link-primary text-decoration-none">로그인</a>
                                         </p>
                                     </div>
