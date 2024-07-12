@@ -5,6 +5,9 @@
     <head>
         <link rel="stylesheet" href="${contextPath}/css/fullReview.css">
         <title>FullReview</title>
+        <script type="text/javascript">
+            var contextPath = "${contextPath}";
+        </script>
     </head>
     <body>
         <%-- header 추가해야 될 <div class="wrapper"> --%>
@@ -17,18 +20,7 @@
             <%--        <br><br><br><br>--%>
             <%-- content 시작 전 전체를 <div class="main-content"> 로 감싸야됨--%>
             <div class="main-content">
-                <c:forEach var="response" items="${reviewResponses}">
-                    <div>
-                        <p>Review ID: ${response.reviewId}</p>
-                        <p>Star: ${response.star}</p>
-                        <p>Content: ${response.content}</p>
-                        <p>Created At: ${response.createdAt}</p>
-                        <p>Images:</p>
-                        <c:forEach var="image" items="${response.images}">
-                            <img src="${image.url}" alt="Review Image"/>
-                        </c:forEach>
-                    </div>
-                </c:forEach>
+
                 <hr>
                 <div class="review-box-cyj">
                     <div class="review-summary-cyj">
@@ -115,217 +107,56 @@
                                 <%--삭제 버튼 만들기--%>
                             </div>
                         </div>
-                        <div class="review-item-cyj best-cyj">
-                            <div class="review-header-cyj">
-                                <div class="review-user-info-cyj">
+
+                        <%-- 리뷰 시작 --%>
+
+                        <c:forEach var="response" items="${reviewResponses}">
+                            <div class="review-item-cyj best-cyj">
+                                <div class="review-header-cyj">
+                                    <div class="review-user-info-cyj">
                                     <span class="profile-image-cyj">
                                         <img src="https://cdn-icons-png.flaticon.com/128/4202/4202831.png"
                                              alt="profile Image 1">
                                     </span>
-                                    <span class="review-username-cyj">블라아이디1</span>
-                                    <br>
-                                </div>
-                                <div class="review-user-id-cyj" data-owner="user1">
-                                    <span class="review-stars-cyj">★★★★★</span>
-                                    <br>
-                                    <span class="review-date-cyj">&nbsp;2024.06.20</span>
-                                    <br>
-                                    <span class="btn-review-edit-delete-box-cyj">
+                                        <span class="review-username-cyj">${response.guestName}</span>
+                                        <br>
+                                    </div>
+                                    <div class="review-user-id-cyj" data-owner="user1">
+                                        <span class="review-stars-cyj">★★★★★${response.star}</span>
+                                        <br>
+                                        <span class="review-date-cyj">&nbsp;${response.createdAt}</span>
+                                        <br>
+                                        <span class="btn-review-edit-delete-box-cyj">
                                         <a href="#" class="btn-review-edit-delete-cyj">수정/삭제</a>
                                     </span>
+                                    </div>
                                 </div>
+                                <div class="review-body-cyj">
+                                    <div class="review-image-cyj">
+                                        <c:forEach var="image" items="${response.images}">
+                                            <img src="${image.url}" alt="Review Image"/>
+                                            <%--                                        <img src="https://tourimage.interpark.com/BBS/Tour/FckUpload/202009/6373473199034434680.jpg"--%>
+                                            <%--                                             alt="Review Image 1">--%>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="review-content-cyj">
+                                        <p>${response.content}</p>
+                                    </div>
+                                </div>
+                                <div class="reply-container-cyj">
+                                    <p class="re-host-cyj"><span>호스트의 답글</span> <span
+                                            class="re-host-date-cyj">2024.07.04</span></p>
+                                    <p class="replyContent-cyj">이용해주셔서 감사하고 감사하고 감사하고 또 감사하고 이용해주셔서 감사하고 감사하고 감사하고 또감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고
+                                    </p>
+                                </div>
+                                <button class="btn-reply-cyj" onclick="openReplyModal()">답글 작성(수정,삭제)</button>
                             </div>
-                            <div class="review-body-cyj">
-                                <div class="review-image-cyj">
-                                    <img src="https://tourimage.interpark.com/BBS/Tour/FckUpload/202009/6373473199034434680.jpg"
-                                         alt="Review Image 1">
-                                </div>
-                                <div class="review-content-cyj">
-                                    <p>
-                                        블라블라블라블라블라블라블라블라블라블라블좋았고 블라블랄브라라발발발발블라라라행복했고 블라블라블라블라블라블라블라블라블라블라블좋았고
-                                        블라블랄브라라발발발발블라라라행복했고 블라블라블라블라블라블라블라블라블라블라블좋았고 블라블랄브라라발발발발블라라라행복했고 블라 했습니다.</p>
-                                </div>
-                            </div>
-                            <div class="reply-container-cyj">
-                                <p class="re-host-cyj"><span>호스트의 답글</span> <span
-                                        class="re-host-date-cyj">2024.07.04</span></p>
-                                <p class="replyContent-cyj">이용해주셔서 감사하고 감사하고 감사하고 또 감사하고 이용해주셔서 감사하고 감사하고 감사하고 또감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고
-                                </p>
-                            </div>
-                            <button class="btn-reply-cyj" onclick="openReplyModal()">답글 작성(수정,삭제)</button>
-                        </div>
-                        <div class="review-item-cyj best-cyj">
-                            <div class="review-header-cyj">
-                                <div class="review-user-info-cyj">
-                                    <span class="profile-image-cyj">
-                                        <img src="https://cdn-icons-png.flaticon.com/128/4202/4202831.png"
-                                             alt="profile Image 1">
-                                    </span>
-                                    <span class="review-username-cyj">블라아이디1</span>
-                                    <br>
-                                </div>
-                                <div class="review-user-id-cyj" data-owner="user2">
-                                    <span class="review-stars-cyj">★★★★★</span>
-                                    <br>
-                                    <span class="review-date-cyj">&nbsp;2024.06.20</span>
-                                    <br>
-                                    <span class="btn-review-edit-delete-box-cyj">
-                                        <a href="#" class="btn-review-edit-delete-cyj">수정/삭제</a>
-                                    </span>
-                                </div>
+                        </c:forEach>
+                        <%-- 리뷰 끝 --%>
 
-                            </div>
-                            <div class="review-body-cyj">
-                                <div class="review-image-cyj">
-                                    <img src="https://tourimage.interpark.com/BBS/Tour/FckUpload/202009/6373473199034434680.jpg"
-                                         alt="Review Image 1">
-                                </div>
-                                <div class="review-content-cyj">
-                                    <p>
-                                        블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라.</p>
-                                </div>
-                            </div>
-                            <div class="reply-container-cyj" style="display: none;">
-                                <h3>호스트의 답글</h3>
-                                <p class="replyContent-cyj">123</p>
-                            </div>
-                            <button class="btn-reply-cyj" onclick="openReplyModal()">답글 작성</button>
-                        </div>
-                        <div class="review-item-cyj best-cyj">
-                            <div class="review-header-cyj">
-                                <div class="review-user-info-cyj">
-                        <span class="profile-image-cyj">
-                            <img src="https://cdn-icons-png.flaticon.com/128/4202/4202831.png" alt="profile Image 1">
-                        </span>
-                                    <span class="review-username-cyj">블라아이디2</span>
-                                    <br>
 
-                                </div>
-                                <div>
-                                    <span class="review-stars-cyj">★★★★☆</span>
-                                    <br>
-                                    <span class="review-date-cyj">&nbsp;2024.06.20</span>
-                                </div>
-                            </div>
-                            <div class="review-body-cyj">
-                                <div class="review-image-cyj">
-                                    <img src="https://tourimage.interpark.com/BBS/Tour/FckUpload/202009/6373473199034434680.jpg"
-                                         alt="Review Image 1">
-                                </div>
-                                <div class="review-content-cyj">
-                                    <p>
-                                        블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-item-cyj best-cyj">
-                            <div class="review-header-cyj">
-                                <div class="review-user-info-cyj">
-                        <span class="profile-image-cyj">
-                            <img src="https://cdn-icons-png.flaticon.com/128/4202/4202831.png" alt="profile Image 1">
-                        </span>
-                                    <span class="review-username-cyj">블라아이디3</span>
-                                    <br>
 
-                                </div>
-                                <div>
-                                    <span class="review-stars-cyj">★★☆☆☆</span>
-                                    <br>
-                                    <span class="review-date-cyj">&nbsp;2024.06.20</span>
-                                </div>
-                            </div>
-                            <div class="review-body-cyj">
-                                <div class="review-image-cyj">
-                                    <img src="https://tourimage.interpark.com/BBS/Tour/FckUpload/202009/6373473199034434680.jpg"
-                                         alt="Review Image 1">
-                                </div>
-                                <div class="review-content-cyj">
-                                    <p>
-                                        블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-item-cyj best-cyj">
-                            <div class="review-header-cyj">
-                                <div class="review-user-info-cyj">
-                        <span class="profile-image-cyj">
-                            <img src="https://cdn-icons-png.flaticon.com/128/4202/4202831.png" alt="profile Image 1">
-                        </span>
-                                    <span class="review-username-cyj">블라아이디4</span>
-                                    <br>
 
-                                </div>
-                                <div>
-                                    <span class="review-stars-cyj">★★★★★</span>
-                                    <br>
-                                    <span class="review-date-cyj">&nbsp;2024.06.20</span>
-                                </div>
-                            </div>
-                            <div class="review-body-cyj">
-                                <div class="review-image-cyj">
-                                    <img src="https://tourimage.interpark.com/BBS/Tour/FckUpload/202009/6373473199034434680.jpg"
-                                         alt="Review Image 1">
-                                </div>
-                                <div class="review-content-cyj">
-                                    <p>
-                                        블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-item-cyj best-cyj">
-                            <div class="review-header-cyj">
-                                <div class="review-user-info-cyj">
-                        <span class="profile-image-cyj">
-                            <img src="https://cdn-icons-png.flaticon.com/128/4202/4202831.png" alt="profile Image 1">
-                        </span>
-                                    <span class="review-username-cyj">블라아이디5</span>
-                                    <br>
-
-                                </div>
-                                <div>
-                                    <span class="review-stars-cyj">★★★★★</span>
-                                    <br>
-                                    <span class="review-date-cyj">&nbsp;2024.06.20</span>
-                                </div>
-                            </div>
-                            <div class="review-body-cyj">
-                                <div class="review-image-cyj">
-                                    <img src="https://tourimage.interpark.com/BBS/Tour/FckUpload/202009/6373473199034434680.jpg"
-                                         alt="Review Image 1">
-                                </div>
-                                <div class="review-content-cyj">
-                                    <p>
-                                        블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-item-cyj best-cyj">
-                            <div class="review-header-cyj">
-                                <div class="review-user-info-cyj">
-                        <span class="profile-image-cyj">
-                            <img src="https://cdn-icons-png.flaticon.com/128/4202/4202831.png" alt="profile Image 1">
-                        </span>
-                                    <span class="review-username-cyj">블라아이디6</span>
-                                    <br>
-
-                                </div>
-                                <div>
-                                    <span class="review-stars-cyj">★★★★★</span>
-                                    <br>
-                                    <span class="review-date-cyj">&nbsp;2024.06.20</span>
-                                </div>
-                            </div>
-                            <div class="review-body-cyj">
-                                <div class="review-image-cyj">
-                                    <img src="https://tourimage.interpark.com/BBS/Tour/FckUpload/202009/6373473199034434680.jpg"
-                                         alt="Review Image 1">
-                                </div>
-                                <div class="review-content-cyj">
-                                    <p>
-                                        블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라.</p>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="pagination-cyj">
                             <button class="page-button-cyj active-cyj" onclick="gotoPage(1, event)">1</button>

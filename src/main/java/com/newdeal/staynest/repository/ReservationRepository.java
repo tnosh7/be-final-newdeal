@@ -1,6 +1,7 @@
 package com.newdeal.staynest.repository;
 
 import com.newdeal.staynest.entity.Reservation;
+import com.newdeal.staynest.entity.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,10 +10,8 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-    // 숙소 ID를 기준으로 해당 숙소에 속하는 모든 예약의 ID를 조회하는 메서드
-    @Query("SELECT r.reservationId FROM Reservation r WHERE r.accommodation = :accommId")
-    List<Long> findReservationIdsByAccommId(@Param("accommId") Long accommId);
-
+    @Query("SELECT r FROM Review r JOIN FETCH r.reservation res JOIN FETCH res.guest WHERE r.accommodation = :accommId")
+    List<Review> getReviewsByAccommodationId(@Param("accommId") Long accommId);
 }
 
 
