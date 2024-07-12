@@ -96,8 +96,14 @@
     function checkDuplicateEmail() {
         const email = document.getElementById("email").value;
         const emailCheckWarn = document.getElementById("emailCheckWarn");
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
         if (email === "") {
-            emailCheckWarn.innerText="이메일을 정확히 입력해주세요."
+            emailCheckWarn.innerText = "이메일을 입력해주세요.";
+            emailCheckWarn.style.color = "red";
+            return;
+        } else if (!emailPattern.test(email)) {
+            emailCheckWarn.innerText = "유효한 이메일 주소를 입력해주세요.";
             emailCheckWarn.style.color = "red";
             return;
         }
