@@ -1,6 +1,5 @@
 package com.newdeal.staynest.service;
 
-import com.newdeal.staynest.dto.GuestDto;
 import com.newdeal.staynest.dto.HostDto;
 import com.newdeal.staynest.dto.guest.GuestRequest;
 import com.newdeal.staynest.entity.Guest;
@@ -8,8 +7,10 @@ import com.newdeal.staynest.entity.Host;
 import com.newdeal.staynest.entity.UserRoleEnum;
 import com.newdeal.staynest.repository.GuestRepository;
 import com.newdeal.staynest.repository.HostRepository;
+import jakarta.persistence.PersistenceException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
 
@@ -66,7 +67,8 @@ public class MemberServiceImpl implements MemberService {
         Host host = HostDto.toEntity(hostDto);
         hostRepository.save(host);
     }
-
+    
+    // 이메일 인증번호 전송
     @Override
     public String sendEmailCheck(String email) {
         String authCode = this.createCode();
@@ -76,7 +78,22 @@ public class MemberServiceImpl implements MemberService {
         mailService.sendEmail(email, title, content, authCode);
         return authCode;
     }
+    
+    // 비밀번호 재설정
+    @Override
+    public void updateGuestPassword(String email, String password) {
+        password = encodePassword(password);
+        guestRepository.updateGuestPasswordByEmail(email, password);
+    }
 
+    @Override
+    public void updateHostPassword(String email, String password) {
+        password = encodePassword(password);
+        hostRepository.updateHostPasswordByEmail(email, password);
+        
+    }
+
+    // 이메일 인증 번호 생성
     private String createCode() {
         String code = String.valueOf((int)((Math.random() * 900000) + 100000));
         return code;
@@ -95,4 +112,8 @@ public class MemberServiceImpl implements MemberService {
 //            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
 //        }
 //    }
+
+    public String encodePassword(String password) {
+        return passwordEncoder.encode(password);
+    }
 }
