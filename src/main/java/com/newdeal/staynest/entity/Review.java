@@ -15,11 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Review {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 

@@ -46,7 +46,7 @@ public class ReserveController {
     public ModelAndView reservecomplete(HttpSession session) {
         ModelAndView mav = new ModelAndView("reserve/reserveComplete");
         Reservation reservation = (Reservation) session.getAttribute("reservation");
-        Accommodation accommodation = accommodationService.getAccomById(reservation.getAccommodation().getAccommId());
+        Accommodation accommodation = accommodationService.getAccomById(reservation.getAccommodation().getId());
         mav.addObject("reservation",reservation);
         mav.addObject("accommodation", accommodation);
         return mav;

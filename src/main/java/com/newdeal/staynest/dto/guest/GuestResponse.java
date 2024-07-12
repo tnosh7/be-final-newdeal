@@ -34,6 +34,6 @@ public class GuestResponse {
         private String email;
         private String phone;
         private String address;
-    }~
+    }
 
 }

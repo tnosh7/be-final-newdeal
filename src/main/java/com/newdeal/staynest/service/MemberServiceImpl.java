@@ -46,13 +46,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-<<<<<<< Updated upstream
-    public void registerGuest(GuestDto guestDto) {
-
-=======
     public void registerGuest(GuestRequest guestDto) {
         // 비밀번호 암호화
->>>>>>> Stashed changes
         String encodedPassword = passwordEncoder.encode(guestDto.getPassword());
         guestDto.setPassword(encodedPassword);
 

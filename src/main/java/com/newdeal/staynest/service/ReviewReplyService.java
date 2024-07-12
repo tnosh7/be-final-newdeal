@@ -5,7 +5,9 @@ import com.newdeal.staynest.dto.review.ReviewResponse;
 import com.newdeal.staynest.entity.Reservation;
 import com.newdeal.staynest.entity.Review;
 import com.newdeal.staynest.entity.ReviewImg;
-import com.newdeal.staynest.entity.accommodation.AccommodationRepository;
+import com.newdeal.staynest.entity.accommodation.Accommodation;
+import com.newdeal.staynest.repository.AccommodationRepository;
+import com.newdeal.staynest.repository.ReservationRepository;
 import com.newdeal.staynest.repository.ReviewRepository;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +25,10 @@ import java.util.stream.Collectors;
 public class ReviewReplyService {
     private final ReviewRepository reviewRepository;
     private final AccommodationRepository accommodationRepository;
-//    private final Reser
+    private final ReservationRepository reservationRepository;
 
     @Transactional
-    public void ReviewSave(ReviewRequest reviewRequest, Long reservationId) {
+    public void ReviewSave(ReviewRequest reviewRequest, Long reservationId, Long accomId) {
         // 이미지 URL 리스트를 ReviewImg 객체로 변환
         List<ReviewImg> reviewImgs = reviewRequest.imgUrl().stream()
                 .map(url -> ReviewImg.builder().imgUrl(url).build())
@@ -38,6 +40,7 @@ public class ReviewReplyService {
                 .star(reviewRequest.star())
                 .images(reviewImgs)
                 .createdAt(LocalDateTime.now())
+                .accommodation(Accommodation.builder().id(accomId).build())
                 .reservation(Reservation.builder().reservationId(reservationId).build())
                 .build();
 
@@ -45,8 +48,14 @@ public class ReviewReplyService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReviewResponse> fullReview(Long accommId) {
-        List<Review> reviews = reviewRepository.findAllByReservation_ReservationId(accommId);
+    public List<ReviewResponse> getReviewsByAccommodationId(Long accommId) {
+        // 숙소 ID를 기준으로 해당 숙소에 속하는 모든 예약의 ID 조회
+        List<Long> reservationIds = reservationRepository.findReservationIdsByAccommId(accommId);
+        System.out.println(reservationIds);
+        // 조회된 예약 ID들을 기준으로 해당 예약들에 속하는 모든 리뷰 조회
+        List<Review> reviews = reviewRepository.findAllByReservation_ReservationIdIn(reservationIds);
+
+        // Review 엔티티를 ReviewResponse DTO로 변환하여 반환
         return ReviewResponse.fromEntity(reviews);
     }
 }
