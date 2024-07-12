@@ -195,7 +195,7 @@
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control border-0 border-bottom rounded-0"
                                                name="email" id="email" placeholder="이메일 주소" required
-                                               onfocusout="checkDuplicateEmail();">
+                                               onkeyup="checkDuplicateEmail();">
                                         <label for="email" class="form-label-ysh">이메일</label>
                                         <div id="emailCheckWarn" class="error-message-ysh"></div>
                                     </div>
