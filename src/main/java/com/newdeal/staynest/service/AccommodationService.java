@@ -4,7 +4,7 @@ import com.newdeal.staynest.dto.Acoomodation.AccommodationDto;
 import com.newdeal.staynest.entity.Host;
 import com.newdeal.staynest.entity.accommodation.Accommodation;
 import com.newdeal.staynest.entity.accommodation.AccommodationImg;
-import com.newdeal.staynest.entity.accommodation.QAccommodation;
+
 import com.newdeal.staynest.repository.AccommodationImgRepository;
 import com.newdeal.staynest.repository.AccommodationRepository;
 import com.newdeal.staynest.exception.ResourceNotFoundException;

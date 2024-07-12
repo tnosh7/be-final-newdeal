@@ -36,37 +36,37 @@ public class ReviewReplyController {
 //                .build();
 //    }
 
-    @PostMapping("/insertReview/{reservationId}/{accomId}")
-    public ModelAndView insertReview(
-            @RequestBody ReviewRequest reviewRequest,
-            @PathVariable Long reservationId,
-            @PathVariable Long accomId
-//            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader
-    ) {
-//        String token = authorizationHeader.substring(7); // "Bearer " 제거
-//        if (jwtUtil.validateToken(token)) {
-            reviewReplyService.ReviewSave(reviewRequest, reservationId, accomId);
+//    @PostMapping("/insertReview/{reservationId}/{accomId}")
+//    public ModelAndView insertReview(
+//            @RequestBody ReviewRequest reviewRequest,
+//            @PathVariable Long reservationId,
+//            @PathVariable Long accomId
+////            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader
+//    ) {
+////        String token = authorizationHeader.substring(7); // "Bearer " 제거
+////        if (jwtUtil.validateToken(token)) {
+//            reviewReplyService.ReviewSave(reviewRequest, reservationId, accomId);
+//
+//            ModelAndView mav = new ModelAndView();
+//            mav.setViewName("review/fullReview/{reservationId}");
+//            mav.addObject("accomId", accomId);
+//            return mav;
+////        } else {
+////            // 토큰이 유효하지 않으면 오류 페이지로 리디렉션
+////            ModelAndView modelAndView = new ModelAndView();
+////            modelAndView.setViewName("error/unauthorized");
+////            return modelAndView;
+////        }
+//    }
 
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("review/fullReview/{reservationId}");
-            mav.addObject("accomId", accomId);
-            return mav;
-//        } else {
-//            // 토큰이 유효하지 않으면 오류 페이지로 리디렉션
-//            ModelAndView modelAndView = new ModelAndView();
-//            modelAndView.setViewName("error/unauthorized");
-//            return modelAndView;
-//        }
-    }
-
-    @GetMapping("/fullReview/{accommId}")
-    public ModelAndView fullReview(@PathVariable Long accommId) {
-        List<ReviewResponse> reviewResponses = reviewReplyService.getReviewsByAccommodationId(accommId);
-        ModelAndView mav = new ModelAndView("review/fullReview"); // 뷰 이름을 지정하여 ModelAndView 객체 생성
-        mav.addObject("reviewResponses", reviewResponses);
-        return mav; // ModelAndView 객체 반환
-    }
-
+//
+//    @GetMapping("/fullReview/{accommId}")
+//    public ModelAndView fullReview(@PathVariable Long accommId) {
+//        List<ReviewResponse> reviewResponses = reviewReplyService.getReviewsByAccommodationId(accommId);
+//        ModelAndView mav = new ModelAndView("review/fullReview"); // 뷰 이름을 지정하여 ModelAndView 객체 생성
+//        mav.addObject("reviewResponses", reviewResponses);
+//        return mav; // ModelAndView 객체 반환
+//    }
 
 
 //    @GetMapping("/Review/{reviewId}")

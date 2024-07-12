@@ -76,7 +76,7 @@
             <a href="#" class="view-all-cyj">전체보기</a> <!-- (알림) 전체보기 버튼 스타일 추가 -->
         </div>
     </div>
-    <div class="host right-aligned"> <a href="#">호스트 모드로 전환 </a></div>
+    <div class="host right-aligned"> <a href="${contextPath}/hosts/">호스트 모드로 전환 </a></div>
     <div class="right-aligned">
         <div class="dropdown">
             <button class="dropbtn">
@@ -85,8 +85,7 @@
             </button>
             <div class="dropdown-content"> <!-- (알림) 드롭다운 메뉴를 오른쪽 정렬 -->
                 <a href="${contextPath}/member/identify" >회원가입</a>
-                <a href="${contextPath}/member/login-page">로그인</a>
-
+                <a href="${contextPath}/member/guestLogin-page">로그인</a>
             </div>
         </div>
     </div>
