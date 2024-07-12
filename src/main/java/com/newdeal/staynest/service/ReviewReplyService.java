@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Builder
@@ -44,9 +45,21 @@ public class ReviewReplyService {
         reviewRepository.save(review);
     }
 
-//    @Transactional(readOnly = true)
-//    public List<ReviewResponse> fullReview(Long accommId) {
-//        List<Review> reviews = reviewRepository.findAllByReservation_ReservationId(accommId);
-//        return ReviewResponse.fromEntity(reviews);
-//    }
+
+    @Transactional(readOnly = true)
+    public List<ReviewResponse> getReviewsByAccommodationId(Long accommId) {
+        List<Review> reviews = reviewRepository.getReviewsByAccommodationId(accommId);
+        return ReviewResponse.fromEntity(reviews);
+    }
+
+    @Transactional(readOnly = true)
+    public Reservation getReservationByReservation(Long reservationId) {
+        Optional<Reservation> optionalReservation = reservationRepository.findById(reservationId);
+        return optionalReservation.orElse(null); // orElse(null)은 reservationId에 해당하는 Reservation이 없을 때 null을 반환합니다.
+    }
+
+    public Accommodation getAccomodationByAccomodation(Long accomId) {
+        return accommodationRepository.findById(accomId).orElse(null);
+    }
+
 }

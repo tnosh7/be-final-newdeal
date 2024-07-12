@@ -2,83 +2,68 @@ package com.newdeal.staynest.controller;
 
 import com.newdeal.staynest.dto.review.ReviewRequest;
 import com.newdeal.staynest.dto.review.ReviewResponse;
-import com.newdeal.staynest.entity.Review;
-import com.newdeal.staynest.repository.ReviewRepository;
+import com.newdeal.staynest.entity.Reservation;
+import com.newdeal.staynest.entity.accommodation.Accommodation;
 import com.newdeal.staynest.service.ReviewReplyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.net.URI;
 import java.util.List;
+
 @RequiredArgsConstructor
-@RestController
+@Controller
 @RequestMapping("/review")
 public class ReviewReplyController {
     private final ReviewReplyService reviewReplyService;
-    private final ReviewRepository reviewRepository;
-//    private final JwtUtil jwtUtil;
-//public ReviewController(ReviewReplyService reviewReplyService, JwtUtil jwtUtil) {
-//    this.reviewReplyService = reviewReplyService;
-//    this.jwtUtil = jwtUtil;
-//}
-//    @PostMapping("/insertReview/{reservationId}")
-//    public ResponseEntity<Void> insertReview(
-//            @RequestBody final ReviewRequest reviewRequest,
-//            @PathVariable final Long reservationId
-//    ) {
-//        reviewReplyService.ReviewSave(reviewRequest, reservationId);
-//        return ResponseEntity
-//                .ok()
-//                .build();
-//    }
 
-//    @PostMapping("/insertReview/{reservationId}/{accomId}")
-//    public ModelAndView insertReview(
-//            @RequestBody ReviewRequest reviewRequest,
-//            @PathVariable Long reservationId,
-//            @PathVariable Long accomId
-////            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader
-//    ) {
-////        String token = authorizationHeader.substring(7); // "Bearer " 제거
-////        if (jwtUtil.validateToken(token)) {
-//            reviewReplyService.ReviewSave(reviewRequest, reservationId, accomId);
-//
-//            ModelAndView mav = new ModelAndView();
-//            mav.setViewName("review/fullReview/{reservationId}");
-//            mav.addObject("accomId", accomId);
+    @GetMapping("/insertReview/{reservationId}/{accomId}")
+    public ModelAndView insertReview(
+            @PathVariable Long reservationId,
+            @PathVariable Long accomId
+//            @RequestHeader("Authorization") String token
+    ) {
+        // 여기에 토큰을 검증하는 로직을 추가할 수 있습니다.
+//        if (!isTokenValid(token)) {
+//            // 토큰이 유효하지 않은 경우 처리 로직 추가 (예: 에러 페이지로 이동)
+//            ModelAndView mav = new ModelAndView("error/unauthorized");
 //            return mav;
-////        } else {
-////            // 토큰이 유효하지 않으면 오류 페이지로 리디렉션
-////            ModelAndView modelAndView = new ModelAndView();
-////            modelAndView.setViewName("error/unauthorized");
-////            return modelAndView;
-////        }
-//    }
+//        }
+        Reservation reservation = reviewReplyService.getReservationByReservation(reservationId);
+        Accommodation accom = reviewReplyService.getAccomodationByAccomodation(accomId);
+        ModelAndView mav = new ModelAndView("review/insertReview");
+        mav.addObject("reservation", reservation);
+        mav.addObject("accom", accom);
+        return mav;
+    }
 
-//
-//    @GetMapping("/fullReview/{accommId}")
-//    public ModelAndView fullReview(@PathVariable Long accommId) {
-//        List<ReviewResponse> reviewResponses = reviewReplyService.getReviewsByAccommodationId(accommId);
-//        ModelAndView mav = new ModelAndView("review/fullReview"); // 뷰 이름을 지정하여 ModelAndView 객체 생성
-//        mav.addObject("reviewResponses", reviewResponses);
-//        return mav; // ModelAndView 객체 반환
-//    }
+    private boolean isTokenValid(String token) {
+        // 실제 토큰 검증 로직을 구현합니다.
+        return true; // 임시로 항상 유효한 것으로 설정
+    }
 
 
-//    @GetMapping("/Review/{reviewId}")
-//    public ResponseEntity<ReviewResponse> getRe
-//            (@PathVariable("reviewId") Long reviewId) {
-//        ReviewResponse reviewResponse = reviewReplyService.getReview(reviewId);
-//
-//        return ResponseEntity
-//                .ok()
-//                .body(reviewResponse);
-//    }
+    @PostMapping("/insertReview/{reservationId}/{accomId}")
+    public ModelAndView insertReview(
+            @RequestBody ReviewRequest reviewRequest,
+            @PathVariable Long reservationId,
+            @PathVariable Long accomId
+    ) {
+        reviewReplyService.ReviewSave(reviewRequest, reservationId, accomId);
 
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("review/fullReview/" + accomId);
+        mav.addObject("accomId", accomId);
+        return mav;
+    }
 
+    @GetMapping("/fullReview/{accommId}")
+    public ModelAndView fullReview(@PathVariable Long accommId) {
+        List<ReviewResponse> reviewResponses = reviewReplyService.getReviewsByAccommodationId(accommId);
+        ModelAndView mav = new ModelAndView("review/fullReview");
+        mav.addObject("reviewResponses", reviewResponses);
+        return mav;
+    }
 
 }
