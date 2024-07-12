@@ -1,12 +1,14 @@
 package com.newdeal.staynest.service;
 
-import com.newdeal.staynest.dto.MemberDto;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.web.servlet.ModelAndView;
+import com.newdeal.staynest.dto.HostDto;
+import com.newdeal.staynest.dto.guest.GuestRequest;
 
 public interface MemberService {
-    public String checkDuplicateEmail(String email);
-    public void registerMember(MemberDto memberDto);
+    public String checkDuplicateGuestEmail(String email);
+    public String checkDuplicateHostEmail(String email);
+    public void registerGuest(GuestRequest guestDto);
+    public void registerHost(HostDto hostDto);
+    public String sendEmailCheck(String email);
+
     //public void login(MemberDto memberDto,  HttpServletResponse res);
 }

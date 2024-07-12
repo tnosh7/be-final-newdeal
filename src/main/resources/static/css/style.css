@@ -1,0 +1,756 @@
+body {
+    font-family: "Do Hyeon", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+button {
+    font-family: "Do Hyeon", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    margin: 110px auto 0 auto; /* 상단 마진 110px, 좌우 자동으로 가운데 정렬 */
+    width: 85%;
+    box-sizing: border-box; /* 패딩과 보더를 너비에 포함 */
+}
+
+/* Container for the header */
+.outer-container {
+    margin: 0 auto;
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+    position: fixed; /* 헤더를 상단에 고정 */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* 다른 요소들보다 위에 오도록 함 */
+}
+
+/* Left-aligned content */
+.left-aligned {
+    color: #0D31B2;
+    font-size: 40px;
+    font-weight: 900;
+    flex: 1;
+}
+
+.logo {
+    width: 150px;
+    cursor: pointer;
+}
+
+/* Right-aligned dropdown */
+.right-aligned {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.host {
+    margin-left: 30px;
+    margin-right: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    width: 180px;
+    min-width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.host a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.host a:hover {
+    width: 180px;
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Dropdown button styles */
+.dropbtn {
+    background-color: #ffffff;
+    min-width: 180px;
+    color: black;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* Dropdown button text styles */
+.dropbtn > div {
+    margin-left: 5px;
+}
+
+/* Dropdown content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    top: calc(100% + 1px);
+    right: 0;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Hover effect for dropdown links */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show dropdown content on click */
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+footer {
+    border-top: 1px solid #cccccc;
+    color: #005241;
+    padding: 1em 0;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.ft {
+    width: 85%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+}
+
+footer .footer-section {
+    flex: 1;
+    text-align: center;
+}
+
+footer .footer-section h3 {
+    margin-top: 0;
+}
+
+footer .footer-section a {
+    color: #4F9F8A;
+    text-decoration: none;
+    margin: 0 1em;
+}
+
+footer .footer-section p {
+    color: #4F9F8A;
+    text-decoration: none;
+    margin: 0 1em;
+}
+
+footer .footer-section a:hover {
+    text-decoration: underline;
+}
+
+footer .social-icons a {
+    margin: 0 0.5em;
+    color: #4F9F8A;
+    font-size: 1.5em;
+}
+
+footer .social-icons a:hover {
+    color: #00aced;
+}
+
+.searchBox-khs {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.searchtitle-khs {
+    padding-left: 12px;
+}
+
+.button-item-khs {
+    padding: 10px;
+    background-color: #f1f1f1;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    margin: 0 10px;
+    cursor: pointer;
+    outline: none;
+    font-weight: bold;
+    color: lightslategray;
+}
+
+.button-item-khs:hover {
+    background-color: gainsboro;
+}
+
+.sb1-khs, .sb2-khs, .sb3-khs {
+    text-align: left;
+    width: 100%;
+}
+
+.sb4-khs {
+    position: relative;
+    width: 100%;
+}
+
+.sb5-khs {
+    width: 100%;
+    background-color: #005241;
+    color: white;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    margin: 0 10px;
+    cursor: pointer;
+    outline: none;
+    font-weight: bold;
+}
+
+.sb5-khs:hover {
+    background-color: #4F9F8A;
+}
+
+.num-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: row; /* 수평으로 정렬되도록 수정 */
+}
+
+.num-input {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+}
+
+.num-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 25px;
+    z-index: 1000;
+    display: none;
+    width: 100px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.num-dropdown.show {
+    display: block;
+}
+
+.num-btn {
+    width: 30px;
+    height: 30px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.num-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.num-value {
+    display: inline-block;
+    padding: 0 8px;
+}
+
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 잘리지 않고 채워지도록 설정 */
+    object-position: center; /* 이미지를 가운데 정렬 */
+    /*margin-top: -200px;  이미지를 위로 30px 올립니다 */
+}
+
+/* 정보 섹션 스타일 */
+.info-section-mjp {
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 예약 정보 박스 스타일 */
+.reservation-box-mjp {
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    border: 1px solid #ccc; /* 테두리 설정 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 그림자 설정 */
+    margin-top: 20px;
+}
+
+/* 지도 컨테이너 스타일 */
+.map-container-mjp {
+    height: 400px; /* 원하는 높이로 조정 */
+}
+
+.review-item-mjp {
+    background-color: #f0f0f0;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
+
+
+.selCat-khs {
+    width: 85%;
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cat-khs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.cat-khs img {
+    width: 70px;
+    height: 70px;
+}
+
+.cat-khs div {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.accomList-khs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* 웹킷 기반 브라우저용 스크롤바 스타일 */
+.accomList-khs::-webkit-scrollbar {
+    width: 12px; /* 스크롤바 너비 */
+}
+
+.accomList-khs::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 스크롤바 트랙 배경색 */
+    border-radius: 10px; /* 둥근 모서리 */
+}
+
+.accomList-khs::-webkit-scrollbar-thumb {
+    background: #888; /* 스크롤바 색상 */
+    border-radius: 10px; /* 둥근 모서리 */
+}
+
+.accomList-khs::-webkit-scrollbar-thumb:hover {
+    background: #555; /* 스크롤바 색상(호버시) */
+}
+
+.accom-khs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    cursor: pointer;
+    width: 300px;
+    height: 330px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 0;
+}
+
+.accom-khs div {
+    font-size: 20px;
+    margin: 5px;
+}
+
+.accom-khs img {
+    width: 100%;
+    height: 50%;
+    border-radius: 10px 10px 0 0;
+}
+
+.accomD1-khs {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 세로 가운데 정렬 */
+}
+
+.accomD1-1-khs {
+    text-align: left; /* 왼쪽 정렬 */
+}
+
+.accomD1-2-khs {
+    text-align: right; /* 오른쪽 정렬 */
+}
+
+.accomD2-khs {
+    width: 95%;
+    text-align: left;
+    padding-left: 13px;
+    color: gray;
+}
+
+.accomD3-khs {
+    width: 95%;
+    text-align: left;
+    padding-left: 13px;
+    color: gray;
+}
+
+.accomD4-khs {
+    width: 95%;
+    text-align: right;
+    padding-right: 13px;
+}
+
+.sbwc-khs {
+    color: black;
+}
+
+.sb6-khs {
+    flex: 2;
+    text-align: left;
+}
+
+.filter-khs {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+    cursor: pointer;
+    border: 1px solid gainsboro;
+    padding: 10px;
+    border-radius: 10px;
+    height: min-content;
+    background-color: white;
+}
+
+.filter-khs img {
+    width: 40px;
+    height: 40px;
+}
+
+.filter-khs div {
+    font-size: 25px;
+}
+
+.reservebox-khs {
+    border-bottom: 1px solid gray;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.reservebox1-khs {
+    padding-top: 10px;
+}
+
+.reservebox-khs input {
+    width: 80%;
+    min-height: 50px;
+}
+
+.paybtn {
+    margin-top: 20px;
+}
+
+.paybtn button {
+    width: 100px;
+    height: 30px;
+    background-color: #4F9F8A;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+.grl-khs {
+    margin-top: 20px;
+    border-top: 1px solid gainsboro;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.grld1-khs {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 20px;
+}
+
+.grld2-khs {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: gray;
+}
+
+.grlb1-khs {
+    width: 100px;
+    height: 30px;
+    background-color: #4F9F8A;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+.grt-khs {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.grt-khs th {
+    border-bottom: 1px solid gainsboro;
+    padding: 15px;
+}
+
+.grt-khs td {
+    border-bottom: 1px solid gainsboro;
+    padding: 10px;
+}
+
+.hm-khs {
+    display: flex;
+    margin-top: 20px;
+}
+
+.hmd1-khs {
+    display: flex;
+    align-items: center; /* 세로 가운데 정렬 */
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+}
+
+.hmdd-khs {
+    align-content: center;
+    margin: 20px;
+    text-align: right;
+    padding: 5px;
+}
+
+.hmd2-khs {
+    text-align: center;
+    align-content: center;
+    margin: 10px;
+    padding: 10px;
+}
+
+.hmain-khs {
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+}
+
+.container-kti {
+    display: flex;
+    width: 75%;
+    margin: 0 auto 30px auto;
+}
+
+#screen1 {
+    width: 55%;
+    margin: 20px;
+}
+
+#screen2 {
+    width: 25%;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+#title-kti {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#bottom-kti {
+    padding: 10px;
+    margin: 20px;
+}
+
+.gad1-khs {
+    border-bottom: 1px solid gainsboro;
+    margin: 20px;
+}
+
+.gad2-khs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-notification-cyj {
+    position: relative;
+    margin-left: 20px;
+}
+
+.modal-notification-icon-cyj {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.modal-notification-count-cyj {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 12px;
+}
+
+.modal-notification-dropdown-cyj {
+    display: none;
+    position: absolute;
+    right: 0;
+    left: 0px;
+    top: 41px;
+    width: 400px;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/*.modal-notification-cyj:hover .modal-notification-dropdown-cyj {*/
+/*    display: block;*/
+/*}*/
+.modal-notification-header-cyj {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.modal-notification-title-cyj {
+    color: rgba(79, 159, 138, 1);
+    font-size: 20px;
+}
+
+
+.modal-notification-item-cyj {
+    border-bottom: 1px solid lightgray;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    color: black;
+    cursor: pointer;
+}
+
+.modal-notification-item-cyj:hover {
+    background-color: #f1f1f1;
+}
+.modal-is-read-notify{
+    /*background-color: #f1f1f1;*/
+    background-color: gainsboro;
+}
+.view-all-cyj {
+    display: block;
+    padding: 12px 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #f9f9f9;
+    color: black;
+}
+
+.view-all-cyj:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* Dropdown button styles */
+.dropdown-khs {
+    width: 13%;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle; /* 세로 정렬을 위해 추가 */
+}
+
+.dropbtn-khs {
+    background-color: white; /* 기본 배경색 */
+    color: black;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid gainsboro;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none; /* 기본 focus 효과 제거 */
+    transition: border-color 0.3s ease; /* 트랜지션 추가 */
+}
+
+.dropdown-content-khs {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content-khs a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.dropdown-content-khs a:hover {
+    background-color: #d3d3d3; /* hover 효과 */
+}
