@@ -13,7 +13,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/js/search.js"></script>
+
 </head>
 <body>
 <%
@@ -108,5 +108,6 @@
 </jsp:include>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

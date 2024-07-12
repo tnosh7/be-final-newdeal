@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-
     // 오늘 날짜를 가져오는 함수
     function getTodayDate() {
         var today = new Date();
@@ -70,108 +69,53 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!event.target.matches('#maxGuests') && !event.target.matches('.num-btn')) {
             numDropdown.classList.remove('show');
         }
+        if (!event.target.matches('.dropbtn-khs')) {
+            document.getElementById("myDropdown-khs").classList.remove("show");
+        }
     });
 
+    // 초기 로딩 시 숙소 리스트 불러오기
+    loadAccommodations();
 
     // 카테고리 선택 이벤트
     document.querySelectorAll('.cat-khs').forEach(function (categoryElement) {
         categoryElement.addEventListener('click', function () {
             const category = categoryElement.getAttribute('data-category');
-
-            // 현재 선택된 카테고리와 비교
-            var isSelected = categoryElement.classList.contains('selected');
-
-            // 모든 카테고리에서 'selected' 클래스 제거
-            document.querySelectorAll('.cat-khs').forEach(function (el) {
-                el.classList.remove('selected');
-            });
-
-            if (!isSelected) {
-                // 선택된 카테고리에 'selected' 클래스 추가
-                categoryElement.classList.add('selected');
-                // 선택된 카테고리로 숙소 리스트 업데이트
-                updateAccommodationList(category, getMinPrice(), getMaxPrice());
+            if (categoryElement.classList.contains('selected')) {
+                categoryElement.classList.remove('selected');
+                loadAccommodations(null, getSelectedSortCriteria());
             } else {
-                // 이미 선택된 카테고리를 다시 클릭했을 경우, 카테고리 선택 해제 (선택된 카테고리 없음)
-                updateAccommodationList(null, getMinPrice(), getMaxPrice());
+                document.querySelectorAll('.cat-khs').forEach(function (el) {
+                    el.classList.remove('selected');
+                });
+                categoryElement.classList.add('selected');
+                loadAccommodations(category, getSelectedSortCriteria());
             }
         });
     });
 
-
-    // 초기 로딩 시 숙소 리스트 불러오기
-    updateAccommodationList(null,null,null);
-
+    // 정렬 기준 선택 이벤트
+    document.querySelectorAll('.dropdown-content-khs a').forEach(function (sortElement) {
+        sortElement.addEventListener('click', function () {
+            const sortCriteria = sortElement.getAttribute('data-sort');
+            document.querySelector('.dropbtn-khs').textContent = sortElement.textContent; // 버튼 텍스트 변경
+            const selectedCategory = document.querySelector('.cat-khs.selected') ? document.querySelector('.cat-khs.selected').getAttribute('data-category') : null;
+            loadAccommodations(selectedCategory, sortCriteria);
+            document.getElementById("myDropdown-khs").classList.remove("show"); // 정렬 기준 선택 후 드롭다운 닫기
+        });
+    });
 });
 
-// 가격 필터 적용 함수
-function applyPriceFilter() {
-    var minPrice = document.getElementById('minPrice').value;
-    var maxPrice = document.getElementById('maxPrice').value;
-    var priceRangeDisplay = document.getElementById('priceRangeDisplay');
-
-    // 가격이 입력되었는지 확인
-    if (minPrice.trim() === '' || maxPrice.trim() === '') {
-        alert('최소 가격과 최대 가격을 모두 입력해주세요.');
-        return;
-    }
-
-    // 가격 필터 결과를 표시
-    priceRangeDisplay.textContent = minPrice + '원 - ' + maxPrice + '원';
-    priceRangeDisplay.style.display = 'block';
-
-    // X 버튼을 생성하여 priceRangeDisplay 바로 옆에 추가
-    var clearPriceFilterBtn = document.createElement('button');
-    clearPriceFilterBtn.setAttribute('type', 'button');
-    clearPriceFilterBtn.setAttribute('class', 'xBtn-khs');
-    clearPriceFilterBtn.setAttribute('id', 'clearPriceFilterBtn'); // 버튼 id 추가
-    clearPriceFilterBtn.textContent = 'X';
-    var selectedCategory = getSelectedCategory();
-    updateAccommodationList(selectedCategory, minPrice, maxPrice);
-    clearPriceFilterBtn.addEventListener('click', function () {
-        document.getElementById('minPrice').value = '';
-        document.getElementById('maxPrice').value = '';
-        priceRangeDisplay.textContent = '';
-        priceRangeDisplay.style.display = 'none';
-        clearPriceFilterBtn.remove(); // 버튼 삭제
-        var selectedCategory = getSelectedCategory(); // 선택된 카테고리 가져오기
-        updateAccommodationList(selectedCategory, null, null); // 선택된 카테고리와 가격 필터 초기화
-    });
-
-    // 기존의 clearPriceFilterBtn이 있으면 삭제
-    var existingClearBtn = document.getElementById('clearPriceFilterBtn');
-    if (existingClearBtn) {
-        existingClearBtn.parentNode.removeChild(existingClearBtn);
-    }
-
-    // priceRangeDisplay 바로 옆에 추가
-    priceRangeDisplay.insertAdjacentElement('afterend', clearPriceFilterBtn);
-}
-
-
-
-// 숙소 리스트 업데이트 요청 함수
-function updateAccommodationList(category=null,minPrice=null,maxPrice=null) {
-    var checkInDate = document.getElementById('checkInDate').value;
-    var checkOutDate = document.getElementById('checkOutDate').value;
-    var address = document.getElementById('address').value;
-    var maxGuests = document.getElementById('maxGuests').value;
-
-    // 서버로 데이터 전송
+function loadAccommodations(category = null, sortCriteria = '최신순') {
+    // AJAX 요청
     $.ajax({
-        url: '/search/accommodations',
+        url: '/accommodations',
         method: 'GET',
         data: {
-            checkInDate: checkInDate,
-            checkOutDate: checkOutDate,
-            address: address,
-            maxGuests: maxGuests,
-            minPrice: minPrice,
-            maxPrice: maxPrice,
-            category: category
+            category: category,
+            sort: sortCriteria
         },
         success: function (data) {
-            console.log(data);
             const accommodationList = document.getElementById('accommodation-list');
             accommodationList.innerHTML = ''; // 기존 내용을 지우기
 
@@ -199,23 +143,10 @@ function updateAccommodationList(category=null,minPrice=null,maxPrice=null) {
     });
 }
 
-// 최소 가격 가져오는 함수
-function getMinPrice() {
-    var minPrice = document.getElementById('minPrice').value;
-    return minPrice.trim() === '' ? undefined : parseFloat(minPrice);
+function toggleDropdown() {
+    document.getElementById("myDropdown-khs").classList.toggle("show");
 }
 
-// 최대 가격 가져오는 함수
-function getMaxPrice() {
-    var maxPrice = document.getElementById('maxPrice').value;
-    return maxPrice.trim() === '' ? undefined : parseFloat(maxPrice);
-}
-
-// 선택된 카테고리 가져오는 함수
-function getSelectedCategory() {
-    var selectedCategoryElement = document.querySelector('.cat-khs.selected');
-    if (selectedCategoryElement) {
-        return selectedCategoryElement.getAttribute('data-category');
-    }
-    return null; // 선택된 카테고리가 없을 경우 null 반환
+function getSelectedSortCriteria() {
+    return document.querySelector('.dropbtn-khs').textContent.trim(); // trim()을 사용하여 앞뒤 공백을 제거한 텍스트 반환
 }

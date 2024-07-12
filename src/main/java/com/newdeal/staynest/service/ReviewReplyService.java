@@ -5,7 +5,9 @@ import com.newdeal.staynest.dto.review.ReviewResponse;
 import com.newdeal.staynest.entity.Reservation;
 import com.newdeal.staynest.entity.Review;
 import com.newdeal.staynest.entity.ReviewImg;
+import com.newdeal.staynest.entity.accommodation.Accommodation;
 import com.newdeal.staynest.repository.AccommodationRepository;
+import com.newdeal.staynest.repository.ReservationRepository;
 import com.newdeal.staynest.repository.ReviewRepository;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +26,11 @@ import java.util.stream.Collectors;
 public class ReviewReplyService {
     private final ReviewRepository reviewRepository;
     private final AccommodationRepository accommodationRepository;
+    private final ReservationRepository reservationRepository;
 //    private final Reser
 
     @Transactional
-    public void ReviewSave(ReviewRequest reviewRequest, Long reservationId) {
+    public void ReviewSave(ReviewRequest reviewRequest, Long reservationId, Long accomId) {
         // 이미지 URL 리스트를 ReviewImg 객체로 변환
         List<ReviewImg> reviewImgs = reviewRequest.imgUrl().stream()
                 .map(url -> ReviewImg.builder().imgUrl(url).build())

@@ -5,19 +5,19 @@
 <head>
     <!-- 페이지에 변경할 때마다 타이틀, 바디 부분 변경해주세요 -->
     <title>검색결과</title>
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Popper.js (Bootstrap의 일부 컴포넌트에서 사용) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55c1825b3a2528996d0f7f272b884d60"></script>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Bootstrap JS 및 jQuery -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-
     <!-- flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="/js/search.js"></script>
+
 </head>
 <body>
 <div class="wrapper">
@@ -71,20 +71,23 @@
     background-color: gainsboro; /* 배경색 설정 */">
         <div style="display: flex;">
             <div class="selCat-khs">
-                <div class="cat-khs" onclick=""><img src="/images/apartment.png" alt="">아파트</div>
-                <div class="cat-khs"><img src="/images/guest_house.png" alt="">게스트하우스</div>
-                <div class="cat-khs"><img src="/images/Officetels.png" alt="">오피스텔</div>
-                <div class="cat-khs"><img src="/images/oneRoom.png" alt="">원룸</div>
-                <div class="cat-khs"><img src="/images/pension.png" alt="">펜션</div>
-                <div class="cat-khs"><img src="/images/hanok.png" alt="">한옥</div>
+                <div class="cat-khs" data-category="아파트"><img src="/images/apartment.png" alt="">아파트</div>
+                <div class="cat-khs" data-category="게스트하우스"><img src="/images/guest_house.png" alt="">게스트하우스</div>
+                <div class="cat-khs" data-category="오피스텔"><img src="/images/Officetels.png" alt="">오피스텔</div>
+                <div class="cat-khs" data-category="원룸"><img src="/images/oneRoom.png" alt="">원룸</div>
+                <div class="cat-khs" data-category="펜션"><img src="/images/pension.png" alt="">펜션</div>
+                <div class="cat-khs" data-category="한옥"><img src="/images/hanok.png" alt="">한옥</div>
             </div>
             <div>
                 <button type="button" class="filter-khs" data-toggle="modal" data-target="#myModal">
                     <img src="/images/filter.png" alt="">필터
                 </button>
-                <!-- 모달 구조 -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
+                <!-- 가격 필터링 결과를 표시할 div -->
+                <div style="display: flex; justify-content: center;
+  align-items: center;">
+                <div id="priceRangeDisplay" style="display: none; color: #0D31B2;"></div>
+                </div>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -94,15 +97,17 @@
                                 </button>
                             </div>
                             <div class="modal-body" style="margin:0 auto; text-align:center;">
-                                <div style=" display: flex; align-items: center;">
-                                    <input type="text"/>
-                                    <div>&nbsp;원 -&nbsp;</div>
-                                    <input type="text"/>
-                                    <div>&nbsp;원</div>
-                                </div>
+                                <form id="priceFilterForm">
+                                    <div style="display: flex; align-items: center;">
+                                        <input type="text" name="minPrice" id="minPrice" placeholder="최소 가격"/>
+                                        <div>&nbsp;원 -&nbsp;</div>
+                                        <input type="text" name="maxPrice" id="maxPrice" placeholder="최대 가격"/>
+                                        <div>&nbsp;원</div>
+                                    </div>
+                                </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="grlb1-khs" data-dismiss="modal">검색하기</button>
+                                <button type="button" class="grlb1-khs" id="applyPriceFilter" data-dismiss="modal" onclick="applyPriceFilter()">적용</button>
                             </div>
                         </div>
                     </div>
@@ -111,127 +116,7 @@
         </div>
 
         <div style="display: flex;">
-            <div class="accomList-khs" style="width: 50%; height:600px; overflow-y: scroll;">
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
-                <div class="accom-khs"><img src="/images/room.png" alt="">
-                    <div class="accomD1-khs">
-                        <div class="accomD1-1-khs">가산아네스트오피스텔</div>
-                        <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5
-                        </div>
-                    </div>
-                    <div class="accomD2-khs">도심 속 숙소</div>
-                    <div class="accomD3-khs">방1개, 침대 2개</div>
-                    <div class="accomD4-khs">50000 원 / 박</div>
-                </div>
+            <div  id="accommodation-list" class="accomList-khs" style="width: 50%; height:600px; overflow-y: scroll;">
             </div>
             <div id="map" style="width:45%; height:600px; margin: 20px; "></div>
         </div>
@@ -244,5 +129,6 @@
     </jsp:include>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="/js/search.js"></script>
 </body>
 </html>
