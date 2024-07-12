@@ -46,7 +46,6 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-
     public void registerGuest(GuestRequest guestDto) {
         // 비밀번호 암호화
         String encodedPassword = passwordEncoder.encode(guestDto.getPassword());
