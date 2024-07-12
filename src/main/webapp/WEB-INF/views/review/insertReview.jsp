@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="${contextPath}/css/insertReview.css">
 </head>
     <body>
+
     <div class="wrapper">
         <!--header.jsp-->
         <jsp:include page="${contextPath}/WEB-INF/views/layout/header.jsp">
@@ -21,9 +22,9 @@
                     <div class="accommodation-info-cyj">
                         <img src="https://cdn.tourtoctoc.com/news/photo/202305/549_2970_1553.jpg" alt="숙소에 등록된 이미지" class="accommodation-image-cyj"/>
                         <div class="accommodation-details-cyj">
-                            <span class="accommodation-title-cyj">오션뷰 호텔 스위트룸</span>
-                            <span class="accommodation-subtitle-cyj">위치: 제주도 / 객실 유형: 스위트룸</span>
-                            <span class="accommodation-subtitle-cyj">이용날짜 : 2024/07/04 ~ 2024/07/05 </span>
+                            <span class="accommodation-title-cyj">${accom.content}</span>
+                            <span class="accommodation-subtitle-cyj">위치: ${accom.address} / 객실 유형: ${accom.category}</span>
+                            <span class="accommodation-subtitle-cyj">이용날짜 : ${reservation.checkInDate} ~ ${reservation.checkOutDate} </span>
                         </div>
                     </div>
                     <div class="rating-section-cyj">
