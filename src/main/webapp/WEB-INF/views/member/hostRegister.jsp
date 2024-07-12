@@ -121,6 +121,7 @@
         if (!Validator.validateForm()) {
         }
         else {
+
             $("#register-btn").show();
             $("#emailCheckYn-btn").hide();
             $.ajax({
@@ -128,6 +129,7 @@
                 type: 'POST',
                 data: {email: email},
                 success: function (response) {
+                    alert(emailCheckNumber);
                     emailCheckNumberInput = response;
                 },
                 error: function (error) {
@@ -382,7 +384,7 @@
                                 <div class="col-12">
                                     <div class="d-grid">
                                         <p class="text-center m-0">Already have an account? <a
-                                                href="${contextPath}/member/login-page"
+                                                href="${contextPath}/member/login"
                                                 class="link-primary text-decoration-none">로그인</a>
                                         </p>
                                     </div>

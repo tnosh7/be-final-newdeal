@@ -146,7 +146,7 @@ h1 {
     }
 }
 
-/*passwordUpdate.jsp start*/
+/*guestPasswordUpdate.jsp start*/
 .password-btn-ysh input {
     background-color: #0D31B2;
     color: white;
@@ -169,7 +169,7 @@ h1 {
 .text-end-ysh {
     text-align: right;
 }
-/*passwordUpdate.jsp end*/
+/*guestPasswordUpdate.jsp end*/
 
 /*emailCheck.jsp start*/
 .email-info-ysh {

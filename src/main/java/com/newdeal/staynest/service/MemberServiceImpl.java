@@ -1,5 +1,6 @@
 package com.newdeal.staynest.service;
 
+import com.newdeal.staynest.dto.GuestDto;
 import com.newdeal.staynest.dto.HostDto;
 import com.newdeal.staynest.dto.guest.GuestRequest;
 import com.newdeal.staynest.entity.Guest;
@@ -45,9 +46,9 @@ public class MemberServiceImpl implements MemberService {
         return member.isPresent() ? "이미 등록된 이메일입니다." : "사용가능한 이메일입니다.";
     }
 
-    @Override
     public void registerGuest(GuestRequest guestDto) {
         // 비밀번호 암호화
+
         String encodedPassword = passwordEncoder.encode(guestDto.getPassword());
         guestDto.setPassword(encodedPassword);
 

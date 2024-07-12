@@ -37,7 +37,7 @@ function loginBtn() {
             // 응답 헤더에서 JWT 토큰 읽기
             const token = xhr.getResponseHeader('Authorization').split(' ')[1];
             sessionStorage.setItem("token", token);
-            location.href="${contextPath}/host/"
+            location.href="${contextPath}/hosts/"
         },
         error: function(error) {
             console.error('로그인 실패:', error);
@@ -89,7 +89,7 @@ function loginBtn() {
                                 <div class="col-12">
                                     <div class="text-end">
                                         <a href="${contextPath}/member/identify" class="text-decoration-none">회원가입</a>
-                                        <a href="${contextPath}/member/passwordUpdate"
+                                        <a href="${contextPath}/member/passwordUpdate?identify=host"
                                            class="link-secondary text-decoration-none">비밀번호 찾기</a>
                                     </div>
                                 </div>

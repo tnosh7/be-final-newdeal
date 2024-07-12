@@ -43,6 +43,7 @@ public class ReviewReplyController {
         return true; // 임시로 항상 유효한 것으로 설정
     }
 
+
     @PostMapping("/insertReview/{reservationId}/{accomId}")
     public ModelAndView insertReview(
             @RequestBody ReviewRequest reviewRequest,
@@ -64,4 +65,5 @@ public class ReviewReplyController {
         mav.addObject("reviewResponses", reviewResponses);
         return mav;
     }
+
 }

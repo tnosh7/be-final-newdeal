@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>비밀번호 재설정</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/logins/login-12/assets/css/login-12.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +15,9 @@
     <script src="${contextPath}/js/member.js"></script>
 </head>
 <script>
+    $().ready(function(){
+        let identity = "${identity}";
+    });
     let emailCheckNumberInput = null;
     function checkDuplicateEmail() {
         const email = document.getElementById("email").value;
@@ -24,28 +28,25 @@
             return;
         }
         $.ajax({
-            url: '/member/duplicateEmail?identity=guest',
+            url: '/member/duplicateEmail?identity=' + "${identity}",
             type: 'POST',
             data: {email: email},
             success: function (response) {
-                emailCheckWarn.innerText = response;
-                emailCheckWarn.style.color = "green";
-
+                emailCheckWarn.innerText = "등록되지 않은 이메일입니다.";
+                emailCheckWarn.style.color = "red";
             },
             error: function (error) {
-                emailCheckWarn.innerText = "이미 가입된 이메일입니다.";
-                emailCheckWarn.style.color = "red";
+                emailCheckWarn.innerText = "인증번호가 전송되었습니다.";
+                emailCheckWarn.style.color = "green";
+                $("#emailCheckNumber-input").show();
             }
         });
     }
     function emailCheckNumber() {
         const email = document.getElementById("email").value;
         const emailCheckNumber = document.getElementById("emailCheckNumber");
-        if (!Validator.validateForm()) {
-        }
-        else {
-            $("#register-btn").show();
-            $("#emailCheckYn-btn").hide();
+
+            $("#emailCheckNumber-div").show();
             $.ajax({
                 url: '/member/emailCheck',
                 type: 'POST',
@@ -58,7 +59,7 @@
                     alert("error")
                 }
             })
-        }
+
     }
     function varifiedEmailNunber() {
         const userNumber = document.getElementById("emailCheckYn").value;
@@ -72,7 +73,6 @@
             $("button[type='submit']").prop('disabled', false);
         }
     }
-
 </script>
 <body>
 <!-- Login -->
@@ -111,6 +111,8 @@
                                         <div id="emailCheckYnWarn" class="error-message-ysh"></div>
                                     </div>
                                 </div>
+                                <div hidden="hidden">
+
                                 <span style="color: #005241; font-size: 20px;">새로 설정할 비밀번호를 입력해 주세요.</span>
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
@@ -129,6 +131,8 @@
                                         <div id="passwdCheckWarn" class="error-message-ysh"></div>
                                     </div>
                                 </div>
+
+                                </div>
                                 <div class="col-12">
                                     <div class="password-btn-ysh">
                                         <input type="button" value="비밀번호 변경"></input>
@@ -137,9 +141,11 @@
                                 <div class="col-12">
                                     <div class="text-end-ysh">
                                         <a href="${contextPath}/member/identify"
-                                           class="text-end-register-ysh text-decoration-none">회원가입</a>&emsp;
-                                        <a href="${contextPath}/member/login-page"
-                                           class="link-secondary text-decoration-none">로그인</a>
+                                           class="text-end-register-ysh text-decoration-none">회원가입&ensp; |</a>&emsp;
+                                        <a href="${contextPath}/member/guestRegister"
+                                           class="link-secondary text-decoration-none">Guest 로그인&ensp; |</a>
+                                        <a href="${contextPath}/member/hostRegister"
+                                           class="link-secondary text-decoration-none">&ensp; Host 로그인</a>
                                     </div>
                                 </div>
                             </div>
