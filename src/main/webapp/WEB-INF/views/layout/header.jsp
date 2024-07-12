@@ -17,6 +17,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 </head>
+<script>
+    $().ready(function(){
+        const token = sessionStorage.getItem("token");
+        const registerLink = document.getElementById("registerLink");
+        const loginLink = document.getElementById("loginLink");
+        const menuText = document.getElementById("menuText");
+        if (token) {
+            console.log(token);
+            registerLink.innerText = "내 정보";
+            registerLink.href = "${contextPath}/guests"; //링크 설정해야 함
+            loginLink.innerText = "로그아웃";
+            loginLink.href = "#";  //링크 설정해야 함
+            menuText.innerText = "내 정보 / 로그아웃"
+        } else {
+            console.log("토큰 없음");
+        }
+
+    });
+</script>
 <body>
 <div class="outer-container">
     <div class="left-aligned">
@@ -81,11 +100,11 @@
         <div class="dropdown">
             <button class="dropbtn">
                 <span class="material-symbols-outlined">menu</span>
-                &nbsp;&nbsp;회원가입 / 로그인
+                &nbsp;&nbsp;<span id="menuText">회원가입 / 로그인</span>
             </button>
             <div class="dropdown-content"> <!-- (알림) 드롭다운 메뉴를 오른쪽 정렬 -->
-                <a href="${contextPath}/member/identify" >회원가입</a>
-                <a href="${contextPath}/member/guestLogin-page">로그인</a>
+                <a href="${contextPath}/member/identify" id="registerLink">회원가입</a>
+                <a href="${contextPath}/member/guestLogin-page" id="loginLink">로그인</a>
             </div>
         </div>
     </div>
