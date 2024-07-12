@@ -61,13 +61,17 @@ public class Accommodation {
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AccommodationImg> images;
 
+    @Column(name = "rating", nullable = false, columnDefinition = "double default 0.0")
+    private double rating = 0.0;
+
+    @Column(name = "review_count", nullable = false, columnDefinition = "integer default 0")
+    private int reviewCount = 0;
+
     private LocalDateTime createdAt;
 
     @JsonIgnore
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
-
-    private int avg;
 
     private double latitude;
     private double longitude;

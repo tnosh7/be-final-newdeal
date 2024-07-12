@@ -38,7 +38,7 @@ arrow_back_ios
                     <div style="margin-top: 5px;">${reservation.message}</div>
                 </div>
                 <div class="paybtn">
-                    <button onclick="finishReservation()">메인으로</button>
+                    <a href="/"><button>메인으로</button></a>
                 </div>
             </div>
             <div style="width:400px; height:50%; padding:20px; margin: 20px; border: 1px solid gray; border-radius: 10px">
