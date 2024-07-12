@@ -27,7 +27,6 @@ public class GuestController {
     
     // 회원 정보 보기
     @GetMapping
-    @Secured({UserRoleEnum.Authority.ROLE_GUEST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView guestView() {
 
         ModelAndView modelAndView = new ModelAndView("guest/guestAccount");
@@ -41,7 +40,6 @@ public class GuestController {
 
     // 회원 정보 수정
     @PatchMapping("/{guestId}")
-    @Secured({UserRoleEnum.Authority.ROLE_GUEST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView updateGuest(@PathVariable Long guestId, @RequestBody Guest reqUpdateGuest) {
 
         GuestResponse.UpdateGuestDTO guest = guestService.updateGuest(guestId, reqUpdateGuest);
@@ -53,7 +51,6 @@ public class GuestController {
 
     // 회원 정보 삭제
     @DeleteMapping("/{guestId}")
-    @Secured({UserRoleEnum.Authority.ROLE_GUEST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView deleteGuest(@PathVariable Long guestId) {
 
         guestService.deleteGuest(guestId);
@@ -63,14 +60,12 @@ public class GuestController {
 
     // 예약 내역 정보
     @GetMapping("/reservations")
-    @Secured({UserRoleEnum.Authority.ROLE_GUEST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView guestReservation() {
         return new ModelAndView("guest/guestReservation");
     }
 
     // 찜한 숙소 리스트
     @GetMapping("/favorites")
-    @Secured({UserRoleEnum.Authority.ROLE_GUEST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView guestFavorite() {
         return new ModelAndView("guest/guestFavorite");
     }
