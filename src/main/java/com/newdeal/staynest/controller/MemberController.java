@@ -49,10 +49,12 @@ public class MemberController {
         try {
             if ((identity.equals("guest"))) {
                 memberService.registerGuest(guestDto);
+                mv.setViewName("redirect:/member/guestLogin-page");
             } else {
                 memberService.registerHost(hostDto);
+                mv.setViewName("redirect:/member/hostLogin-page");
             }
-            mv.setViewName("redirect:/member/login-page");
+
         } catch (Exception e) {
             mv.addObject("message", "회원가입 중 오류가 발생했습니다.");
             if ((identity.equals("guest"))) {
@@ -119,8 +121,20 @@ public class MemberController {
     }
 
     @GetMapping("/passwordUpdate")
-    public ModelAndView passwordUpdate() {
-        return new ModelAndView("member/passwordUpdate");
+    public ModelAndView passwordUpdate(@RequestParam("identify") String identify) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("identify", identify);
+        mv.setViewName("member/passwordUpdate");
+        return mv;
     }
 
+    @PostMapping("/passwordUpdate")
+    public ModelAndView passwordUpdate (@RequestParam("email") String email,
+                                        @RequestParam("password") String password,
+                                        @RequestParam("role") String role) {
+        ModelAndView mv = new ModelAndView();
+        if (role.equals("guest"))mv.setViewName("member/guestLogin");
+        else if (role.equals("host"))mv.setViewName("member/hostLogin");
+        return mv;
+    }
 }

@@ -89,7 +89,7 @@ function loginBtn() {
                                 <div class="col-12">
                                     <div class="text-end">
                                         <a href="${contextPath}/member/identify" class="text-decoration-none">회원가입</a>
-                                        <a href="${contextPath}/member/passwordUpdate"
+                                        <a href="${contextPath}/member/passwordUpdate?identify=guest"
                                            class="link-secondary text-decoration-none">비밀번호 찾기</a>
                                     </div>
                                 </div>

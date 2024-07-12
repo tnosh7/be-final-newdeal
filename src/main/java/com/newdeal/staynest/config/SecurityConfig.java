@@ -117,9 +117,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         //핵심 .. 눙물
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                        //여기서 경로 설정 안함
                         .requestMatchers("/**").permitAll()
+                        .requestMatchers("/host/**").permitAll()
                         .requestMatchers("/**").hasAnyRole("GUEST", "HOST", "ADMIN")
-                        .requestMatchers("/host/**").hasAnyRole("HOST", "ADMIN")
+                        .requestMatchers("/host/**").hasAnyRole("GUEST", "HOST", "ADMIN")
                         .requestMatchers("/admin/**").hasAnyRole("ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(loggingFilter, UsernamePasswordAuthenticationFilter.class)
