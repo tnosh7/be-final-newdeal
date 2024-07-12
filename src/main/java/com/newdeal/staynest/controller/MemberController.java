@@ -92,6 +92,9 @@ public class MemberController {
     public @ResponseBody String emailCheck(@RequestParam String email) {
         String emailCheckCode;
         emailCheckCode = memberService.sendEmailCheck(email);
+        System.out.println("---------------------------");
+        System.out.println("이메일 인증 코드: " + emailCheckCode);
+        System.out.println("---------------------------");
         return emailCheckCode;
     }
 
