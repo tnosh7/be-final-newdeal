@@ -87,7 +87,7 @@ public class HostController {
 
     //숙소 메인
     @GetMapping("/")
-    @Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
+    //@Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView hostMain() {
         return new ModelAndView("host/hostMain");
     }

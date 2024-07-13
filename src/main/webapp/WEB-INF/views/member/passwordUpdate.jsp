@@ -44,32 +44,40 @@
     function checkDuplicateEmail() {
         const email = document.getElementById("email").value;
         const emailCheckWarn = document.getElementById("emailCheckWarn");
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (email === "") {
-            emailCheckWarn.innerText="이메일을 정확히 입력해주세요."
+            emailCheckWarn.innerText = "이메일을 입력해주세요.";
             emailCheckWarn.style.color = "red";
-            return;
+            return false;
+        } else if (!emailPattern.test(email)) {
+            emailCheckWarn.innerText = "유효한 이메일 주소를 입력해주세요.";
+            emailCheckWarn.style.color = "red";
+            return false;
         }
-        const identify = "${identify}"
         $.ajax({
             url: '/member/duplicateEmail?identify=' + "${identify}",
             type: 'POST',
             data: {email: email},
             success: function (response) {
-                emailCheckNumber(email);
-                emailCheckWarn.innerText = "인증번호가 전송되었습니다.";
-                emailCheckWarn.style.color = "green";
-                $("#emailCheckNumber-input").show();
-            },
-            error: function (error) {
-                emailCheckWarn.innerText = "등록되지 않은 이메일입니다.";
-                emailCheckWarn.style.color = "red";
+                alert(response);
+                if (response === "이미 등록된 이메일입니다."){
+                    emailCheckWarn.innerText ="인증번호가 전송되었습니다."
+                    emailCheckWarn.style.color = "green";
+                    emailCheckNumber(email);
+                    $("#emailCheckNumber-input").show();
+                    return true;
+                }
+                else {
+                    emailCheckWarn.innerText = "유효한 이메일 주소를 입력해주세요.";
+                    emailCheckWarn.style.color = "red";
+                    return false;
+                }
             }
         });
     }
     function emailCheckNumber() {
         const email = document.getElementById("email").value;
         const emailCheckNumber = document.getElementById("emailCheckNumber");
-
             $("#emailCheckNumber-div").show();
             $.ajax({
                 url: '/member/emailCheck',
@@ -93,19 +101,17 @@
         } else {
             emailCheckYnWarn.innerText ="";
             $("#setPassword-div").show();
+            $("#password-btn-ysh").show();
+            $("#emailCheck-btn-ysh").hide();
+            $("#email").prop("readonly", true);
+            $("#emailCheckYn").prop("readonly", true);
             $("button[type='submit']").prop('disabled', false);
             return true;
         }
     }
-    function validateForm() {
-        const isPasswordValid = validatePassword();
-        const isEmailVerified = varifiedEmailNunber();
-        return isPasswordValid && isEmailVerified;
-    }
-
     $(document).ready(function() {
         $("form").on("submit", function(event) {
-            if (!validateForm()) {
+            if (!validatePassword()) {
                 event.preventDefault();
             }
         });
@@ -134,7 +140,7 @@
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control border-0 border-bottom rounded-0"
                                                name="email" id="email" placeholder="이메일" required
-                                               maxlength="30" onfocusout="checkDuplicateEmail();">
+                                               maxlength="30">
                                         <label for="email" class="email-label">이메일</label>
                                         <div id="emailCheckWarn" class="error-message"></div>
                                     </div>
@@ -146,6 +152,11 @@
                                         <label for="email" class="form-label-ysh" >이메일 인증번호</label>
                                         <input type="hidden" id=" emailCheckNumber" value="">
                                         <div id="emailCheckYnWarn" class="error-message-ysh"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="password-btn-ysh" id="emailCheck-btn-ysh">
+                                        <input type="button" value="인증번호 전송" onclick="checkDuplicateEmail();"></input>
                                     </div>
                                 </div>
                                 <div id="setPassword-div" style="display:none;">
@@ -170,8 +181,8 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="password-btn-ysh">
-                                    <input type="button" value="비밀번호 변경" onclick="submit()"></input>
+                                <div class="password-btn-ysh" id="password-btn-ysh" style="display:none;">
+                                    <input type="submit" value="비밀번호 변경" >
                                     <input type="hidden" name="identify" value="${identify}">
                                 </div>
                             </div>

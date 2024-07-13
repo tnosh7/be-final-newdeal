@@ -81,9 +81,6 @@ public class MemberController {
     @PostMapping("/duplicateEmail")
     public @ResponseBody String duplicateEmail(@RequestParam("email") String email,
                                                @RequestParam("identify") String identify) {
-        System.out.println("------------------");
-        System.out.println("identify : " + identify);
-        System.out.println("------------------");
         return (identify.equals("guest")) ?
                 memberService.checkDuplicateGuestEmail(email) : memberService.checkDuplicateHostEmail(email);
     }
@@ -131,5 +128,4 @@ public class MemberController {
         }
         return mv;
     }
-
 }

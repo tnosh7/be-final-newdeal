@@ -78,7 +78,7 @@ jwt:
 
 logging:
   level:
-    root: info
+    root: debug #info debug error
 
 
 

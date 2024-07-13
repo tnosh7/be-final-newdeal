@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -30,20 +29,15 @@ public class MemberServiceImpl implements MemberService {
         this.mailService = mailService;
     }
 
-// ADMIN_TOKEN
-    //private final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
-
     @Override
     public String checkDuplicateGuestEmail(String email) {
         Optional<Guest> member = Optional.ofNullable(guestRepository.findByEmail(email));
-
         return member.isPresent() ? "이미 등록된 이메일입니다." : "사용가능한 이메일입니다.";
     }
 
     @Override
     public String checkDuplicateHostEmail(String email) {
         Optional<Host> member = Optional.ofNullable(hostRepository.findByEmail(email));
-
         return member.isPresent() ? "이미 등록된 이메일입니다." : "사용가능한 이메일입니다.";
     }
 
@@ -59,10 +53,8 @@ public class MemberServiceImpl implements MemberService {
     }
     @Override
     public void registerHost(HostDto hostDto) {
-
         String encodedPassword = passwordEncoder.encode(hostDto.getPassword());
         hostDto.setPassword(encodedPassword);
-
         hostDto.setRole(UserRoleEnum.HOST);
         Host host = HostDto.toEntity(hostDto);
         hostRepository.save(host);
@@ -90,7 +82,6 @@ public class MemberServiceImpl implements MemberService {
     public void updateHostPassword(String email, String password) {
         password = encodePassword(password);
         hostRepository.updateHostPasswordByEmail(email, password);
-        
     }
 
     // 이메일 인증 번호 생성
@@ -98,20 +89,6 @@ public class MemberServiceImpl implements MemberService {
         String code = String.valueOf((int)((Math.random() * 900000) + 100000));
         return code;
     }
-
-//    @Override
-//    public void login( HttpServletResponse res) {
-//        String email = memberDto.getEmail();
-//        String password = memberDto.getPassword();
-//
-//        Member member = memberRepository.findByEmail(email).orElseThrow(
-//                () -> new IllegalArgumentException("등록된 사용자가 없습니다.")
-//        );
-//
-//        if (!passwordEncoder.matches(password, member.getPassword())) {
-//            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-//        }
-//    }
 
     public String encodePassword(String password) {
         return passwordEncoder.encode(password);
