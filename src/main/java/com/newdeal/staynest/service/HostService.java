@@ -20,14 +20,14 @@ public class HostService {
     }
 
     public Host getHostById(Long hostId) {
-        return hostRepository.findById(hostId).orElseThrow(() -> new ResourceNotFoundException("Host not fount with id" + hostId));
+        return hostRepository.findById(hostId).orElseThrow(() -> new ResourceNotFoundException("Host not found with id" + hostId));
     }
 
     @Transactional
     public HostResponse.UpdateHostDTO updateHostDTO(Long hostId, Host reqUpdateHost) {
 
         // repository 조회
-        Host host = hostRepository.findById(hostId).orElseThrow(() -> new ResourceNotFoundException("Host not fount with id" + hostId));
+        Host host = hostRepository.findById(hostId).orElseThrow(() -> new ResourceNotFoundException("Host not found with id" + hostId));
 
         // 데이터 가공 & DTO 업데이터
         checkNull(host, reqUpdateHost);

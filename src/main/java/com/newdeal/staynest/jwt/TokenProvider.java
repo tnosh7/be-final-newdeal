@@ -101,7 +101,7 @@ public class TokenProvider implements InitializingBean {
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
-        User principal = new User(claims.getSubject(), "", authorities);
+        User principal = new User(claims.get("sub", String.class), "", authorities);
         for (GrantedAuthority authority : authorities) {
             log.info("Authority: {}", authority.getAuthority());
         }

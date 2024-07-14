@@ -6,6 +6,9 @@
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
+<%@ page import="java.net.HttpURLConnection" %>
+<%@ page import="java.io.InputStreamReader" %>
+<%@ page import="java.io.BufferedReader" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
@@ -18,7 +21,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/style.css">
     <link rel="stylesheet" href="${contextPath}/css/member.css">
 </head>
@@ -164,6 +166,19 @@
         }
     }
 </script>
+<script type="text/javascript">
+    var naver_id_login = new naver_id_login("2_jqBMEoBm3D7oNJBMHy", "http://localhost:8090/login/oauth2/code/naver");
+    // 접근 토큰 값 출력
+    alert(naver_id_login.oauthParams.access_token);
+    // 네이버 사용자 프로필 조회
+    naver_id_login.get_naver_userprofile("naverSignInCallback()");
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    function naverSignInCallback() {
+        alert(naver_id_login.getProfileData('email'));
+        alert(naver_id_login.getProfileData('nickname'));
+        alert(naver_id_login.getProfileData('age'));
+    }
+</script>
 <body>
 <!-- 회원가입 -->
 <section class="py-3 py-md-5 py-xl-8">
@@ -179,7 +194,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8">
-                <div class="row gy-5 justify-content-center">
+            <div class="row gy-5 justify-content-center">
                     <div class="col-12 col-lg-5">
                         <!--폼 시작-->
                         <form action="${contextPath}/member/register?identify=guest" method="post">
@@ -422,19 +437,10 @@
                                      class="kakao-register-symbol">
                                 카카오로 시작하기
                             </button>
-                            <button class="naver-register-btn" id="naver_id_login"
+                            <button class="naver-register-btn"
                                     onclick="location.href='${contextPath}/oauth2/authorization/naver'">
                                 <img src="${contextPath}/images/naver-btn.png" width="45px" height="40px" alt="네이버 심볼"
                                      class="naver-register-symbol">
-                                <script type="text/javascript">
-                                    var naver_id_login = new naver_id_login("2_jqBMEoBm3D7oNJBMHy", "http://localhost:8090/login/oauth2/code/naver");
-                                    var state = naver_id_login.getUniqState();
-                                    naver_id_login.setButton("white", 2,40);
-                                    naver_id_login.setDomain("YOUR_SERVICE_URL");
-                                    naver_id_login.setState(state);
-                                    naver_id_login.setPopup();
-                                    naver_id_login.init_naver_id_login();
-                                </script>
                                 네이버로 시작하기
                             </button>
                         </div>

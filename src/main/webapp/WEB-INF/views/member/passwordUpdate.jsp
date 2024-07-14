@@ -118,7 +118,7 @@
     });
 </script>
 <body>
-<!-- Login -->
+<!-- LoginController -->
 <section class="py-3 py-md-5 py-xl-8">
     <div class="container-ysh">
         <div class="row">

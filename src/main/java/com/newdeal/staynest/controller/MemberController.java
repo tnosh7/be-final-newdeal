@@ -128,4 +128,10 @@ public class MemberController {
         }
         return mv;
     }
+
+    // OAuth2 회원가입 페이지
+    @GetMapping("/oAuth2Register")
+    public ModelAndView oAuth2Register() {
+        return new ModelAndView("member/oAuth2Register");
+    }
 }

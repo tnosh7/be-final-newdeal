@@ -36,19 +36,23 @@ function loginBtn() {
         success: function(data, status, xhr) {
             // 응답 헤더에서 JWT 토큰 읽기
             const token = xhr.getResponseHeader("Authorization");
+            const role = "ROLE_HOST";
+            console.log('role:', role);
             if (token) {
+                sessionStorage.setItem("role", role);
                 sessionStorage.setItem("token", token);
             }
             location.href="${contextPath}/hosts/"
         },
         error: function(error) {
+            alert("아이디와 비밀번호를 확인해주세요.");
             console.error('로그인 실패:', error);
         }
     });
 }
 </script>
 <body>
-<!-- Login -->
+<!-- LoginController -->
 <section class="py-3 py-md-5 py-xl-8">
     <div class="container">
         <div class="row">

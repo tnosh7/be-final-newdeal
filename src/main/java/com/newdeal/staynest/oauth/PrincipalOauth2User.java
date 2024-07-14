@@ -1,3 +1,13 @@
+package com.newdeal.staynest.oauth;
+
+import com.newdeal.staynest.entity.UserRoleEnum;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+
+import java.util.Collection;
+import java.util.Map;
+
 //package com.newdeal.staynest.oauth;
 //
 //import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -22,3 +32,27 @@
 //        return super.loadUser(userRequest);
 //    }
 //}
+/*
+성명, 이메일, 핸드폰번호
+
+ */
+@Slf4j(topic = "Oauth2User 정보 전달")
+public class PrincipalOauth2User extends DefaultOAuth2User {
+
+    private String role;
+
+    /**
+     *
+     * @param authorities
+     * @param attributes
+     * @param nameAttributeKey
+     *
+     */
+    public PrincipalOauth2User(Collection<? extends GrantedAuthority> authorities,
+                               Map<String, Object> attributes,
+                               String nameAttributeKey){
+        super(authorities, attributes, nameAttributeKey);
+        
+
+    }
+}

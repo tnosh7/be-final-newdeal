@@ -20,11 +20,13 @@
 <script>
     $().ready(function(){
         const token = sessionStorage.getItem("token");
+        const role = sessionStorage.getItem("role");
         const registerLink = document.getElementById("registerLink");
         const loginLink = document.getElementById("loginLink");
         const menuText = document.getElementById("menuText");
         if (token) {
             console.log(token);
+            console.log(role);
             const currentUrl = window.location.href;
             const changeRole = document.getElementById("changeRole");
             registerLink.innerText = "내 정보";

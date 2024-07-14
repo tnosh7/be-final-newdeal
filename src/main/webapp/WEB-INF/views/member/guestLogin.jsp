@@ -36,19 +36,35 @@ function loginBtn() {
         success: function(data, status, xhr) {
             // 응답 헤더에서 JWT 토큰 읽기
             const token = xhr.getResponseHeader("Authorization");
+            const role = "ROLE_GUEST";
             if (token) {
+                sessionStorage.setItem("role", role);
                 sessionStorage.setItem("token", token);
             }
             location.href="${contextPath}/"
         },
         error: function(error) {
+            alert("아이디와 비밀번호를 확인해주세요.");
             console.error('로그인 실패:', error);
         }
     });
 }
 </script>
+<script type="text/javascript">
+    var naver_id_login = new naver_id_login("2_jqBMEoBm3D7oNJBMHy", "http://localhost:8090/login/oauth2/code/naver");
+    // 접근 토큰 값 출력
+    alert(naver_id_login.oauthParams.access_token);
+    // 네이버 사용자 프로필 조회
+    naver_id_login.get_naver_userprofile("naverSignInCallback()");
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    function naverSignInCallback() {
+        alert(naver_id_login.getProfileData('email'));
+        alert(naver_id_login.getProfileData('nickname'));
+        alert(naver_id_login.getProfileData('age'));
+    }
+</script>
 <body>
-<!-- Login -->
+<!-- LoginController -->
 <section class="py-3 py-md-5 py-xl-8">
     <div class="container">
         <div class="row">
