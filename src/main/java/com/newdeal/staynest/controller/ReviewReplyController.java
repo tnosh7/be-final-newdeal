@@ -6,11 +6,14 @@ import com.newdeal.staynest.entity.Reservation;
 import com.newdeal.staynest.entity.accommodation.Accommodation;
 import com.newdeal.staynest.service.ReviewReplyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
@@ -44,18 +47,30 @@ public class ReviewReplyController {
     }
 
 
+//    @PostMapping("/insertReview/{reservationId}/{accomId}")
+//    public ModelAndView insertReview(
+//            @RequestBody ReviewRequest reviewRequest,
+//            @PathVariable Long reservationId,
+//            @PathVariable Long accomId
+//    ) {
+//        reviewReplyService.ReviewSave(reviewRequest, reservationId, accomId);
+//
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName("review/fullReview/" + accomId);
+//        mav.addObject("accomId", accomId);
+//        return mav;
+//    }
     @PostMapping("/insertReview/{reservationId}/{accomId}")
-    public ModelAndView insertReview(
+    public ResponseEntity<Map<String, String>> insertReview(
             @RequestBody ReviewRequest reviewRequest,
             @PathVariable Long reservationId,
             @PathVariable Long accomId
     ) {
         reviewReplyService.ReviewSave(reviewRequest, reservationId, accomId);
 
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("review/fullReview/" + accomId);
-        mav.addObject("accomId", accomId);
-        return mav;
+        Map<String, String> response = new HashMap<>();
+        response.put("redirectUrl", "/review/fullReview/" + accomId);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/fullReview/{accommId}")

@@ -135,8 +135,6 @@
                                     <div class="review-image-cyj">
                                         <c:forEach var="image" items="${response.images}">
                                             <img src="${image.url}" alt="Review Image"/>
-                                            <%--                                        <img src="https://tourimage.interpark.com/BBS/Tour/FckUpload/202009/6373473199034434680.jpg"--%>
-                                            <%--                                             alt="Review Image 1">--%>
                                         </c:forEach>
                                     </div>
                                     <div class="review-content-cyj">

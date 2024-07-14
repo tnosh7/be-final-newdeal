@@ -83,29 +83,48 @@ function initStars() {
     }
 }
 
-const photoUpload = document.getElementById('photoUpload');
-const selectedFileName = document.getElementById('selectedFileName');
+function getPathVariables() {
+    const path = window.location.pathname;
+    const pathSegments = path.split('/');
+    const reservationId = pathSegments[pathSegments.length - 2];
+    const accomId = pathSegments[pathSegments.length - 1];
+    return { accomId, reservationId };
+}
 
-photoUpload.addEventListener('change', function() {
-    const file = this.files[0];
+const { accomId, reservationId } = getPathVariables();
 
-    if (file) {
-        selectedFileName.textContent = `선택된 파일: ${file.name}`;
-        // 여기서 파일을 서버에 업로드하거나 다른 작업을 수행할 수 있습니다.
-    } else {
-        selectedFileName.textContent = '사진을 첨부해주세요. (최대 1장)';
-    }
-});
+function submitReview() {
+    const token = 'YOUR_TOKEN_HERE'; // 실제 토큰 값으로 대체해야 합니다.
 
+    fetch(`${contextPath}/review/insertReview/${reservationId}/${accomId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            star: parseInt(getSelectedRating()),
+            content: document.querySelector('.review-textarea-cyj').value,
+            imgUrl: getSelectedImages()
+        })
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }).then(data => {
+        window.location.href = `${contextPath}/review/fullReview/${accomId}`;
+    }).catch(error => {
+        console.error('Error:', error);
+    });
+}
 
-// 리뷰 쓰기 버튼 클릭 이벤트 핸들러
-document.querySelector('.submit-button-cyj').addEventListener('click', function (event) {
-        // 여기 서버로 보내는 로직 짜고 전체 페이지로 이동
-        window.location.href = './fullReview?type=insert'; // 실제 리뷰 쓰기 페이지 URL로 변경
-});
+function getSelectedRating() {
+    const selectedRating = document.querySelector('.rating-cyj input[type="radio"]:checked');
+    return selectedRating ? selectedRating.value : null;
+}
 
-// 리뷰 삭제 버튼 클릭 이벤트 핸들러
-document.querySelector('.delete-button-cyj').addEventListener('click', function (event) {
-    // 여기 서버로 보내는 로직 짜고 전체 페이지로 이동
-    window.location.href = './fullReview?type=delete'; // 실제 리뷰 쓰기 페이지 URL로 변경
-});
+function getSelectedImages() {
+    const imageUrl = document.getElementById('photoUrl').value;
+    return imageUrl ? [imageUrl] : [];
+}

@@ -43,6 +43,7 @@ public class ReviewReplyService {
                 .images(reviewImgs)
                 .createdAt(LocalDateTime.now())
                 .reservation(Reservation.builder().reservationId(reservationId).build())
+                .accommodation(Accommodation.builder().id(accomId).build())
                 .build();
 
         reviewRepository.save(review);
