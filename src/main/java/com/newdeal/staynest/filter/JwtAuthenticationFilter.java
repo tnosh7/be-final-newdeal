@@ -43,6 +43,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         //세션에 토큰 값 저장(여기서 보냄 - 인가 체크 때문);
         HttpSession session = request.getSession();
         session.setAttribute(TokenProvider.AUTHORIZATION_HEADER, "Bearer " + token);
+        session.setAttribute("role", authResult.getAuthorities().iterator().next().getAuthority());
 
     }
 

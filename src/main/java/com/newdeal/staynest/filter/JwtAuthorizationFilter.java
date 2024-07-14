@@ -10,17 +10,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Slf4j(topic = "JWT 검증 및 인가")
@@ -57,9 +53,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     return;
                 }
                 Claims info = tokenProvider.getUserInfoFromToken(token);
-                System.out.println("-------------------");
-                System.out.println(info.get("sub", String.class));
-                System.out.println(info.get("auth", String.class));
                 try {
                     // email, role 담음
                     setAuthentication(info.get("sub", String.class), info.get("auth", String.class));
@@ -78,10 +71,9 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     public void setAuthentication(String email, String memberRole) {
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         Authentication authentication = createAuthentication(email, memberRole);
-        log.info("Set Authentication: {}", authentication);
+        log.info("Authentication  인가 설정 : {}", authentication);
         context.setAuthentication(authentication);
-        log.info("email: {}", email);
-
+        log.info("이메일 : {}", email);
         SecurityContextHolder.setContext(context);
     }
 
@@ -92,8 +84,9 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     // 인증 객체 생성
     private Authentication createAuthentication(String email, String memberRole) {
         log.info("createAuthentication 인증 객체 생성");
-        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(memberRole));
-        return new UsernamePasswordAuthenticationToken(email, null, authorities);
+        UserDetails userDetails = principalDetailsService.loadUserByUsername(email);
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
+
 }
 
