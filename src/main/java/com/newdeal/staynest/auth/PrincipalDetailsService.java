@@ -53,4 +53,5 @@ public class PrincipalDetailsService implements UserDetailsService {
     public String memberRole() {
         return request.getParameter("role");
     }
+
 }

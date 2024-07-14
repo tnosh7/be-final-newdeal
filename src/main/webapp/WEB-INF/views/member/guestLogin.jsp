@@ -19,7 +19,7 @@
 <script>
 
 $(document).ready(function() {
-    Cookies.remove('JwtAuthorizationFilter', {path: '/'});
+    sessionStorage.removeItem("token");
 });
 
 function loginBtn() {
@@ -35,8 +35,10 @@ function loginBtn() {
         },
         success: function(data, status, xhr) {
             // 응답 헤더에서 JWT 토큰 읽기
-            const token = xhr.getResponseHeader('Authorization').split(' ')[1];
-            sessionStorage.setItem("token", token);
+            const token = xhr.getResponseHeader("Authorization");
+            if (token) {
+                sessionStorage.setItem("token", token);
+            }
             location.href="${contextPath}/"
         },
         error: function(error) {

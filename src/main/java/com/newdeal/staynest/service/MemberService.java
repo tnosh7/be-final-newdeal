@@ -9,6 +9,7 @@ public interface MemberService {
     public void registerGuest(GuestRequest guestDto);
     public void registerHost(HostDto hostDto);
     public String sendEmailCheck(String email);
-
+    public void updateGuestPassword(String email, String password);
+    public void updateHostPassword(String email, String password);
     //public void login(MemberDto memberDto,  HttpServletResponse res);
 }

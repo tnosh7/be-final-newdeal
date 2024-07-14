@@ -14,5 +14,4 @@ public class SearchRequestDTO {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private int maxGuests;
-
 }

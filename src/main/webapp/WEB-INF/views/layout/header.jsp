@@ -8,7 +8,7 @@
     <title>header</title>
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="/js/script.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -17,6 +17,40 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 </head>
+<script>
+    $().ready(function(){
+        const token = sessionStorage.getItem("token");
+        const registerLink = document.getElementById("registerLink");
+        const loginLink = document.getElementById("loginLink");
+        const menuText = document.getElementById("menuText");
+        if (token) {
+            console.log(token);
+            const currentUrl = window.location.href;
+            const changeRole = document.getElementById("changeRole");
+            registerLink.innerText = "내 정보";
+            loginLink.innerText = "로그아웃";
+            menuText.innerText = "내 정보 / 로그아웃"
+            if (currentUrl.includes("localhost:8090/hosts/")) {
+                changeRole.innerText = "게스트 모드로 전환";
+                changeRole.href="${contextPath}/member/guestLogin-page";
+                registerLink.href = "${contextPath}/hosts";
+            }
+            else {
+                changeRole.innerText = "호스트 모드로 전환";
+                registerLink.href = "${contextPath}/guests";
+            }
+        } else {
+            console.log("토큰 없음");
+        }
+    });
+    function checkToken() {
+        const loginLink = document.getElementById("loginLink").innerText;
+        if (loginLink.equals("로그아웃")) {
+            sessionStorage.removeItem("token");
+            location.href = "${contextPath}/member/logout";
+        }
+    }
+</script>
 <body>
 <div class="outer-container">
     <div class="left-aligned">
@@ -76,16 +110,16 @@
             <a href="#" class="view-all-cyj">전체보기</a> <!-- (알림) 전체보기 버튼 스타일 추가 -->
         </div>
     </div>
-    <div class="host right-aligned"> <a href="${contextPath}/hosts/">호스트 모드로 전환 </a></div>
+    <div class="host right-aligned"> <a href="${contextPath}/member/hostLogin-page" id="changeRole">호스트 모드로 전환 </a></div>
     <div class="right-aligned">
         <div class="dropdown">
             <button class="dropbtn">
                 <span class="material-symbols-outlined">menu</span>
-                &nbsp;&nbsp;회원가입 / 로그인
+                &nbsp;&nbsp;<span id="menuText">회원가입 / 로그인</span>
             </button>
             <div class="dropdown-content"> <!-- (알림) 드롭다운 메뉴를 오른쪽 정렬 -->
-                <a href="${contextPath}/member/identify" >회원가입</a>
-                <a href="${contextPath}/member/guestLogin-page">로그인</a>
+                <a href="${contextPath}/member/identify" id="registerLink">회원가입</a>
+                <a href="${contextPath}/member/guestLogin-page" id="loginLink" onclick="checkToken()">로그인</a>
             </div>
         </div>
     </div>

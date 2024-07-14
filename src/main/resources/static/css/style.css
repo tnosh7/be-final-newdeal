@@ -764,3 +764,10 @@ footer .social-icons a:hover {
 .dropdown-content-khs a:hover {
     background-color: #d3d3d3; /* hover 효과 */
 }
+
+.xBtn-khs {
+    background-color: white;
+    border: none;
+    font-weight: bolder;
+    color: #0D31B2;
+}
