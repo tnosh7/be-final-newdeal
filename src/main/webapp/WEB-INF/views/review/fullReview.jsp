@@ -85,7 +85,7 @@
                         </button>
                         <button class="tab-button-cyj" data-tab="oldest" onclick="toggleActive(this)">오래된순</button>
                         <span class="btn-review-insert-box-cyj">
-                            <a href="#" class="btn-review-insert-cyj">리뷰쓰기</a>
+                            <a href="#" class="btn-review-insert-cyj">리뷰작성(수정, 삭제)</a>
                         </span>
                     </div>
                     <!-- 리뷰 모달 구조 -->
@@ -135,7 +135,7 @@
                                         <span class="review-date-cyj">&nbsp;${fn:substring(response.createdAt, 0, 10)}</span>
                                         <br>
                                         <span class="btn-review-edit-delete-box-cyj">
-                                        <a href="#" class="btn-review-edit-delete-cyj">수정/삭제</a>
+<%--                                        <a href="#" class="btn-review-edit-delete-cyj">수정/삭제</a>--%>
                                     </span>
                                     </div>
                                 </div>

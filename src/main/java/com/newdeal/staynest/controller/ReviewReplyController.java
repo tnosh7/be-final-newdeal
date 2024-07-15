@@ -5,6 +5,7 @@ import com.newdeal.staynest.dto.review.ReviewRequest;
 import com.newdeal.staynest.dto.review.ReviewResponse;
 import com.newdeal.staynest.entity.Reservation;
 import com.newdeal.staynest.entity.Review;
+import com.newdeal.staynest.entity.ReviewImg;
 import com.newdeal.staynest.entity.accommodation.Accommodation;
 import com.newdeal.staynest.repository.ReviewRepository;
 import com.newdeal.staynest.service.ReviewReplyService;
@@ -39,11 +40,13 @@ public class ReviewReplyController {
 //        }
         Reservation reservation = reviewReplyService.getReservationByReservation(reservationId);
         Review review = reviewReplyService.findByReservationId(reservationId);
+        ReviewImg reviewImg = reviewReplyService.findByReviewId(review.getReviewId());
         Accommodation accom = reviewReplyService.getAccomodationByAccomodation(accomId);
         ModelAndView mav = new ModelAndView("review/insertReview");
         mav.addObject("reservation", reservation);
         mav.addObject("accom", accom);
         mav.addObject("review", review);
+        mav.addObject("reviewImg", reviewImg);
         return mav;
     }
 
@@ -53,17 +56,32 @@ public class ReviewReplyController {
     }
 
     @PostMapping("/insertReview/{reservationId}/{accomId}")
-    public ResponseEntity<Map<String, String>> insertReview(
+    public ResponseEntity<Map<String, String>> ReviewSaveOrUpdate(
             @RequestBody ReviewRequest reviewRequest,
             @PathVariable Long reservationId,
             @PathVariable Long accomId
     ) {
-        reviewReplyService.ReviewSave(reviewRequest, reservationId, accomId);
+        reviewReplyService.ReviewSaveOrUpdate(reviewRequest, reservationId, accomId);
 
         Map<String, String> response = new HashMap<>();
         response.put("redirectUrl", "/review/fullReview/" + accomId);
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping("/deleteReview/{reservationId}/{accomId}")
+    public ResponseEntity<Map<String, String>> deleteReview(
+            @PathVariable Long reservationId,
+            @PathVariable Long accomId
+    ) {
+        // 리뷰 삭제를 처리하는 서비스 메서드를 호출합니다.
+        reviewReplyService.deleteReview(reservationId);
+
+        // 응답으로 리디렉션 URL을 제공합니다.
+        Map<String, String> response = new HashMap<>();
+        response.put("redirectUrl", "/review/fullReview/" + accomId);
+        return ResponseEntity.ok(response);
+    }
+
 
     @GetMapping("/fullReview/{accommId}")
     public ModelAndView fullReview(@PathVariable Long accommId) {

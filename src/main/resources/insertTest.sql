@@ -1,8 +1,8 @@
 -- 데이터 삽입 전에 테이블을 비웁니다.
+DELETE FROM review_img where 1;
+
 DELETE
-FROM review_img;
-DELETE
-FROM review;
+FROM review where 1;
 DELETE
 FROM reservation;
 DELETE
@@ -62,15 +62,17 @@ VALUES (1, 1, '2024-07-20', '2024-07-25', 2, NOW(), 'Message 1'),
 -- Review 데이터 삽입 (예제에서는 accommodation과 reservation 테이블의 존재를 가정하고 있음)
 INSERT INTO review (reservation_id, star, content, created_at, accomm_id)
 VALUES (1, 5, 'Excellent stay!', NOW(), 1),
-       (2, 4, 'Very good experience', NOW(), 2),
-       (3, 3, 'Average service', NOW(), 3),
-       (4, 2, 'Not as expected', NOW(), 4),
-       (5, 1, 'Terrible stay!', NOW(), 5);
+       (2, 4, 'Very good experience', NOW(), 1),
+       (3, 3, 'Average service', NOW(), 1),
+       (4, 2, 'Not as expected', NOW(), 1),
+       (5, 1, 'Terrible stay!', NOW(), 1);
 
 -- ReviewImg 데이터 삽입 (예제에서는 review 테이블의 존재를 가정하고 있음)
 INSERT INTO review_img (review_id, img_url, created_at)
 VALUES (1, 'https://cdn.3hoursahead.com/v2/content/image-comp/f3c4505d-6bbe-481a-9b8a-be713e8b196f.webp', NOW()),
-       (2, 'https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/wlQ/image/sDpK8gWt1h_7iJrDw9wTBWcixtU.jpg', NOW()),
+       (2,
+        'https://img1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/wlQ/image/sDpK8gWt1h_7iJrDw9wTBWcixtU.jpg',
+        NOW()),
        (3, 'https://tourimage.interpark.com/BBS/Tour/FckUpload/202009/6373473511746848033.jpg', NOW()),
        (4, 'https://tourimage.interpark.com/BBS/Tour/FckUpload/202009/6373473199034434680.jpg', NOW()),
        (5, 'https://cdn.3hoursahead.com/v2/content/image-comp/0e12e7c9-3ced-403e-a5cb-de281e1e7902.webp', NOW());
