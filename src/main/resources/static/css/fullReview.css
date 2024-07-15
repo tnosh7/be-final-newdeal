@@ -214,8 +214,8 @@ body {
 
 /* 답글 버튼 스타일 */
 .btn-reply-cyj {
-    height: 4%;
-    width: 12%;
+    height: 40px;
+    width: 140px;
     background-color: rgba(165, 152, 255, 0.8); /* 초록색 배경 */
     border: none; /* 테두리 없음 */
     color: white; /* 흰색 글자 */
@@ -282,6 +282,16 @@ body {
 
 /* 제출 버튼 스타일 */
 .btn-submit-re-cyj {
+    background-color: rgba(165, 152, 255, 0.8); /* 초록색 배경 */
+    color: white; /* 흰색 글자 */
+    padding: 10px 20px; /* 패딩 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 둥근 테두리 */
+    cursor: pointer; /* 마우스 커서 포인터 */
+    margin-top: 10px; /* 상단 마진 */
+}
+/* 삭제 버튼 스타일 */
+.btn-delete-re-cyj {
     background-color: rgba(165, 152, 255, 0.8); /* 초록색 배경 */
     color: white; /* 흰색 글자 */
     padding: 10px 20px; /* 패딩 */

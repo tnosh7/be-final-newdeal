@@ -1,3 +1,4 @@
+
 const rateWrap = document.querySelectorAll('.rating-cyj'),
     label = document.querySelectorAll('.rating-cyj .rating__label-cyj'),
     input = document.querySelectorAll('.rating-cyj .rating__input-cyj'),
