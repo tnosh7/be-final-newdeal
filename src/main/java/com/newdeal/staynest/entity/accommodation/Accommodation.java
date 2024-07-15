@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -59,7 +60,8 @@ public class Accommodation {
 
     @JsonIgnore
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AccommodationImg> images;
+    private List<AccommodationImg> images = new ArrayList<>();
+
 
     @Column(name = "rating", nullable = false, columnDefinition = "double default 0.0")
     private double rating = 0.0;
@@ -73,9 +75,16 @@ public class Accommodation {
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
+    private Double avg;
+
     private double latitude;
     private double longitude;
 
-
+    public void setImages(List<AccommodationImg> images) {
+        this.images.clear();
+        if (images != null) {
+            this.images.addAll(images);
+        }
+    }
 
 }

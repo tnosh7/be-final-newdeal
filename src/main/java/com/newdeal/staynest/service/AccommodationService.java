@@ -9,6 +9,7 @@ import com.newdeal.staynest.repository.AccommodationImgRepository;
 import com.newdeal.staynest.repository.AccommodationRepository;
 import com.newdeal.staynest.exception.ResourceNotFoundException;
 import com.newdeal.staynest.repository.HostRepository;
+import com.newdeal.staynest.repository.ReviewRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -17,6 +18,7 @@ import jakarta.persistence.PersistenceContext;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,6 +33,7 @@ public class AccommodationService {
     private final AccommodationRepository accommodationRepository;
     private final HostRepository hostRepository;
     private final AccommodationImgRepository accommodationImgRepository;
+    private final ReviewRepository reviewRepository;
 
     //<숙소 정보 변경(호스트만)>
 //    public Accommodation updateAccomm(Long id, AccommodationDto accommDto) {
@@ -76,6 +79,7 @@ public class AccommodationService {
 
 
     // <숙소 등록>
+    @Transactional
     public Accommodation registerAccomm(AccommodationDto accommDto) {
         // 호스트 조회
         Host host = hostRepository.findById(accommDto.getHostId())
@@ -125,11 +129,25 @@ public class AccommodationService {
     }
 
     //----------------------<아래부터는 호스트만 가능해야되는 부분>---------------------------
-    //<숙소 등록 수정>
+    //<숙소 정보 수정>
+    @Transactional
     public Accommodation updateAccomm(Long id, AccommodationDto accommDto) {
         Accommodation existingAccomm = accommodationRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Accommodation not found"));
 
+        // 기존 이미지 삭제
+        accommodationImgRepository.deleteByAccommodation(existingAccomm);
+
+        // 새로운 이미지 추가
+        List<AccommodationImg> images = accommDto.getImgUrls().stream()
+                .map(url -> AccommodationImg.builder()
+                        .accommodation(existingAccomm)
+                        .imgUrl(url)
+                        .createdAt(LocalDateTime.now())
+                        .build())
+                .collect(Collectors.toList());
+
+        // Accommodation 엔티티 업데이트
         existingAccomm.setName(accommDto.getName());
         existingAccomm.setCategory(accommDto.getCategory());
         existingAccomm.setRoomCategory(accommDto.getRoomCategory());
@@ -142,23 +160,12 @@ public class AccommodationService {
         existingAccomm.setContent(accommDto.getContent());
         existingAccomm.setLatitude(accommDto.getLatitude());
         existingAccomm.setLongitude(accommDto.getLongitude());
-
-        // 기존 이미지 삭제??? 삭제하고 넣어야되나? 5개로 제한있으니깐?
-        accommodationImgRepository.deleteByAccommodation(existingAccomm);
-
-        // 새로운 이미지 추가
-        List<AccommodationImg> images = accommDto.getImgUrls().stream()
-                .map(url -> AccommodationImg.builder()
-                        .accommodation(existingAccomm)
-                        .imgUrl(url)
-                        .createdAt(LocalDateTime.now())
-                        .build())
-                .collect(Collectors.toList());
-
-        accommodationImgRepository.saveAll(images);
+        existingAccomm.setImages(images);  // 이미지 설정
 
         return accommodationRepository.save(existingAccomm);
     }
+
+
 
 
 
