@@ -19,7 +19,7 @@
 <script>
 
 $(document).ready(function() {
-    Cookies.remove('JwtAuthorizationFilter', {path: '/'});
+    sessionStorage.removeItem("token");
 });
 
 function loginBtn() {
@@ -35,18 +35,24 @@ function loginBtn() {
         },
         success: function(data, status, xhr) {
             // 응답 헤더에서 JWT 토큰 읽기
-            const token = xhr.getResponseHeader('Authorization').split(' ')[1];
-            sessionStorage.setItem("token", token);
-            location.href="${contextPath}/host/"
+            const token = xhr.getResponseHeader("Authorization");
+            const role = "ROLE_HOST";
+            console.log('role:', role);
+            if (token) {
+                sessionStorage.setItem("role", role);
+                sessionStorage.setItem("token", token);
+            }
+            location.href="${contextPath}/hosts/"
         },
         error: function(error) {
+            alert("아이디와 비밀번호를 확인해주세요.");
             console.error('로그인 실패:', error);
         }
     });
 }
 </script>
 <body>
-<!-- Login -->
+<!-- LoginController -->
 <section class="py-3 py-md-5 py-xl-8">
     <div class="container">
         <div class="row">
@@ -89,7 +95,7 @@ function loginBtn() {
                                 <div class="col-12">
                                     <div class="text-end">
                                         <a href="${contextPath}/member/identify" class="text-decoration-none">회원가입</a>
-                                        <a href="${contextPath}/member/passwordUpdate"
+                                        <a href="${contextPath}/member/passwordUpdate?identify=host"
                                            class="link-secondary text-decoration-none">비밀번호 찾기</a>
                                     </div>
                                 </div>

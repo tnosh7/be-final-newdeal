@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Builder
@@ -26,6 +27,7 @@ public class ReviewReplyService {
     private final ReviewRepository reviewRepository;
     private final AccommodationRepository accommodationRepository;
     private final ReservationRepository reservationRepository;
+//    private final Reser
 
     @Transactional
     public void ReviewSave(ReviewRequest reviewRequest, Long reservationId, Long accomId) {
@@ -40,22 +42,28 @@ public class ReviewReplyService {
                 .star(reviewRequest.star())
                 .images(reviewImgs)
                 .createdAt(LocalDateTime.now())
-                .accommodation(Accommodation.builder().id(accomId).build())
                 .reservation(Reservation.builder().reservationId(reservationId).build())
+                .accommodation(Accommodation.builder().id(accomId).build())
                 .build();
 
         reviewRepository.save(review);
     }
 
+
     @Transactional(readOnly = true)
     public List<ReviewResponse> getReviewsByAccommodationId(Long accommId) {
-        // 숙소 ID를 기준으로 해당 숙소에 속하는 모든 예약의 ID 조회
-        List<Long> reservationIds = reservationRepository.findReservationIdsByAccommId(accommId);
-        System.out.println(reservationIds);
-        // 조회된 예약 ID들을 기준으로 해당 예약들에 속하는 모든 리뷰 조회
-        List<Review> reviews = reviewRepository.findAllByReservation_ReservationIdIn(reservationIds);
-
-        // Review 엔티티를 ReviewResponse DTO로 변환하여 반환
+        List<Review> reviews = reviewRepository.getReviewsByAccommodationId(accommId);
         return ReviewResponse.fromEntity(reviews);
     }
+
+    @Transactional(readOnly = true)
+    public Reservation getReservationByReservation(Long reservationId) {
+        Optional<Reservation> optionalReservation = reservationRepository.findById(reservationId);
+        return optionalReservation.orElse(null); // orElse(null)은 reservationId에 해당하는 Reservation이 없을 때 null을 반환합니다.
+    }
+
+    public Accommodation getAccomodationByAccomodation(Long accomId) {
+        return accommodationRepository.findById(accomId).orElse(null);
+    }
+
 }

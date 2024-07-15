@@ -42,7 +42,7 @@ public class Guest {
     @Column(name = "expire_dt",nullable = false)
     private LocalDateTime expireDt;
 
-    @Column(nullable = false)
+    @Column
     private String address;
 
     @Column

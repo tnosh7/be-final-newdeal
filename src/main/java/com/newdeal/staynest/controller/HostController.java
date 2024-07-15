@@ -3,8 +3,9 @@ package com.newdeal.staynest.controller;
 import com.newdeal.staynest.dto.host.HostResponse;
 import com.newdeal.staynest.entity.Host;
 import com.newdeal.staynest.entity.UserRoleEnum;
+
+import com.newdeal.staynest.jwt.TokenProvider;
 import com.newdeal.staynest.service.HostService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +16,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class HostController {
 
     private final HostService hostService;
+    private final TokenProvider tokenProvider;
 
     @Autowired
-    public HostController(HostService hostService) {
+    public HostController(HostService hostService, TokenProvider tokenProvider) {
         this.hostService = hostService;
+        this.tokenProvider = tokenProvider;
     }
 
     // 호스트 회원 정보보기
     @GetMapping
+    @Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView hostView() {
-
         ModelAndView modelAndView = new ModelAndView("host/hostAccom");
 
         // login한 유저 값으로 바꿔야 함
@@ -36,6 +39,7 @@ public class HostController {
 
     // 회원 정보 수정
     @PatchMapping("/{hostId}")
+    @Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView updateHost(@PathVariable Long hostId, @RequestBody Host reqUpdateHost) {
 
         HostResponse.UpdateHostDTO host = hostService.updateHostDTO(hostId, reqUpdateHost);
@@ -47,6 +51,7 @@ public class HostController {
 
     // 회원 정보 삭제
     @DeleteMapping("/{hostId}")
+    @Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView deleteHost(@PathVariable Long hostId) {
 
         hostService.deleteHost(hostId);
@@ -56,30 +61,35 @@ public class HostController {
 
     // 숙소 등록 페이지
     @GetMapping("/accommodations")
+    @Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView hostAccom() {
         return new ModelAndView("host/hostAccom");
     }
 
     // 예약 내역 정보
     @GetMapping("/reservations")
+    @Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView hostReservation() {
         return new ModelAndView("host/hostReservation");
     }
 
     // 호스트 숙소 등록
     @GetMapping("/accomEnroll")
+    @Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView accomEnroll() {
         return new ModelAndView("host/accomEnroll");
     }
 
     // 호스트 숙소 수정
     @GetMapping("/accomUpdate")
+    @Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView accomUpdate() {
         return new ModelAndView("host/accomUpdate");
     }
 
     //숙소 메인
     @GetMapping("/")
+    //@Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView hostMain() {
         return new ModelAndView("host/hostMain");
     }

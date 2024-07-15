@@ -3,9 +3,11 @@ package com.newdeal.staynest.jwt;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -24,7 +26,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
-
+@Slf4j(topic = "토큰 provider")
 @Component
 public class TokenProvider implements InitializingBean {
     // Header KEY 값
@@ -35,7 +37,6 @@ public class TokenProvider implements InitializingBean {
     public static final String BEARER_PREFIX = "Bearer ";
     //토큰 만료 시간
     private final long tokenValidityInMilliseconds;
-    private final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
     private final String secretKey;
     private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
     private Key key;
@@ -82,7 +83,7 @@ public class TokenProvider implements InitializingBean {
         if (StringUtils.hasText(tokenValue) && tokenValue.startsWith(BEARER_PREFIX)) {
             return tokenValue.substring(7);
         }
-        logger.error("토큰이 없습니다.");
+        log.error("토큰이 없습니다.");
         throw new NullPointerException("토큰이 없습니다.");
     }
 
@@ -94,35 +95,47 @@ public class TokenProvider implements InitializingBean {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+
         Collection<? extends  GrantedAuthority> authorities =
                 Arrays.stream(claims.get(AUTHORIZATION_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
-        User principal = new User(claims.getSubject(), "", authorities);
+        User principal = new User(claims.get("sub", String.class), "", authorities);
+        for (GrantedAuthority authority : authorities) {
+            log.info("Authority: {}", authority.getAuthority());
+        }
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
     //토큰 유효성 검사
     public boolean validateToken(String token) {
-        try{
+        try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
-        } catch (io.jsonwebtoken.security.SignatureException | MalformedJwtException e) {
-            logger.info("잘못된 JWT서명입니다");
+        } catch (SignatureException e) {
+            log.info("잘못된 JWT 서명입니다: {}", e.getMessage());
+        } catch (MalformedJwtException e) {
+            log.info("잘못된 JWT 토큰입니다: {}", e.getMessage());
         } catch (ExpiredJwtException e) {
-            logger.info("만료된 JWT 토큰입니다.");
+            log.info("만료된 JWT 토큰입니다: {}", e.getMessage());
         } catch (UnsupportedJwtException e) {
-            logger.info("지원되지 않는 JWT 토큰입니다.");
+            log.info("지원되지 않는 JWT 토큰입니다: {}", e.getMessage());
         } catch (IllegalArgumentException e) {
-            logger.info("JWT토큰이 잘못되었습니다.");
+            log.info("JWT 토큰이 잘못되었습니다: {}", e.getMessage());
+        } catch (Exception e) {
+            log.error("JWT 토큰 처리 중 알 수 없는 오류가 발생했습니다: {}", e.getMessage());
         }
         return false;
     }
     public Claims getUserInfoFromToken(String token) {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
-
+    //세션에서 토큰 추출
+    public String getTokenFromSession(HttpServletRequest request) {
+        Object token = request.getSession().getAttribute(AUTHORIZATION_HEADER);
+        return token != null ? token.toString() : null;
+    }
     public String getTokenFromRequest(HttpServletRequest request) {
         return request.getHeader(AUTHORIZATION_HEADER);
     }

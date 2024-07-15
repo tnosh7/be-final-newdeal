@@ -7,6 +7,7 @@ import com.newdeal.staynest.filter.LoggingFilter;
 import com.newdeal.staynest.jwt.JwtAuthenticationEntryPoint;
 import com.newdeal.staynest.jwt.JwtAccessDeniedHandler;
 import com.newdeal.staynest.jwt.TokenProvider;
+import com.newdeal.staynest.oauth.OAuth2LoginSuccessHandler;
 import jakarta.servlet.DispatcherType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -84,6 +86,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, LoggingFilter loggingFilter) throws Exception {
+        AuthenticationSuccessHandler OAuth2LoginSuccessHandler = new OAuth2LoginSuccessHandler();
 
         http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -94,7 +97,7 @@ public class SecurityConfig {
                         .loginProcessingUrl("/member/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .successForwardUrl("/host/")
+                        .successForwardUrl("/hosts/")
                         .failureUrl("/member/hostLogin-page?error=true")
                         .permitAll()
                 )
@@ -109,22 +112,29 @@ public class SecurityConfig {
                 )
 
                 .logout(logout -> logout
+                        .logoutUrl("/member/logout")
                         .deleteCookies("JSESSIONID")
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/home")
                         .permitAll())
                 .oauth2Login(oauth2Login -> oauth2Login
-                        .loginPage("/member/login-page"))
+                        .loginPage("/member/guestLogin-page")
+                        .defaultSuccessUrl("http://localhost:8090/login/oauth2/code/naver")
+                        .successHandler(OAuth2LoginSuccessHandler)
+                  //      .failureUrl()
+                )
                 .authorizeHttpRequests((requests) -> requests
                         //핵심 .. 눙물
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                        //여기서 경로 설정 안함
                         .requestMatchers("/**").permitAll()
+                        .requestMatchers("/hosts/**").permitAll()
                         .requestMatchers("/**").hasAnyRole("GUEST", "HOST", "ADMIN")
-                        .requestMatchers("/host/**").hasAnyRole("HOST", "ADMIN")
+                        .requestMatchers("/hosts/**").hasAnyRole("GUEST", "HOST", "ADMIN")
                         .requestMatchers("/admin/**").hasAnyRole("ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(loggingFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAuthorizationFilter(tokenProvider, principalDetailsService), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(handle -> handle
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                         .accessDeniedHandler(jwtAccessDeniedHandler));

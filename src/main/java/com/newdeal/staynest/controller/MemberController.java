@@ -43,19 +43,21 @@ public class MemberController {
     @PostMapping("/register")
     public ModelAndView register(HttpServletRequest request,
                                  GuestRequest guestDto, HostDto hostDto,
-                                 @RequestParam("identity") String identity) {
+                                 @RequestParam("identify") String identify) {
         ModelAndView mv = new ModelAndView();
         //가입
         try {
-            if ((identity.equals("guest"))) {
+            if ((identify.equals("guest"))) {
                 memberService.registerGuest(guestDto);
+                mv.setViewName("redirect:/member/guestLogin-page");
             } else {
                 memberService.registerHost(hostDto);
+                mv.setViewName("redirect:/member/hostLogin-page");
             }
-            mv.setViewName("redirect:/member/login-page");
+
         } catch (Exception e) {
             mv.addObject("message", "회원가입 중 오류가 발생했습니다.");
-            if ((identity.equals("guest"))) {
+            if ((identify.equals("guest"))) {
                 mv.setViewName("member/guestRegister");
             } else {
                 mv.setViewName("member/hostRegister");
@@ -75,33 +77,11 @@ public class MemberController {
         return new ModelAndView("member/guestLogin");
     }
 
-//    //로그인
-//    @PostMapping("/login")
-//    public @ResponseBody Map<String, String> login(@RequestParam String email, @RequestParam String password) {
-//        System.out.println("==================================");
-//        System.out.println("email: " + email);
-//        System.out.println("password: " + password);
-//        System.out.println("==================================");
-//        UsernamePasswordAuthenticationToken authenticationToken
-//                = new UsernamePasswordAuthenticationToken(email, password);
-//        Authentication authentication;
-//        try {
-//            authentication = authenticationManager.authenticate(authenticationToken);
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//        } catch (AuthenticationException e) {
-//            throw new RuntimeException("loginController : 로그인 실패");
-//        }
-//        String jwt = tokenProvider.createToken(authentication);
-//        Map<String, String> response = new HashMap<>();
-//        response.put("token", jwt);
-//        return response;
-//    }
-
     // 게스트&호스트 이메일 중복 확인
     @PostMapping("/duplicateEmail")
     public @ResponseBody String duplicateEmail(@RequestParam("email") String email,
-                                               @RequestParam("identity") String identity) {
-        return (identity.equals("guest")) ?
+                                               @RequestParam("identify") String identify) {
+        return (identify.equals("guest")) ?
                 memberService.checkDuplicateGuestEmail(email) : memberService.checkDuplicateHostEmail(email);
     }
     // 이메일 인증
@@ -109,9 +89,11 @@ public class MemberController {
     public @ResponseBody String emailCheck(@RequestParam String email) {
         String emailCheckCode;
         emailCheckCode = memberService.sendEmailCheck(email);
+        System.out.println("---------------------------");
+        System.out.println("이메일 인증 코드: " + emailCheckCode);
+        System.out.println("---------------------------");
         return emailCheckCode;
     }
-
 
     @GetMapping("/identify")
     public ModelAndView identify() {
@@ -119,8 +101,37 @@ public class MemberController {
     }
 
     @GetMapping("/passwordUpdate")
-    public ModelAndView passwordUpdate() {
-        return new ModelAndView("member/passwordUpdate");
+    public ModelAndView passwordUpdate(@RequestParam("identify") String identify) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("identify", identify);
+        mv.setViewName("member/passwordUpdate");
+        return mv;
     }
 
+    @PostMapping("/passwordUpdate")
+    public ModelAndView passwordUpdate (@RequestParam("email") String email,
+                                        @RequestParam("password") String password,
+                                        @RequestParam("identify") String identify) {
+        ModelAndView mv = new ModelAndView();
+        try {
+            if (identify.equals("guest")) {
+                memberService.updateGuestPassword(email, password);
+                mv.setViewName("member/guestLogin");
+            }
+            else if (identify.equals("host")) {
+                memberService.updateHostPassword(email, password);
+                mv.setViewName("member/hostLogin");
+            }
+        } catch (Exception e) {
+            mv.setViewName("member/passwordUpdate?identify=" + identify);
+            mv.addObject("message", "비밀번호 재설정에 실패하였습니다.");
+        }
+        return mv;
+    }
+
+    // OAuth2 회원가입 페이지
+    @GetMapping("/oAuth2Register")
+    public ModelAndView oAuth2Register() {
+        return new ModelAndView("member/oAuth2Register");
+    }
 }

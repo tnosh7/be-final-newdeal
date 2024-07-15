@@ -1,46 +1,32 @@
 package com.newdeal.staynest.dto.review;
 
+import com.newdeal.staynest.entity.Guest;
 import com.newdeal.staynest.entity.Review;
 import com.newdeal.staynest.entity.ReviewImg;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
+@NoArgsConstructor
 public class ReviewResponse {
     private Long reviewId;
     private int star;
     private String content;
     private LocalDateTime createdAt;
     private List<ReviewImgResponse> images;
+    private String guestName; // Guest 이름 추가
 
-    public ReviewResponse(Long reviewId, int star, String content, LocalDateTime createdAt, List<ReviewImgResponse> images) {
+    public ReviewResponse(Long reviewId, int star, String content, LocalDateTime createdAt, List<ReviewImgResponse> images, String guestName) {
         this.reviewId = reviewId;
         this.star = star;
         this.content = content;
         this.createdAt = createdAt;
         this.images = images;
-    }
-
-    // Getters
-    public Long getReviewId() {
-        return reviewId;
-    }
-
-    public int getStar() {
-        return star;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public List<ReviewImgResponse> getImages() {
-        return images;
+        this.guestName = guestName;
     }
 
     // Review 엔티티를 ReviewResponse DTO로 변환하는 메서드
@@ -56,7 +42,8 @@ public class ReviewResponse {
                 review.getStar(),
                 review.getContent(),
                 review.getCreatedAt(),
-                imageResponses
+                imageResponses,
+                review.getReservation().getGuest().getGuestName() // 리뷰에서 예약 -> 게스트 -> 이름을 가져옴
         );
     }
 
@@ -68,29 +55,4 @@ public class ReviewResponse {
     }
 }
 
-class ReviewImgResponse {
-    private Long id;
-    private String url;
 
-    public ReviewImgResponse(Long id, String url) {
-        this.id = id;
-        this.url = url;
-    }
-
-    // Getters
-    public Long getId() {
-        return id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    // Factory method to create ReviewImgResponse from ReviewImg entity
-    public static ReviewImgResponse fromEntity(ReviewImg reviewImg) {
-        return new ReviewImgResponse(
-                reviewImg.getId(),
-                reviewImg.getImgUrl() // 여기서 getUrl()을 getImgUrl()로 변경
-        );
-    }
-}

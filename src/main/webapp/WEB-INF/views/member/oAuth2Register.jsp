@@ -1,5 +1,14 @@
+<%@ page import="java.math.BigInteger" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+<%@ page import="java.net.HttpURLConnection" %>
+<%@ page import="java.io.InputStreamReader" %>
+<%@ page import="java.io.BufferedReader" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
@@ -61,6 +70,7 @@
 
         validateForm: function () {
             this.isValid = true; // 초기화
+
             const isPasswordValid = this.validatePassword();
             const isPhoneValid = this.validatePhone();
             if (!isPasswordValid || !isPhoneValid) {
@@ -69,6 +79,7 @@
             }
             return true;
         }
+
     };
 
     $(document).ready(function () {
@@ -108,12 +119,13 @@
             return;
         }
         $.ajax({
-            url: '/member/duplicateEmail?identify=host',
+            url: '/member/duplicateEmail?identify=guest',
             type: 'POST',
             data: {email: email},
             success: function (response) {
                 emailCheckWarn.innerText = response;
                 emailCheckWarn.style.color = "green";
+
             },
             error: function (error) {
                 emailCheckWarn.innerText = "이미 가입된 이메일입니다.";
@@ -127,7 +139,6 @@
         if (!Validator.validateForm()) {
         }
         else {
-
             $("#register-btn").show();
             $("#emailCheckYn-btn").hide();
             $.ajax({
@@ -155,6 +166,19 @@
         }
     }
 </script>
+<script type="text/javascript">
+    var naver_id_login = new naver_id_login("2_jqBMEoBm3D7oNJBMHy", "http://localhost:8090/login/oauth2/code/naver");
+    // 접근 토큰 값 출력
+    alert(naver_id_login.oauthParams.access_token);
+    // 네이버 사용자 프로필 조회
+    naver_id_login.get_naver_userprofile("naverSignInCallback()");
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+    function naverSignInCallback() {
+        alert(naver_id_login.getProfileData('email'));
+        alert(naver_id_login.getProfileData('nickname'));
+        alert(naver_id_login.getProfileData('age'));
+    }
+</script>
 <body>
 <!-- 회원가입 -->
 <section class="py-3 py-md-5 py-xl-8">
@@ -164,22 +188,22 @@
                 <div class="mb-5" align="center">
                     <img src="${contextPath}/images/logo.png" alt="로고" width="250"
                          onclick="location.href='${contextPath}/'">
-                    <h1>호스트 회원가입</h1>
+                    <h1>게스트 회원가입</h1>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8">
-                <div class="row gy-5 justify-content-center">
+            <div class="row gy-5 justify-content-center">
                     <div class="col-12 col-lg-5">
                         <!--폼 시작-->
-                        <form action="${contextPath}/member/register?identify=host" method="post">
+                        <form action="${contextPath}/member/register?identify=guest" method="post">
                             <div class="row gy-3 overflow-hidden">
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control border-0 border-bottom rounded-0"
-                                               name="hostName" id="hostName" placeholder="hostName" required>
-                                        <label for="hostName" class="form-label-ysh">성명</label>
+                                               name="guestName" id="guestName" placeholder="name" required>
+                                        <label for="guestName" class="form-label-ysh">성명</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -220,7 +244,7 @@
                                 <div class="col-12" id="emailCheckNumber-div">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control border-0 border-bottom rounded-0"
-                                               name="emailCheckYn" id="emailCheckYn" placeholder="이메일 인증번호" required  maxlength="6" onkeyup="varifiedEmailNunber()">
+                                               name="emailCheckYn" id="emailCheckYn" placeholder="이메일 인증번호" required maxlength="6" onkeyup="varifiedEmailNunber()">
                                         <label for="email" class="form-label-ysh" >이메일 인증번호</label>
                                         <input type="hidden" id=" emailCheckNumber" value="">
                                         <div id="emailCheckYnWarn" class="error-message-ysh"></div>
@@ -389,7 +413,7 @@
                                 <div class="col-12">
                                     <div class="d-grid">
                                         <p class="text-center m-0">Already have an account? <a
-                                                href="${contextPath}/member/hostLogin-page"
+                                                href="${contextPath}/member/guestLogin-page"
                                                 class="link-primary text-decoration-none">로그인</a>
                                         </p>
                                     </div>
@@ -428,4 +452,3 @@
 </section>
 </body>
 </html>
-

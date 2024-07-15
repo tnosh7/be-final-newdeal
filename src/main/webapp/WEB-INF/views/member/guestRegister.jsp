@@ -1,5 +1,11 @@
+<%@ page import="java.math.BigInteger" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
@@ -12,6 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/style.css">
     <link rel="stylesheet" href="${contextPath}/css/member.css">
 </head>
@@ -98,13 +105,19 @@
     function checkDuplicateEmail() {
         const email = document.getElementById("email").value;
         const emailCheckWarn = document.getElementById("emailCheckWarn");
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
         if (email === "") {
-            emailCheckWarn.innerText="이메일을 정확히 입력해주세요."
+            emailCheckWarn.innerText = "이메일을 입력해주세요.";
+            emailCheckWarn.style.color = "red";
+            return;
+        } else if (!emailPattern.test(email)) {
+            emailCheckWarn.innerText = "유효한 이메일 주소를 입력해주세요.";
             emailCheckWarn.style.color = "red";
             return;
         }
         $.ajax({
-            url: '/member/duplicateEmail?identity=guest',
+            url: '/member/duplicateEmail?identify=guest',
             type: 'POST',
             data: {email: email},
             success: function (response) {
@@ -169,7 +182,7 @@
                 <div class="row gy-5 justify-content-center">
                     <div class="col-12 col-lg-5">
                         <!--폼 시작-->
-                        <form action="${contextPath}/member/register?identity=guest" method="post">
+                        <form action="${contextPath}/member/register?identify=guest" method="post">
                             <div class="row gy-3 overflow-hidden">
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
@@ -191,7 +204,7 @@
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control border-0 border-bottom rounded-0"
                                                name="email" id="email" placeholder="이메일 주소" required
-                                               onfocusout="checkDuplicateEmail();">
+                                               onkeyup="checkDuplicateEmail();">
                                         <label for="email" class="form-label-ysh">이메일</label>
                                         <div id="emailCheckWarn" class="error-message-ysh"></div>
                                     </div>
@@ -216,7 +229,7 @@
                                 <div class="col-12" id="emailCheckNumber-div">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control border-0 border-bottom rounded-0"
-                                               name="emailCheckYn" id="emailCheckYn" placeholder="이메일 인증번호" required maxlength="6" onfocusout="varifiedEmailNunber()">
+                                               name="emailCheckYn" id="emailCheckYn" placeholder="이메일 인증번호" required maxlength="6" onkeyup="varifiedEmailNunber()">
                                         <label for="email" class="form-label-ysh" >이메일 인증번호</label>
                                         <input type="hidden" id=" emailCheckNumber" value="">
                                         <div id="emailCheckYnWarn" class="error-message-ysh"></div>
@@ -385,7 +398,7 @@
                                 <div class="col-12">
                                     <div class="d-grid">
                                         <p class="text-center m-0">Already have an account? <a
-                                                href="${contextPath}/member/login-page"
+                                                href="${contextPath}/member/guestLogin-page"
                                                 class="link-primary text-decoration-none">로그인</a>
                                         </p>
                                     </div>
@@ -409,10 +422,19 @@
                                      class="kakao-register-symbol">
                                 카카오로 시작하기
                             </button>
-                            <button class="naver-register-btn"
+                            <button class="naver-register-btn" id="naver_id_login"
                                     onclick="location.href='${contextPath}/oauth2/authorization/naver'">
                                 <img src="${contextPath}/images/naver-btn.png" width="45px" height="40px" alt="네이버 심볼"
                                      class="naver-register-symbol">
+                                <script type="text/javascript">
+                                    var naver_id_login = new naver_id_login("2_jqBMEoBm3D7oNJBMHy", "http://localhost:8090/login/oauth2/code/naver");
+                                    var state = naver_id_login.getUniqState();
+                                    naver_id_login.setButton("white", 2,40);
+                                    naver_id_login.setDomain("YOUR_SERVICE_URL");
+                                    naver_id_login.setState(state);
+                                    naver_id_login.setPopup();
+                                    naver_id_login.init_naver_id_login();
+                                </script>
                                 네이버로 시작하기
                             </button>
                         </div>
