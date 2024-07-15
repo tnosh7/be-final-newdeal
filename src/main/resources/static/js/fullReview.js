@@ -49,11 +49,15 @@ function closeReplyModal() {
     modal.style.display = "none";
 }
 
+const accomId = 1; // 실제 숙소 ID로 대체해야 합니다.
+const reservationId = 1; // 실제 예약 ID로 대체해야 합니다.
+const isReserved = true; // 여기에 예약 여부를 확인하는 로직을 추가해야 합니다.
+
 document.querySelector('.btn-review-insert-cyj').addEventListener('click', function (event) {
-    const isReserved = true; // 여기에 예약 여부를 확인하는 로직을 추가해야 합니다.
+
     const token = 'YOUR_TOKEN_HERE'; // 실제 토큰 값으로 대체해야 합니다.
-    const reservationId = 1; // 실제 예약 ID로 대체해야 합니다.
-    const accomId = 1; // 실제 숙소 ID로 대체해야 합니다.
+
+
 
     if (!isReserved) {
         event.preventDefault();
@@ -63,7 +67,7 @@ document.querySelector('.btn-review-insert-cyj').addEventListener('click', funct
         fetch(`${contextPath}/review/insertReview/${reservationId}/${accomId}`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`
+                // 'Authorization': `Bearer ${token}`
             }
         })
             .then(response => {
@@ -82,10 +86,8 @@ document.querySelector('.btn-review-insert-cyj').addEventListener('click', funct
 
 
 document.querySelector('.btn-review-edit-delete-cyj').addEventListener('click', function (event) {
-    const isReserved = true; // 여기에 예약 여부를 확인하는 로직을 추가해야 합니다.
+
     const token = 'YOUR_TOKEN_HERE'; // 실제 토큰 값으로 대체해야 합니다.
-    const reservationId = 1; // 실제 예약 ID로 대체해야 합니다.
-    const accomId = 1; // 실제 숙소 ID로 대체해야 합니다.
 
     if (!isReserved) {
         event.preventDefault();
@@ -95,7 +97,7 @@ document.querySelector('.btn-review-edit-delete-cyj').addEventListener('click', 
         fetch(`${contextPath}/review/insertReview/${reservationId}/${accomId}`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`
+                // 'Authorization': `Bearer ${token}`
             }
         })
             .then(response => {
@@ -113,11 +115,11 @@ document.querySelector('.btn-review-edit-delete-cyj').addEventListener('click', 
 });
 
 function submitReply() {
-    const isReserved = true; // 여기에 예약 여부를 확인하는 로직을 추가해야 합니다.
+
     const token = 'YOUR_TOKEN_HERE'; // 실제 토큰 값으로 대체해야 합니다.
     // const reviewId = 1; // 실제 리뷰 ID로 대체해야 합니다.
     const reviewId = document.getElementById("replyText-cyj").getAttribute("data-review-id");
-    const accomId = 1; // 실제 숙소 ID로 대체해야 합니다.
+     // 실제 숙소 ID로 대체해야 합니다.
 
     if (!isReserved) {
         event.preventDefault();
@@ -127,7 +129,7 @@ function submitReply() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                // 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
                 content: document.querySelector('.textarea-re-cyj').value,
