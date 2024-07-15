@@ -1,9 +1,12 @@
 package com.newdeal.staynest.controller;
 
+import com.newdeal.staynest.dto.hostReply.HostReplyRequest;
 import com.newdeal.staynest.dto.review.ReviewRequest;
 import com.newdeal.staynest.dto.review.ReviewResponse;
 import com.newdeal.staynest.entity.Reservation;
+import com.newdeal.staynest.entity.Review;
 import com.newdeal.staynest.entity.accommodation.Accommodation;
+import com.newdeal.staynest.repository.ReviewRepository;
 import com.newdeal.staynest.service.ReviewReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,7 @@ import java.util.Map;
 @RequestMapping("/review")
 public class ReviewReplyController {
     private final ReviewReplyService reviewReplyService;
+    private final ReviewRepository reviewRepository;
 
     @GetMapping("/insertReview/{reservationId}/{accomId}")
     public ModelAndView insertReview(
@@ -34,10 +38,12 @@ public class ReviewReplyController {
 //            return mav;
 //        }
         Reservation reservation = reviewReplyService.getReservationByReservation(reservationId);
+        Review review = reviewReplyService.findByReservationId(reservationId);
         Accommodation accom = reviewReplyService.getAccomodationByAccomodation(accomId);
         ModelAndView mav = new ModelAndView("review/insertReview");
         mav.addObject("reservation", reservation);
         mav.addObject("accom", accom);
+        mav.addObject("review", review);
         return mav;
     }
 
@@ -46,20 +52,6 @@ public class ReviewReplyController {
         return true; // 임시로 항상 유효한 것으로 설정
     }
 
-
-//    @PostMapping("/insertReview/{reservationId}/{accomId}")
-//    public ModelAndView insertReview(
-//            @RequestBody ReviewRequest reviewRequest,
-//            @PathVariable Long reservationId,
-//            @PathVariable Long accomId
-//    ) {
-//        reviewReplyService.ReviewSave(reviewRequest, reservationId, accomId);
-//
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("review/fullReview/" + accomId);
-//        mav.addObject("accomId", accomId);
-//        return mav;
-//    }
     @PostMapping("/insertReview/{reservationId}/{accomId}")
     public ResponseEntity<Map<String, String>> insertReview(
             @RequestBody ReviewRequest reviewRequest,
@@ -81,4 +73,16 @@ public class ReviewReplyController {
         return mav;
     }
 
+    @PostMapping("/insertReply/{reviewId}/{accomId}")
+    public ResponseEntity<Map<String, String>> insertReply(
+            @RequestBody HostReplyRequest hostReplyRequest,
+            @PathVariable Long reviewId,
+            @PathVariable Long accomId
+    ) {
+        reviewReplyService.ReplySave(hostReplyRequest, reviewId);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("redirectUrl", "/review/fullReview/" + accomId);
+        return ResponseEntity.ok(response);
+    }
 }
