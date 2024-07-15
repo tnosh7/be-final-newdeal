@@ -14,5 +14,5 @@ public class ReserveDto {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private int guests;
-    private String message;
+    private Long guestId;
 }

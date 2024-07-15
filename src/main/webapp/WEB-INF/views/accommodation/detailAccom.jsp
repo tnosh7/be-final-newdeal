@@ -3,7 +3,6 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-    <link href="${contextPath}/resources/css/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>RoomDetail</title>
 </head>
@@ -77,8 +76,8 @@
                         <div class="info-section text-start">
                             <hr style="border-top: 1px solid #cccccc;"/> <!-- 회색 얇은 선 -->
                             <h1>${accommodation.address}, ${accommodation.roomCategory}</h1>
-                            <h3>최대 인원 ${accommodation.maxGuests}명</h3>
-                            <p> ★ ${accommodation.avg} 후기 ${accommodation.reviews.size()}개</p>
+                            <h3>최대 인원 ${accommodation.maxGuests}명, 침실 2개, 욕실 2개</h3>
+                            <p> ★ ${accommodation.rating} 후기 ${accommodation.reviewCount}개</p>
 
                             <hr style="border-top: 1px solid #cccccc;"/> <!-- 회색 얇은 선 -->
                             <img src="${contextPath}/images/test.png" alt="프로필 사진" class="me-3" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
@@ -96,6 +95,7 @@
                         <div class="mb-5"></div>
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
+                                <h5 class="card-title">78,000원 /박 </h5>
                                 <!-- hidden input을 사용하여 숙소 ID를 설정 -->
                                 <input type="hidden" id="accommodationId" value="${accommodation.id}"> <!-- 추후에 들어오는 hotel_id로 변경 -->
                                 <h5 class="card-title">${accommodation.price}원 /박 </h5>
@@ -145,14 +145,14 @@
                 </div>
                 <!-- 지도 삽입 끝 -->
 
-                <!-- 리뷰 섹션 -->
-                <hr style="border-top: 1px solid #ccc;"/> <!-- 회색 얇은 선 -->
-                <div class="reviews-section d-flex justify-content-between align-items-center">
-                    <h3> ★${accommodation.avg}  후기 ${accommodation.reviews.size()}개</h3>
-                    <div class="text-end">
-                        <a href="#">더보기</a>
-                    </div>
+            <!-- 리뷰 섹션  -->
+            <hr style="border-top: 1px solid #ccc;"/> <!-- 회색 얇은 선 -->
+            <div class="reviews-section d-flex justify-content-between align-items-center">
+                <h3> ★${accommodation.rating}  후기 ${accommodation.reviewCount}개</h3>
+                <div class="text-end">
+                    <a href="#">더보기</a>
                 </div>
+            </div>
 
                 <!-- 리뷰 섹션 -->
                 <hr style="border-top: 1px solid #ccc;"/> <!-- 회색 얇은 선 -->
@@ -254,7 +254,9 @@
         </jsp:include>
     </div>
 
-    <script src="${contextPath}/static/js/detailAccom.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+</div>
+<script src="/js/detailAccom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

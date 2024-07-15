@@ -133,7 +133,10 @@ function loadAccommodations(category = null, sortCriteria = '최신순') {
         <div class="accomD3-khs">${accommodation.roomCategory}</div>
         <div class="accomD4-khs">${accommodation.price} 원 / 박</div>
     `;
-
+                accommodationDiv.addEventListener('click', function() {
+                    // 클릭된 숙소의 번호를 가져와서 숙소 상세 정보 페이지로 이동
+                    window.location.href = '/accommodation/detailAccom/' + accommodation.id; // 예시 URL
+                });
                 accommodationList.appendChild(accommodationDiv);
             });
         },

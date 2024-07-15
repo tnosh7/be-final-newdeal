@@ -36,11 +36,14 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
-
         // 인증이 필요 없는 경로인지 확인 (하위 경로 포함)
-        if (isSecuredPath(requestURI)) {
-            String token = tokenProvider.getTokenFromSession(request);
-
+        //if (isSecuredPath(requestURI)) {
+            //String token = tokenProvider.getTokenFromSession(request);
+            String token = request.getHeader("Authorization");
+            if(token == null) {
+                filterChain.doFilter(request, response);
+                return;
+            }
             log.info("세션 Authorization 헤더 확인: {}", token);
 
             if (StringUtils.hasText(token)) {
@@ -62,7 +65,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     return;
                 }
             }
-        }
+        //}
 
         filterChain.doFilter(request, response);
     }

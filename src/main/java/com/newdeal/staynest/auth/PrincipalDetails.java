@@ -3,6 +3,7 @@ package com.newdeal.staynest.auth;
 import com.newdeal.staynest.entity.Guest;
 import com.newdeal.staynest.entity.Host;
 import com.newdeal.staynest.entity.UserRoleEnum;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,11 @@ import java.util.List;
 
 public class PrincipalDetails implements UserDetails {
 
+    // 게스트 정보를 반환하는 getter 메서드
+    @Getter
     private Guest guest;
+    // 호스트 정보를 반환하는 getter 메서드
+    @Getter
     private Host host;
     private UserRoleEnum userRoleEnum;
 
