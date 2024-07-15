@@ -39,4 +39,7 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "accomm_id", nullable = false)
     private Accommodation accommodation;
+
+    @OneToOne(mappedBy = "review", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private HostReply hostReply;
 }
