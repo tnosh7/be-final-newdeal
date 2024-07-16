@@ -4,20 +4,22 @@ import com.newdeal.staynest.core.exception.ResourceNotFoundException;
 import com.newdeal.staynest.dto.host.HostResponse;
 import com.newdeal.staynest.entity.Host;
 import com.newdeal.staynest.repository.HostRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor // final constructor
 @Service
 public class HostService {
 
     private final HostRepository hostRepository;
 
-    // DI
-    @Autowired
-    public HostService(HostRepository hostRepository) {
-        this.hostRepository = hostRepository;
-    }
+//    // DI
+//    @Autowired
+//    public HostService(HostRepository hostRepository) {
+//        this.hostRepository = hostRepository;
+//    }
 
     public Host getHostById(Long hostId) {
         return hostRepository.findById(hostId).orElseThrow(() -> new ResourceNotFoundException("Host not found with id" + hostId));
