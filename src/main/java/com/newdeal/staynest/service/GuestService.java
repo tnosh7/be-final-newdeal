@@ -90,4 +90,9 @@ public class GuestService {
                 guest.getAddress()
         );
     }
+
+    @Transactional
+    public Guest findByGuestName(String guestName) {
+        return guestRepository.findByGuestName(guestName);
+    }
 }
