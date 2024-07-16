@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -38,33 +39,33 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         String requestURI = request.getRequestURI();
         // 인증이 필요 없는 경로인지 확인 (하위 경로 포함)
         //if (isSecuredPath(requestURI)) {
-            //String token = tokenProvider.getTokenFromSession(request);
-            String token = request.getHeader("Authorization");
-            if(token == null) {
-                filterChain.doFilter(request, response);
+        //String token = tokenProvider.getTokenFromSession(request);
+        String token = request.getHeader("Authorization");
+        if (token == null) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        log.info("세션 Authorization 헤더 확인: {}", token);
+
+        if (StringUtils.hasText(token)) {
+            token = tokenProvider.substringToken(token);
+            log.info("토큰 정보만 추출: {}", token);
+
+            if (!tokenProvider.validateToken(token)) {
+                log.error("error : 토큰 없음 또는 유효하지 않음");
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
                 return;
             }
-            log.info("세션 Authorization 헤더 확인: {}", token);
-
-            if (StringUtils.hasText(token)) {
-                token = tokenProvider.substringToken(token);
-                log.info("토큰 정보만 추출: {}", token);
-
-                if (!tokenProvider.validateToken(token)) {
-                    log.error("error : 토큰 없음 또는 유효하지 않음");
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
-                    return;
-                }
-                Claims info = tokenProvider.getUserInfoFromToken(token);
-                try {
-                    // email, role 담음
-                    setAuthentication(info.get("sub", String.class), info.get("auth", String.class));
-                } catch (Exception e) {
-                    log.error("인가 Error: {}", e.getMessage());
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "인가 실패");
-                    return;
-                }
+            Claims info = tokenProvider.getUserInfoFromToken(token);
+            try {
+                // email, role 담음
+                setAuthentication(info.get("sub", String.class), info.get("auth", String.class));
+            } catch (Exception e) {
+                log.error("인가 Error: {}", e.getMessage());
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "인가 실패");
+                return;
             }
+        }
         //}
 
         filterChain.doFilter(request, response);
