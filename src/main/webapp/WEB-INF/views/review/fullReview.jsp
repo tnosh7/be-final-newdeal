@@ -151,11 +151,16 @@
                                 </div>
                                 <c:if test="${response.hostReply != null}">
                                     <div class="reply-container-cyj">
+<%--                                        <input type="hidden" class="reply-id-cyj" value="${response.hostReply.hostReplyId}">--%>
                                         <p class="re-host-cyj"><span>호스트의 답글</span> <span class="re-host-date-cyj">${fn:substring(response.hostReply.createdAt, 0, 10)}</span></p>
                                         <p class="replyContent-cyj">${response.hostReply.content}</p>
                                     </div>
                                 </c:if>
-                                <button class="btn-reply-cyj" onclick="openReplyModal(${response.reviewId})">답글 작성(수정,삭제)</button>
+<%--                                <button class="btn-reply-cyj" onclick="openReplyModal(${response.reviewId})">답글 작성(수정,삭제)</button>--%>
+                                <button class="btn-reply-cyj"
+                                        onclick="openReplyModal(${response.hostReply.hostReplyId}, ${response.reviewId}, '${response.hostReply != null ? response.hostReply.content : ''}')">
+                                    답글 작성(수정,삭제)
+                                </button>
                             </div>
                         </c:forEach>
                         <%-- 리뷰 끝 --%>

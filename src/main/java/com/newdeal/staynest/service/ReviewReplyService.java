@@ -139,17 +139,34 @@ public class ReviewReplyService {
     }
 
     @Transactional
-    public void ReplySave(HostReplyRequest hostReplyRequest, Long reviewId) {
-        Review review = reviewRepository.findById(reviewId).orElse(null);
-        HostReply hostReply = HostReply.builder()
-                .content(hostReplyRequest.content())
-                .review(review)
-                .createdAt(LocalDateTime.now())
-                .build();
-        hostReplyRepository.save(hostReply);
+    public void ReplySaveOrUpdate(HostReplyRequest hostReplyRequest, Long reviewId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Review not found"));
+
+        HostReply existingReply = hostReplyRepository.findByReviewExistingReply(review);
+
+        if (existingReply != null) {
+            existingReply.setContent(hostReplyRequest.content());
+            existingReply.setCreatedAt(LocalDateTime.now());
+            hostReplyRepository.save(existingReply);
+        } else {
+            HostReply hostReply = HostReply.builder()
+                    .content(hostReplyRequest.content())
+                    .review(review)
+                    .createdAt(LocalDateTime.now())
+                    .build();
+            hostReplyRepository.save(hostReply);
+        }
     }
 
     public ReviewImg findByReviewId(Long reviewId) {
         return reviewImgRepositoty.findByReviewId(reviewId);
+    }
+
+    @Transactional
+    public void deleteReply(Long replyId) {
+        HostReply hostReply = hostReplyRepository.findByHostReplyId(replyId);
+//        if (hostReply != null) {
+            hostReplyRepository.deleteByHostReplyId(replyId);
+//        }
     }
 }
