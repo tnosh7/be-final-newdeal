@@ -19,4 +19,8 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
     @Transactional
     @Query("UPDATE Guest g SET g.password = :password WHERE g.email = :email")
     int updateGuestPasswordByEmail(@Param("email") String email, @Param("password") String password);
+
+    Guest findByGuestName(String guestName);
+
+
 }
