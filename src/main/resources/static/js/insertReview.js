@@ -120,10 +120,9 @@ function submitReview() {
     });
 }
 
-function deleteReview() {
+function deleteReview(hostReplyId) {
     const token = 'YOUR_TOKEN_HERE'; // 실제 토큰 값으로 대체해야 합니다.
-
-    fetch(`${contextPath}/review/deleteReview/${reservationId}/${accomId}`, {
+    fetch(`${contextPath}/review/deleteReview/${hostReplyId}/${accomId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

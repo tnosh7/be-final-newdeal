@@ -40,13 +40,18 @@ public class ReviewReplyController {
 //        }
         Reservation reservation = reviewReplyService.getReservationByReservation(reservationId);
         Review review = reviewReplyService.findByReservationId(reservationId);
-        ReviewImg reviewImg = reviewReplyService.findByReviewId(review.getReviewId());
+        ReviewImg reviewImg = null;
+        if (review != null) {
+            reviewImg = reviewReplyService.findByReviewId(review.getReviewId());
+        }
         Accommodation accom = reviewReplyService.getAccomodationByAccomodation(accomId);
+
         ModelAndView mav = new ModelAndView("review/insertReview");
         mav.addObject("reservation", reservation);
         mav.addObject("accom", accom);
         mav.addObject("review", review);
-        mav.addObject("reviewImg", reviewImg);
+        mav.addObject("reviewImg", reviewImg); // reviewImg가 null일 수 있음
+
         return mav;
     }
 
@@ -97,10 +102,27 @@ public class ReviewReplyController {
             @PathVariable Long reviewId,
             @PathVariable Long accomId
     ) {
-        reviewReplyService.ReplySave(hostReplyRequest, reviewId);
+//        reviewReplyService.ReplySave(hostReplyRequest, reviewId);
+        reviewReplyService.ReplySaveOrUpdate(hostReplyRequest, reviewId);
 
         Map<String, String> response = new HashMap<>();
         response.put("redirectUrl", "/review/fullReview/" + accomId);
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping("/deleteReply/{replyId}/{accomId}")
+    public ResponseEntity<Map<String, String>> deleteReply(
+            @PathVariable Long replyId,
+            @PathVariable Long accomId
+    ) {
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println(replyId);
+        reviewReplyService.deleteReply(replyId);
+
+        // 응답으로 리디렉션 URL을 제공합니다.
+        Map<String, String> response = new HashMap<>();
+        response.put("redirectUrl", "/review/fullReview/" + accomId);
+        return ResponseEntity.ok(response);
+    }
+
 }

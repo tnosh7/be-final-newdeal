@@ -1,14 +1,15 @@
 -- 데이터 삽입 전에 테이블을 비웁니다.
 DELETE FROM review_img where 1;
 
-DELETE
-FROM review where 1;
-DELETE
-FROM reservation;
-DELETE
-FROM guest;
-DELETE
-FROM host;
+DELETE FROM host_reply where 1;
+DELETE FROM review where 1;
+
+
+DELETE FROM reservation where 1;
+DELETE FROM guest where 1;
+DELETE FROM host where 1;
+
+
 
 -- Guest 데이터 삽입
 INSERT INTO guest (guestName, email, password, phone, role, join_dt, expire_dt, address, image, email_check_yn)

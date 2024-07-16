@@ -26,6 +26,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("select re from Review re where re.reservation.reservationId = :reservationId")
     Review findByReservationId(@Param("reservationId") Long reservationId);
 
+
 //    List<Review> getReviewsByAccommodationId(Long accommId);
 
     @Query("SELECT r FROM Review r LEFT JOIN FETCH r.hostReply WHERE r.accommodation.id = :accommId")
