@@ -21,6 +21,7 @@ import java.util.List;
 public class Accommodation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name = "accom_id")
     private Long id;
 
     @ManyToOne
@@ -75,7 +76,6 @@ public class Accommodation {
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
-    private Double avg;
 
     private double latitude;
     private double longitude;

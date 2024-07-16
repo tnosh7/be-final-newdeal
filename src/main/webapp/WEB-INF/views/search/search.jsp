@@ -130,5 +130,6 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="/js/search.js"></script>
+<script src="/js/map.js"></script>
 </body>
 </html>

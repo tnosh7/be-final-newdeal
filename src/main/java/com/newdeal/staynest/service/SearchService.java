@@ -27,22 +27,6 @@ public class SearchService {
     private final AccommodationRepository accommodationRepository;
     private final EntityManager entityManager;
 
-    public List<Accommodation> findAvailableAccommodations(String location, LocalDate checkInDate, LocalDate checkOutDate, int numGuests) {
-        // 예약 가능한 숙소 조회 로직 구현
-        // 1. 지역과 숙박인원 조건으로 숙소 조회
-        List<Accommodation> accommodations = accommodationRepository.findByAddressAndMaxGuestsGreaterThanEqual(location, numGuests);
-
-//        // 2. 예약된 숙소 필터링
-//        accommodations.removeIf(accommodation -> {
-//            // 숙소가 예약되어 있는지 확인
-//            List<Reservation> reservations = reservationRepository.findByAccommodationIdAndDates(accommodation.getId(), checkInDate, checkOutDate);
-//            // 예약된 숙소는 제외
-//            return !reservations.isEmpty();
-//        });
-
-        return accommodations;
-    }
-
     //메인에서 조건별 숙소 조회
     public List<Accommodation> getAccommodations(String category, String sortCriteria) {
         JPAQuery<Accommodation> query = new JPAQuery<>(entityManager);

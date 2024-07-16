@@ -20,10 +20,18 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 //    List<Review> findAllByReservation_ReservationIdIn(List<Long> reservationIds);
 //    @Query("SELECT r.reservationId FROM Reservation r WHERE r.accommodation.id = :accommId")
     
-    @Query(" select re from Review re where re.reviewId in(:reservationIds)")
+    @Query(" select re from Review re where re.reservation in(:reservationIds)")
     List<Review> findAllByReservation_ReservationIdIn(@Param("reservationIds") List<Long> reservationIds);
 
-    List<Review> getReviewsByAccommodationId(Long accommId);
+    @Query("select re from Review re where re.reservation.reservationId = :reservationId")
+    Review findByReservationId(@Param("reservationId") Long reservationId);
+
+//    List<Review> getReviewsByAccommodationId(Long accommId);
+
+    @Query("SELECT r FROM Review r LEFT JOIN FETCH r.hostReply WHERE r.accommodation.id = :accommId")
+    List<Review> getReviewsByAccommodationId(@Param("accommId") Long accommId);
+
+    Review findByReservation_ReservationIdAndAccommodation_Id(Long reservationId, Long accomId);
 }
 
 

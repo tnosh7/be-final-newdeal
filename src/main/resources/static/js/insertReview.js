@@ -1,3 +1,4 @@
+
 const rateWrap = document.querySelectorAll('.rating-cyj'),
     label = document.querySelectorAll('.rating-cyj .rating__label-cyj'),
     input = document.querySelectorAll('.rating-cyj .rating__input-cyj'),
@@ -100,7 +101,7 @@ function submitReview() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            // 'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
             star: parseInt(getSelectedRating()),
@@ -118,6 +119,32 @@ function submitReview() {
         console.error('Error:', error);
     });
 }
+
+function deleteReview() {
+    const token = 'YOUR_TOKEN_HERE'; // 실제 토큰 값으로 대체해야 합니다.
+
+    fetch(`${contextPath}/review/deleteReview/${reservationId}/${accomId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            // 필요한 경우 body에 추가 데이터를 넣을 수 있습니다.
+            // 하지만 DELETE 요청의 경우 보통 URL에 필요한 정보가 포함됩니다.
+        })
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    }).then(data => {
+        window.location.href = `${contextPath}/review/fullReview/${accomId}`;
+    }).catch(error => {
+        console.error('Error:', error);
+    });
+}
+
 
 function getSelectedRating() {
     const selectedRating = document.querySelector('.rating-cyj input[type="radio"]:checked');

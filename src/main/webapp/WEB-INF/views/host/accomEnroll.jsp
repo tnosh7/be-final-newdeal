@@ -49,18 +49,58 @@
                     if (data.autoRoadAddress) {
                         var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                         guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                        guideTextBox.style.display = 'block';
+                        guideTextBox.style.display = 'none';
 
                     } else if (data.autoJibunAddress) {
                         var expJibunAddr = data.autoJibunAddress;
                         guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                        guideTextBox.style.display = 'block';
+                        guideTextBox.style.display = 'none';
                     } else {
                         guideTextBox.innerHTML = '';
                         guideTextBox.style.display = 'none';
                     }
                 }
             }).open();
+        }
+
+        // 폼 제출 함수
+        async function submitForm(event) {
+            event.preventDefault(); // 기본 폼 제출 동작 방지
+            const token = sessionStorage.getItem('token');
+
+            const accommodationDto = {
+                name: document.getElementById('name').value,
+                category: document.getElementById('room-type').value,
+                address: document.getElementById('sample4_roadAddress').value,
+                detailAddress: document.getElementById('sample4_detailAddress').value,
+                maxGuests: document.getElementById('maxGuests').value,
+                price: document.getElementById('price').value,
+                checkIn: document.getElementById('checkIn').value,
+                checkOut: document.getElementById('checkOut').value,
+                content: document.getElementById('additional-info').value,
+                roomCategory: document.getElementById('roomCategory').value
+            };
+
+            try {
+                const response = await fetch('/hosts/accomEnroll', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(accommodationDto)
+                });
+
+                if (response.ok) {
+                    alert('숙소 등록이 완료되었습니다.');
+                    window.location.href="/hosts/";
+                } else {
+                    alert('숙소 등록에 실패했습니다.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('숙소 등록 중 오류가 발생했습니다.');
+            }
         }
     </script>
     <style>
@@ -108,11 +148,11 @@
 <div class="wrapper">
     <!-- 레이아웃 설정 footer, header -->
     <!-- header.jsp -->
-    <jsp:include page="/WEB-INF/views/layout/header.jsp">
+    <jsp:include page="${contextPath}/WEB-INF/views/layout/header.jsp">
         <jsp:param name="pageName" value="header"/>
     </jsp:include>
     <div class="main-content">
-        <form class="form-ysh">
+        <form class="form-ysh" onsubmit="submitForm(event)">
             <div class="" align="center">
                 <h1>숙소 등록하기</h1>
                 <h3>StayNest 호스팅을 시작하고 남는 공간으로 수입을 만들어 보세요.</h3>
@@ -120,19 +160,19 @@
             <div class="form-info-ysh">
                 <div class="form-group-ysh">
                     <div class="section-title-ysh"><h3>숙소 기본 정보</h3></div>
-                    <label for="floor">숙소명</label>
-                    <input type="text" id="floor" placeholder="숙소 이름을 입력하세요.">
+                    <label for="name">숙소명</label>
+                    <input type="text" id="name" placeholder="숙소 이름을 입력하세요.">
                 </div>
                 <div class="form-group-ysh">
                     <label for="room-type">숙소 유형</label>
                     <select id="room-type">
-                        <option value="standard">아파트</option>
-                        <option value="standard">게스트하우스</option>
-                        <option value="standard">오피스텔</option>
-                        <option value="standard">원룸</option>
-                        <option value="standard">팬션</option>
-                        <option value="standard">한옥</option>
-                        <option value="deluxe">기타</option>
+                        <option value="아파트">아파트</option>
+                        <option value="게스트하우스">게스트하우스</option>
+                        <option value="오피스텔">오피스텔</option>
+                        <option value="원룸">원룸</option>
+                        <option value="팬션">팬션</option>
+                        <option value="한옥">한옥</option>
+                        <option value="기타">기타</option>
                     </select>
                 </div>
                 <div class="form-group-ysh">
@@ -140,27 +180,31 @@
                     <input type="text" id="sample4_postcode" placeholder="우편번호">
                     <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
                     <input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-                    <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+                    <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
                     <span id="guide" style="color:#999;display:none"></span>
                     <input type="text" id="sample4_detailAddress" placeholder="상세주소">
-                    <input type="text" id="sample4_extraAddress" placeholder="참고항목">
+                    <input type="hidden" id="sample4_extraAddress" placeholder="참고항목">
                 </div>
                 <div class="section-title-ysh"><h3>객실구성</h3></div>
                 <div class="form-group-ysh">
                     <label>수용 인원</label>
-                    <input type="number" placeholder="최대 5명" min="1" max="5">
+                    <input type="number" id="maxGuests" placeholder="최대 5명" min="1" max="5">
+                </div>
+                <div class="form-group-ysh">
+                    <label>방 종류</label>
+                    <input type="text" id="roomCategory" placeholder="ex) 방 2">
                 </div>
                 <div class="form-group-ysh">
                     <label>가격</label>
-                    <input type="text" placeholder="가격을 입력하세요.">
+                    <input type="text" id="price" placeholder="가격을 입력하세요.">
                 </div>
                 <div class="form-group-ysh">
                     <label>입실 시간</label>
-                    <input type="time">
+                    <input type="time" id="checkIn">
                 </div>
                 <div class="form-group-ysh">
                     <label>퇴실 시간</label>
-                    <input type="time">
+                    <input type="time" id="checkOut">
                 </div>
                 <div class="section-title-ysh"><h3>숙소 정보</h3></div>
                 <div class="form-group-ysh">
@@ -180,7 +224,7 @@
     </div>
 
     <!-- footer.jsp -->
-    <jsp:include page="/WEB-INF/views/layout/footer.jsp">
+    <jsp:include page="${contextPath}/WEB-INF/views/layout/footer.jsp">
         <jsp:param name="pageName" value="footer"/>
     </jsp:include>
 </div>

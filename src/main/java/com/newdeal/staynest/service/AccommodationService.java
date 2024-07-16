@@ -10,11 +10,6 @@ import com.newdeal.staynest.repository.AccommodationRepository;
 import com.newdeal.staynest.exception.ResourceNotFoundException;
 import com.newdeal.staynest.repository.HostRepository;
 import com.newdeal.staynest.repository.ReviewRepository;
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.jpa.impl.JPAQuery;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -81,13 +76,10 @@ public class AccommodationService {
     // <숙소 등록>
     @Transactional
     public Accommodation registerAccomm(AccommodationDto accommDto) {
-        // 호스트 조회
-        Host host = hostRepository.findById(accommDto.getHostId())
-                .orElseThrow(() -> new IllegalArgumentException("호스트를 찾을 수 없습니다."));
 
         // Accommodation 엔티티 생성
         Accommodation accomm = Accommodation.builder()
-                .host(host)
+                .host(accommDto.getHost())
                 .name(accommDto.getName())
                 .category(accommDto.getCategory())
                 .roomCategory(accommDto.getRoomCategory())
@@ -106,15 +98,15 @@ public class AccommodationService {
 
         // AccommodationImg 엔티티 생성 및 저장
         Accommodation Accomm = accomm;
-        List<AccommodationImg> images = accommDto.getImgUrls().stream()
-                .map(url -> AccommodationImg.builder()
-                        .accommodation(Accomm)
-                        .imgUrl(url)
-                        .createdAt(LocalDateTime.now())
-                        .build())
-                .collect(Collectors.toList());
-
-        accommodationImgRepository.saveAll(images);
+//        List<AccommodationImg> images = accommDto.getImages().stream()
+//                .map(url -> AccommodationImg.builder()
+//                        .accommodation(Accomm)
+//                        .imgUrl(String.valueOf(url))
+//                        .createdAt(LocalDateTime.now())
+//                        .build())
+//                .collect(Collectors.toList());
+//
+//        accommodationImgRepository.saveAll(images);
 
         return Accomm;
     }
@@ -139,10 +131,10 @@ public class AccommodationService {
         accommodationImgRepository.deleteByAccommodation(existingAccomm);
 
         // 새로운 이미지 추가
-        List<AccommodationImg> images = accommDto.getImgUrls().stream()
+        List<AccommodationImg> images = accommDto.getImages().stream()
                 .map(url -> AccommodationImg.builder()
                         .accommodation(existingAccomm)
-                        .imgUrl(url)
+                        .imgUrl(String.valueOf(url))
                         .createdAt(LocalDateTime.now())
                         .build())
                 .collect(Collectors.toList());
@@ -182,4 +174,8 @@ public class AccommodationService {
                 .orElseThrow(() -> new ResourceNotFoundException("Accommodation not found with id " + id));
     }
 
+    // 로그인한 Host의 숙소 조회
+    public List<Accommodation> getAllAccommodationsByHostId(Long id) {
+        return accommodationRepository.findByHostId(id);
+    }
 }

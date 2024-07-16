@@ -1,5 +1,6 @@
 package com.newdeal.staynest.controller;
 
+import com.newdeal.staynest.auth.PrincipalDetails;
 import com.newdeal.staynest.dto.ReserveDto;
 import com.newdeal.staynest.entity.Guest;
 import com.newdeal.staynest.entity.Reservation;
@@ -10,6 +11,7 @@ import com.newdeal.staynest.service.ReservationService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,9 +37,15 @@ public class ReserveController {
     }
 
     @PostMapping("/reserve")
-    public ResponseEntity<String> reserve(@RequestBody ReserveDto reserveDto, HttpSession session) {
+    public ResponseEntity<String> reserve(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody ReserveDto reserveDto, HttpSession session) {
+        Long id = null;
+        if (principalDetails.getGuest() != null) {
+            id = principalDetails.getGuest().getId();
+        } else if (principalDetails.getHost() != null) {
+            id = principalDetails.getHost().getId();
+        }
+        reserveDto.setGuestId(id);
         session.setAttribute("reserveDto", reserveDto);
-        System.out.println(reserveDto.getCheckInDate());
         // 클라이언트로부터 받은 예약 정보 처리
         return ResponseEntity.ok("예약정보보내기!");
     }
@@ -53,9 +61,9 @@ public class ReserveController {
     }
 
     @PostMapping("/reserveComplete")
-    public ResponseEntity<String> reserve(@RequestBody String message, HttpSession session) {
+    public ResponseEntity<String> reserve(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestBody String message, HttpSession session) {
         ReserveDto reserveDto = (ReserveDto) session.getAttribute("reserveDto");
-        Guest guest = guestService.getGuestById(1L);
+        Guest guest = guestService.getGuestById(reserveDto.getGuestId());
         Accommodation accommodation = accommodationService.getAccomById(reserveDto.getAccommodationId());
         Reservation reservation = Reservation.builder()
                 .guest(guest)

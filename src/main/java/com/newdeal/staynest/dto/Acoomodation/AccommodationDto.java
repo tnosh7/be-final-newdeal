@@ -1,6 +1,8 @@
 package com.newdeal.staynest.dto.Acoomodation;
 
 
+import com.newdeal.staynest.entity.Host;
+import com.newdeal.staynest.entity.accommodation.AccommodationImg;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +14,7 @@ import java.util.List;
 @Builder
 public class AccommodationDto {
 
-    private Long hostId;
+    private Host host;
     private String name;
     private String category;
     private String roomCategory;
@@ -25,7 +27,8 @@ public class AccommodationDto {
     private String content;
     private double latitude;
     private double longitude;
-    private List<String> imgUrls;
-    private int avg;
+    private List<AccommodationImg> images;
+    private double rating;
+    private int reviewCount;
 }
 

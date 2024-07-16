@@ -31,8 +31,8 @@ public class AccomodationController {
 
 //--------기능 --------------------------------------------------
     @PostMapping
-    public ResponseEntity<Accommodation> registerAccomm(@RequestBody AccommodationDto accommDto) {
-        Accommodation accomm = accommodationService.registerAccomm(accommDto);
+    public ResponseEntity<Accommodation> registerAccomm(@RequestBody AccommodationDto accommodationDto) {
+        Accommodation accomm = accommodationService.registerAccomm(accommodationDto);
         return ResponseEntity.ok(accomm);
     }
     @GetMapping

@@ -58,16 +58,19 @@
                     </div>
                 </div>
                 <div class="photo-upload-section-cyj">
-                    <input type="text" id="photoUrl" placeholder="이미지 URL" class="photo-url-input-cyj">
+                    <input type="text" id="photoUrl" placeholder="이미지 URL" class="photo-url-input-cyj" value="${reviewImg.imgUrl}">
                 </div>
+<%--                <script>--%>
+<%--                    console.log('${reviewImg.imgUrl}');--%>
+<%--                </script>--%>
 
                 <div class="review-text-section-cyj">
                     <textarea class="review-textarea-cyj" maxlength="100"
-                              placeholder="최소 20자 이상, 최대 100자 미만"></textarea>
+                              placeholder="최소 20자 이상, 최대 100자 미만">${review.content}</textarea>
                 </div>
                 <div class="submit-button-section-cyj">
                     <button class="submit-button-cyj" onclick="submitReview()">완료</button>
-                    <button class="delete-button-cyj">삭제</button>
+                    <button class="delete-button-cyj" onclick="deleteReview()">삭제</button>
                 </div>
             </div>
         </div>

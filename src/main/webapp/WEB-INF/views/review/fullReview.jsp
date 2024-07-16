@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
     <head>
@@ -26,7 +27,7 @@
                     <div class="review-summary-cyj">
                         <div class="summary-header-cyj">
                             <span class="review-title-cyj">리뷰</span>
-                            <span class="total-reviews-cyj">14,891</span>
+                            <span class="total-reviews-cyj">10</span>
                         </div>
                         <div class="review-average-body-cyj">
                             <div class="average-rating-cyj">
@@ -46,35 +47,35 @@
                                     <div class="bar-cyj">
                                         <div class="filled-cyj" style="width: 78%;"></div>
                                     </div>
-                                    <span>11,601</span>
+                                    <span>10</span>
                                 </div>
                                 <div class="distribution-cyj">
                                     <span>4점</span>
                                     <div class="bar-cyj">
                                         <div class="filled-cyj" style="width: 18%;"></div>
                                     </div>
-                                    <span>2,771</span>
+                                    <span>5</span>
                                 </div>
                                 <div class="distribution-cyj">
                                     <span>3점</span>
                                     <div class="bar-cyj">
                                         <div class="filled-cyj" style="width: 3%;"></div>
                                     </div>
-                                    <span>450</span>
+                                    <span>2</span>
                                 </div>
                                 <div class="distribution-cyj">
                                     <span>2점</span>
                                     <div class="bar-cyj">
                                         <div class="filled-cyj" style="width: 0.5%;"></div>
                                     </div>
-                                    <span>44</span>
+                                    <span>1</span>
                                 </div>
                                 <div class="distribution-cyj">
                                     <span>1점</span>
                                     <div class="bar-cyj">
                                         <div class="filled-cyj" style="width: 0.2%;"></div>
                                     </div>
-                                    <span>25</span>
+                                    <span>1</span>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +85,7 @@
                         </button>
                         <button class="tab-button-cyj" data-tab="oldest" onclick="toggleActive(this)">오래된순</button>
                         <span class="btn-review-insert-box-cyj">
-                            <a href="#" class="btn-review-insert-cyj">리뷰쓰기</a>
+                            <a href="#" class="btn-review-insert-cyj">리뷰작성(수정, 삭제)</a>
                         </span>
                     </div>
                     <!-- 리뷰 모달 구조 -->
@@ -103,7 +104,7 @@
                                 <textarea id="replyText-cyj" class="textarea-re-cyj" rows="5"
                                           placeholder="답글을 입력하세요..."></textarea>
                                 <button class="btn-submit-re-cyj" onclick="submitReply()">완료</button>
-                                <button class="btn-submit-re-cyj" onclick="submitReply()">삭제</button>
+                                <button class="btn-delete-re-cyj" onclick="deleteReply()">삭제</button>
                                 <%--삭제 버튼 만들기--%>
                             </div>
                         </div>
@@ -122,12 +123,19 @@
                                         <br>
                                     </div>
                                     <div class="review-user-id-cyj" data-owner="user1">
-                                        <span class="review-stars-cyj">★★★★★${response.star}</span>
+                                        <span class="review-stars-cyj">
+<%--                                                ${response.star}--%>
+                                            <!-- JSP에서 response.star 값에 따라 별을 반복 생성 -->
+                                                <c:forEach var="i" begin="1" end="${response.star}">
+                                                    ★
+                                                </c:forEach>
+                                        </span>
                                         <br>
-                                        <span class="review-date-cyj">&nbsp;${response.createdAt}</span>
+<%--                                        <span class="review-date-cyj">&nbsp;${response.createdAt}</span>--%>
+                                        <span class="review-date-cyj">&nbsp;${fn:substring(response.createdAt, 0, 10)}</span>
                                         <br>
                                         <span class="btn-review-edit-delete-box-cyj">
-                                        <a href="#" class="btn-review-edit-delete-cyj">수정/삭제</a>
+<%--                                        <a href="#" class="btn-review-edit-delete-cyj">수정/삭제</a>--%>
                                     </span>
                                     </div>
                                 </div>
@@ -141,19 +149,16 @@
                                         <p>${response.content}</p>
                                     </div>
                                 </div>
-                                <div class="reply-container-cyj">
-                                    <p class="re-host-cyj"><span>호스트의 답글</span> <span
-                                            class="re-host-date-cyj">2024.07.04</span></p>
-                                    <p class="replyContent-cyj">이용해주셔서 감사하고 감사하고 감사하고 또 감사하고 이용해주셔서 감사하고 감사하고 감사하고 또감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고이용해주셔서 감사하고 감사하고 감사하고 또 감사하고
-                                    </p>
-                                </div>
-                                <button class="btn-reply-cyj" onclick="openReplyModal()">답글 작성(수정,삭제)</button>
+                                <c:if test="${response.hostReply != null}">
+                                    <div class="reply-container-cyj">
+                                        <p class="re-host-cyj"><span>호스트의 답글</span> <span class="re-host-date-cyj">${fn:substring(response.hostReply.createdAt, 0, 10)}</span></p>
+                                        <p class="replyContent-cyj">${response.hostReply.content}</p>
+                                    </div>
+                                </c:if>
+                                <button class="btn-reply-cyj" onclick="openReplyModal(${response.reviewId})">답글 작성(수정,삭제)</button>
                             </div>
                         </c:forEach>
                         <%-- 리뷰 끝 --%>
-
-
-
 
 
                         <div class="pagination-cyj">

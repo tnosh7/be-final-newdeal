@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // 초기 로딩 시 숙소 리스트 불러오기
-    updateAccommodationList(null,null,null);
+    updateAccommodationList(null, null, null);
 
 });
 
@@ -149,9 +149,8 @@ function applyPriceFilter() {
 }
 
 
-
 // 숙소 리스트 업데이트 요청 함수
-function updateAccommodationList(category=null,minPrice=null,maxPrice=null) {
+function updateAccommodationList(category = null, minPrice = null, maxPrice = null) {
     var checkInDate = document.getElementById('checkInDate').value;
     var checkOutDate = document.getElementById('checkOutDate').value;
     var address = document.getElementById('address').value;
@@ -189,7 +188,10 @@ function updateAccommodationList(category=null,minPrice=null,maxPrice=null) {
         <div class="accomD3-khs">${accommodation.roomCategory}</div>
         <div class="accomD4-khs">${accommodation.price} 원 / 박</div>
     `;
-
+                accommodationDiv.addEventListener('click', function () {
+                    // 클릭된 숙소의 번호를 가져와서 숙소 상세 정보 페이지로 이동
+                    window.location.href = '/accommodation/detailAccom/' + accommodation.id; // 예시 URL
+                });
                 accommodationList.appendChild(accommodationDiv);
             });
         },

@@ -41,7 +41,7 @@ public class TokenProvider implements InitializingBean {
     private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
     private Key key;
 
-    public TokenProvider(@Value("${jwt.secret.key}") String secretKey, @Value("${jwt.token-validity-in-seconds}") long tokenValidityInMilliseconds) {
+    public TokenProvider(@Value("${jwt.secret.key}") String secretKey, @Value("${jwt.token-validity-in-seconds}000") long tokenValidityInMilliseconds) {
         this.secretKey = secretKey;
         this.tokenValidityInMilliseconds = tokenValidityInMilliseconds;
     }

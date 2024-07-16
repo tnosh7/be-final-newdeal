@@ -36,9 +36,12 @@ function closeModal() {
     modal.style.display = "none";
 }
 
-function openReplyModal() {
+function openReplyModal(reviewId) {
     const modal = document.getElementById("replyModal-cyj");
     modal.style.display = "block";
+
+    // 답글 작성 모달에서 reviewId 사용 예시
+    document.getElementById("replyText-cyj").setAttribute("data-review-id", reviewId);
 }
 
 function closeReplyModal() {
@@ -46,11 +49,15 @@ function closeReplyModal() {
     modal.style.display = "none";
 }
 
+const accomId = 1; // 실제 숙소 ID로 대체해야 합니다.
+const reservationId = 1; // 실제 예약 ID로 대체해야 합니다.
+const isReserved = true; // 여기에 예약 여부를 확인하는 로직을 추가해야 합니다.
+
 document.querySelector('.btn-review-insert-cyj').addEventListener('click', function (event) {
-    const isReserved = true; // 여기에 예약 여부를 확인하는 로직을 추가해야 합니다.
+
     const token = 'YOUR_TOKEN_HERE'; // 실제 토큰 값으로 대체해야 합니다.
-    const reservationId = 1; // 실제 예약 ID로 대체해야 합니다.
-    const accomId = 1; // 실제 숙소 ID로 대체해야 합니다.
+
+
 
     if (!isReserved) {
         event.preventDefault();
@@ -60,7 +67,7 @@ document.querySelector('.btn-review-insert-cyj').addEventListener('click', funct
         fetch(`${contextPath}/review/insertReview/${reservationId}/${accomId}`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`
+                // 'Authorization': `Bearer ${token}`
             }
         })
             .then(response => {
@@ -76,3 +83,71 @@ document.querySelector('.btn-review-insert-cyj').addEventListener('click', funct
             });
     }
 });
+
+
+document.querySelector('.btn-review-edit-delete-cyj').addEventListener('click', function (event) {
+
+    const token = 'YOUR_TOKEN_HERE'; // 실제 토큰 값으로 대체해야 합니다.
+
+    if (!isReserved) {
+        event.preventDefault();
+        showReviewModal();
+    } else {
+        // 예약한 사람은 리뷰 수정/삭제 페이지로 이동
+        fetch(`${contextPath}/review/insertReview/${reservationId}/${accomId}`, {
+            method: 'GET',
+            headers: {
+                // 'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = response.url;
+                } else {
+                    // 오류 처리
+                    console.error('리뷰 작성 페이지로 이동 실패');
+                }
+            })
+            .catch(error => {
+                console.error('리뷰 작성 페이지로 이동 중 오류 발생:', error);
+            });
+    }
+});
+
+function submitReply() {
+
+    const token = 'YOUR_TOKEN_HERE'; // 실제 토큰 값으로 대체해야 합니다.
+    // const reviewId = 1; // 실제 리뷰 ID로 대체해야 합니다.
+    const reviewId = document.getElementById("replyText-cyj").getAttribute("data-review-id");
+     // 실제 숙소 ID로 대체해야 합니다.
+
+    if (!isReserved) {
+        event.preventDefault();
+        showReviewModal();
+    } else {
+        fetch(`${contextPath}/review/insertReply/${reviewId}/${accomId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                content: document.querySelector('.textarea-re-cyj').value,
+            })
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        }).then(data => {
+            window.location.href = `${contextPath}/review/fullReview/${accomId}`;
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+
+
+    }
+}
+
+
+

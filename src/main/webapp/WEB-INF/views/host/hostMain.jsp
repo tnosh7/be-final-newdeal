@@ -17,69 +17,12 @@
     <div class="main-content">
         <div class="hmain-khs">
             <div style="font-size: 30px; text-align: left;">숙소 메인</div>
-            <div class="hm-khs">
-                <div class="hmd1-khs">
-                    <div style="margin: 10px;">
-                        <img style="width: 200px;" src="/images/room.png" alt="">
-                    </div>
-                    <div class="hmdd-khs">
-                        <div style="font-size: 30px;">
-                            가산 아네스트
-                        </div>
-                        <div>
-                            오피스텔 원룸
-                        </div>
-                        <div>
-                            숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소
-                            상세정보~숙소 상세정보~
-                        </div>
-                        <div>
-                            <img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5 (후기 12개)
-                        </div>
-                    </div>
-                </div>
-                <div class="hmd2-khs">
-                    <div style="margin-bottom: 10px;">
-                        <a href="#">예약 내역</a>
-                    </div>
-                    <div>
-                        <button class="grlb1-khs">숙소 정보 수정</button>
-                    </div>
-                </div>
-            </div>
-            <div class="hm-khs">
-                <div class="hmd1-khs">
-                    <div style="margin: 10px;">
-                        <img style="width: 200px;" src="/images/room.png" alt="">
-                    </div>
-                    <div class="hmdd-khs">
-                        <div style="font-size: 30px;">
-                            가산 아네스트
-                        </div>
-                        <div>
-                            오피스텔 원룸
-                        </div>
-                        <div>
-                            숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소 상세정보~숙소
-                            상세정보~숙소 상세정보~
-                        </div>
-                        <div>
-                            <img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;4.5 (후기 12개)
-                        </div>
-                    </div>
-                </div>
-                <div class="hmd2-khs">
-                    <div style="margin-bottom: 10px;">
-                        <a href="#">예약 내역</a>
-                    </div>
-                    <div>
-                        <button class="grlb1-khs">숙소 정보 수정</button>
-                    </div>
-                </div>
+            <div id="accommodation-list">
+                
             </div>
 
             <div style="margin: 20px 0 20px 0; text-align: left;">
-                <button class="grlb1-khs">숙소 추가</button>
+                <button class="grlb1-khs" onclick="accomEnroll()">숙소 추가</button>
             </div>
         </div>
     </div>
@@ -88,5 +31,6 @@
         <jsp:param name="pageName" value="footer"/>
     </jsp:include>
 </div>
+<script src="/js/hostMain.js"></script>
 </body>
 </html>
