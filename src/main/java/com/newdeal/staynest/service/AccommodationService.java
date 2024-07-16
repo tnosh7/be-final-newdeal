@@ -1,5 +1,6 @@
 package com.newdeal.staynest.service;
 
+import com.newdeal.staynest.dto.Acoomodation.AccomDto;
 import com.newdeal.staynest.dto.Acoomodation.AccommodationDto;
 import com.newdeal.staynest.entity.Host;
 import com.newdeal.staynest.entity.accommodation.Accommodation;
@@ -14,10 +15,18 @@ import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Builder
@@ -75,11 +84,10 @@ public class AccommodationService {
 
     // <숙소 등록>
     @Transactional
-    public Accommodation registerAccomm(AccommodationDto accommDto) {
-
+    public Accommodation registerAccomm(List<MultipartFile> files, AccomDto accommDto, Host host) throws IOException {
         // Accommodation 엔티티 생성
-        Accommodation accomm = Accommodation.builder()
-                .host(accommDto.getHost())
+        Accommodation accommodation = Accommodation.builder()
+                .host(host)
                 .name(accommDto.getName())
                 .category(accommDto.getCategory())
                 .roomCategory(accommDto.getRoomCategory())
@@ -93,22 +101,39 @@ public class AccommodationService {
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        // Accommodation 엔티티를 데이터베이스에 저장
-        accomm = accommodationRepository.save(accomm);
+        List<AccommodationImg> accommodationImgs = new ArrayList<>();
+        String uploadDir = "C:\\upload\\";
+        Path uploadPath = Paths.get(uploadDir);
 
-        // AccommodationImg 엔티티 생성 및 저장
-        Accommodation Accomm = accomm;
-//        List<AccommodationImg> images = accommDto.getImages().stream()
-//                .map(url -> AccommodationImg.builder()
-//                        .accommodation(Accomm)
-//                        .imgUrl(String.valueOf(url))
-//                        .createdAt(LocalDateTime.now())
-//                        .build())
-//                .collect(Collectors.toList());
-//
-//        accommodationImgRepository.saveAll(images);
+        // 경로가 존재하지 않으면 생성
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+        int adj=0;
+        for (MultipartFile file : files) {
+            if (!file.isEmpty()) {
 
-        return Accomm;
+                String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+                Path filePath = uploadPath.resolve(fileName); // 파일 경로 설정
+                try {
+                    Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    // 파일 복사 예외 처리
+                    throw new IOException("Could not save file: " + fileName, e);
+                }
+
+                AccommodationImg img = new AccommodationImg();
+                img.setAccommodation(accommodation);
+                img.setImgUrl(filePath.toString());
+                img.setCreatedAt(LocalDateTime.now());
+
+                accommodationImgs.add(img);
+                if(adj++==0) accommodation.setImgUrl(fileName);
+            }
+        }
+        accommodation.setImages(accommodationImgs);
+        accommodationRepository.save(accommodation);
+        return accommodation;
     }
 
     //<숙소 전체 리스트 조회>

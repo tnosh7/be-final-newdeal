@@ -1,6 +1,7 @@
 package com.newdeal.staynest.controller;
 
 import com.newdeal.staynest.auth.PrincipalDetails;
+import com.newdeal.staynest.dto.Acoomodation.AccomDto;
 import com.newdeal.staynest.dto.Acoomodation.AccommodationDto;
 import com.newdeal.staynest.dto.host.HostResponse;
 import com.newdeal.staynest.entity.Host;
@@ -15,8 +16,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -90,11 +93,11 @@ public class HostController {
     }
 
     @PostMapping("/accomEnroll")
-    public ResponseEntity<String> accommodationEnroll(@AuthenticationPrincipal PrincipalDetails principalDetails,@RequestBody AccommodationDto accommDto) {
+    public ResponseEntity<String> accommodationEnroll(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestPart("files") List<MultipartFile> files, @RequestPart("accommodationDto") AccomDto accommodationDto) throws IOException {
+        System.out.println("컨트롤러오나");
+        System.out.println(files.size());
         Host host = principalDetails.getHost();
-        accommDto.setHost(host);
-        accommodationService.registerAccomm(accommDto);
-
+        accommodationService.registerAccomm(files,accommodationDto, host);
         return ResponseEntity.ok("숙소등록완료");
     }
 

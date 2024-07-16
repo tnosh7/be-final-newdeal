@@ -30,11 +30,11 @@ public class AccomodationController {
 
 
 //--------기능 --------------------------------------------------
-    @PostMapping
-    public ResponseEntity<Accommodation> registerAccomm(@RequestBody AccommodationDto accommodationDto) {
-        Accommodation accomm = accommodationService.registerAccomm(accommodationDto);
-        return ResponseEntity.ok(accomm);
-    }
+//    @PostMapping
+//    public ResponseEntity<Accommodation> registerAccomm(@RequestBody AccommodationDto accommodationDto) {
+//        Accommodation accomm = accommodationService.registerAccomm(accommodationDto);
+//        return ResponseEntity.ok(accomm);
+//    }
     @GetMapping
     public ResponseEntity<List<Accommodation>> getAllAccommodations() {
         List<Accommodation> accommodations = accommodationService.getAllAccommodations();

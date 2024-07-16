@@ -76,15 +76,8 @@ public class Accommodation {
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
-
     private double latitude;
     private double longitude;
 
-    public void setImages(List<AccommodationImg> images) {
-        this.images.clear();
-        if (images != null) {
-            this.images.addAll(images);
-        }
-    }
-
+    private String imgUrl;
 }

@@ -124,7 +124,7 @@ function loadAccommodations(category = null, sortCriteria = '최신순') {
                 accommodationDiv.classList.add('accom-khs');
 
                 accommodationDiv.innerHTML = `
-        <img src="/images/room.png" alt="">
+        <img src="/image/${accommodation.imgUrl}" alt="">
         <div class="accomD1-khs">
             <div class="accomD1-1-khs">${accommodation.name}</div>
             <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;${accommodation.rating}</div>

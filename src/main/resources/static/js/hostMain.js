@@ -30,8 +30,11 @@ function getAccomListByHostId() {
 
                 accommodationDiv.innerHTML = `
                     <div class="hmd1-khs">
-                        <div style="margin: 10px;">
-                            <img style="width: 200px;" src="/images/room.png" alt="">
+                        <div style="margin: 10px; width: 400px;">
+                            <img src="/image/${accommodation.imgUrl}" style="padding:10px;width: 100%;
+            height: 100%;
+            object-fit: cover; /* 이미지가 잘리지 않고 채워지도록 설정 */
+            object-position: center; /* 이미지를 가운데 정렬 */" alt="">
                         </div>
                         <div class="hmdd-khs">
                             <div style="font-size: 30px;">
