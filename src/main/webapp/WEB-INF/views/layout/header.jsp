@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -11,47 +11,84 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="/js/script.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 </head>
 <script>
-    $().ready(function(){
+    $().ready(function () {
         const token = sessionStorage.getItem("token");
         const role = sessionStorage.getItem("role");
-        const registerLink = document.getElementById("registerLink");
-        const loginLink = document.getElementById("loginLink");
+        const dropdownContent = document.getElementById("dropdownContent");
         const menuText = document.getElementById("menuText");
+        const changeRoleLink = document.getElementById("changeRole");
+
         if (token) {
-            console.log(token);
-            console.log(role);
-            const currentUrl = window.location.href;
-            const changeRole = document.getElementById("changeRole");
-            registerLink.innerText = "내 정보";
-            loginLink.innerText = "로그아웃";
-            menuText.innerText = "내 정보 / 로그아웃"
-            if (currentUrl.includes("localhost:8090/hosts/")) {
-                changeRole.innerText = "게스트 모드로 전환";
-                changeRole.href="${contextPath}/member/guestLogin-page";
-                registerLink.href = "${contextPath}/hosts";
+            let roleSpecificLinks = '';
+            if (role === "ROLE_GUEST") {
+                console.log("조건문안")
+                roleSpecificLinks = `
+                    <a href="${contextPath}/account/manage">계정 관리</a>
+                    <a href="${contextPath}/chat/list">채팅 내역</a>
+                `;
+                changeRoleLink.innerText = "호스트 모드로 전환";
+                changeRoleLink.onclick = function () {
+                    if (token) {
+                        removeSession();
+                        changeRoleLink.href = "${contextPath}/member/hostLogin-page";
+                    } else {
+                        changeRoleLink.href = "${contextPath}/member/hostLogin-page";
+                    }
+                };
+            } else if (role === "ROLE_HOST") {
+                roleSpecificLinks = `
+                    <a href="${contextPath}/account/manage">계정 관리</a>
+                    <a href="${contextPath}/chat/list">채팅 내역</a>
+                `;
+                changeRoleLink.innerText = "게스트 모드로 전환";
+                changeRoleLink.onclick = function () {
+                    if (token) {
+                        removeSession();
+                        changeRoleLink.href = "${contextPath}/member/guestLogin-page";
+                    } else {
+                        changeRoleLink.href = "${contextPath}/member/guestLogin-page";
+                    }
+                };
             }
-            else {
-                changeRole.innerText = "호스트 모드로 전환";
-                registerLink.href = "${contextPath}/guests";
-            }
+
+            dropdownContent.innerHTML = roleSpecificLinks + `
+            <a onclick="logout()">로그아웃</a>
+        `;
+            menuText.innerText = "메뉴";
         } else {
-            console.log("토큰 없음");
+            dropdownContent.innerHTML = `
+                <a href="${contextPath}/member/identify">회원가입</a>
+                <a href="${contextPath}/member/guestLogin-page">로그인</a>
+            `;
+            menuText.innerText = "회원가입 / 로그인";
+            changeRoleLink.innerText = "호스트 모드로 전환";
+            changeRoleLink.onclick = function () {
+                changeRoleLink.href = "${contextPath}/member/hostLogin-page";
+            };
         }
     });
-    function checkToken() {
-        const loginLink = document.getElementById("loginLink").innerText;
-        if (loginLink.equals("로그아웃")) {
-            sessionStorage.removeItem("token");
-            location.href = "${contextPath}/member/logout";
-        }
+
+    function logout() {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("role");
+        window.location.href = `/member/logout`;
+        window.location.href='http://localhost:8090/';
     }
+
+    function removeSession() {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("role");
+        window.location.href = `/member/logout`;
+    }
+
 </script>
 <body>
 <div class="outer-container">
@@ -112,16 +149,17 @@
             <a href="#" class="view-all-cyj">전체보기</a> <!-- (알림) 전체보기 버튼 스타일 추가 -->
         </div>
     </div>
-    <div class="host right-aligned"> <a href="${contextPath}/member/hostLogin-page" id="changeRole">호스트 모드로 전환 </a></div>
+    <div class="host right-aligned">
+        <a id="changeRole">호스트 모드로 전환</a>
+    </div>
     <div class="right-aligned">
         <div class="dropdown">
             <button class="dropbtn">
                 <span class="material-symbols-outlined">menu</span>
                 &nbsp;&nbsp;<span id="menuText">회원가입 / 로그인</span>
             </button>
-            <div class="dropdown-content"> <!-- (알림) 드롭다운 메뉴를 오른쪽 정렬 -->
-                <a href="${contextPath}/member/identify" id="registerLink">회원가입</a>
-                <a href="${contextPath}/member/guestLogin-page" id="loginLink" onclick="checkToken()">로그인</a>
+            <div class="dropdown-content" id="dropdownContent">
+                <!-- Content will be dynamically generated by JavaScript -->
             </div>
         </div>
     </div>

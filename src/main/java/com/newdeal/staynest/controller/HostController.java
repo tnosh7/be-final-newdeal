@@ -1,15 +1,23 @@
 package com.newdeal.staynest.controller;
 
+import com.newdeal.staynest.auth.PrincipalDetails;
+import com.newdeal.staynest.dto.Acoomodation.AccommodationDto;
 import com.newdeal.staynest.dto.host.HostResponse;
 import com.newdeal.staynest.entity.Host;
 import com.newdeal.staynest.entity.UserRoleEnum;
 
+import com.newdeal.staynest.entity.accommodation.Accommodation;
 import com.newdeal.staynest.jwt.TokenProvider;
+import com.newdeal.staynest.service.AccommodationService;
 import com.newdeal.staynest.service.HostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/hosts")
@@ -17,11 +25,13 @@ public class HostController {
 
     private final HostService hostService;
     private final TokenProvider tokenProvider;
+    private final AccommodationService accommodationService;
 
     @Autowired
-    public HostController(HostService hostService, TokenProvider tokenProvider) {
+    public HostController(HostService hostService, TokenProvider tokenProvider, AccommodationService accommodationService) {
         this.hostService = hostService;
         this.tokenProvider = tokenProvider;
+        this.accommodationService = accommodationService;
     }
 
     // 호스트 회원 정보보기
@@ -59,7 +69,7 @@ public class HostController {
         return new ModelAndView("redirect:/");
     }
 
-    // 숙소 등록 페이지
+    // Host 개인 정보
     @GetMapping("/accommodations")
     @Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView hostAccom() {
@@ -73,11 +83,19 @@ public class HostController {
         return new ModelAndView("host/hostReservation");
     }
 
-    // 호스트 숙소 등록
+    // 호스트 숙소 등록 페이지로
     @GetMapping("/accomEnroll")
-    @Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView accomEnroll() {
         return new ModelAndView("host/accomEnroll");
+    }
+
+    @PostMapping("/accomEnroll")
+    public ResponseEntity<String> accommodationEnroll(@AuthenticationPrincipal PrincipalDetails principalDetails,@RequestBody AccommodationDto accommDto) {
+        Host host = principalDetails.getHost();
+        accommDto.setHost(host);
+        accommodationService.registerAccomm(accommDto);
+
+        return ResponseEntity.ok("숙소등록완료");
     }
 
     // 호스트 숙소 수정
@@ -89,11 +107,16 @@ public class HostController {
 
     //숙소 메인
     @GetMapping("/")
-    //@Secured({UserRoleEnum.Authority.ROLE_HOST, UserRoleEnum.Authority.ROLE_ADMIN})
     public ModelAndView hostMain() {
         return new ModelAndView("host/hostMain");
     }
 
-
-
+    // 로그인한 Host의 숙소 조회
+    @PostMapping("/")
+    public ResponseEntity<List<Accommodation>> getAccommodations(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        Long id = null;
+        id = principalDetails.getHost().getId();
+        List<Accommodation> accommodationList = accommodationService.getAllAccommodationsByHostId(id);
+        return ResponseEntity.ok(accommodationList);
+    }
 }

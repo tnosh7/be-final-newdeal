@@ -578,6 +578,7 @@ footer .social-icons a:hover {
     align-items: center; /* 세로 가운데 정렬 */
     border: 1px solid gainsboro;
     border-radius: 10px;
+    width: 85%;
 }
 
 .hmdd-khs {
@@ -585,6 +586,7 @@ footer .social-icons a:hover {
     margin: 20px;
     text-align: right;
     padding: 5px;
+    width: 100%;
 }
 
 .hmd2-khs {
