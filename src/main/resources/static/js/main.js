@@ -123,13 +123,19 @@ function loadAccommodations(category = null, sortCriteria = '최신순') {
                 const accommodationDiv = document.createElement('div');
                 accommodationDiv.classList.add('accom-khs');
 
+                // 길이가 20자를 넘으면 "..."로 표시
+                let shortContent = accommodation.content;
+                if (shortContent.length > 15) {
+                    shortContent = shortContent.substring(0, 15) + '...';
+                }
+
                 accommodationDiv.innerHTML = `
         <img src="/image/${accommodation.imgUrl}" alt="">
         <div class="accomD1-khs">
             <div class="accomD1-1-khs">${accommodation.name}</div>
             <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;${accommodation.rating}</div>
         </div>
-        <div class="accomD2-khs">${accommodation.content}</div>
+        <div class="accomD2-khs">${shortContent}</div>
         <div class="accomD3-khs">${accommodation.roomCategory}</div>
         <div class="accomD4-khs">${accommodation.price} 원 / 박</div>
     `;

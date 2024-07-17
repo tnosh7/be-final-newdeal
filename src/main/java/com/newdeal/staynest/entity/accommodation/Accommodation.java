@@ -48,7 +48,7 @@ public class Accommodation {
     private int maxGuests;
 
     @Column(name = "accomm_price", nullable = false)
-    private String price;
+    private Long price;
 
     @Column(name = "check_in", nullable = false)
     private String checkIn;

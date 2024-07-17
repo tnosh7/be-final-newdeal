@@ -23,10 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Builder
@@ -38,6 +35,7 @@ public class AccommodationService {
     private final HostRepository hostRepository;
     private final AccommodationImgRepository accommodationImgRepository;
     private final ReviewRepository reviewRepository;
+    private final GeoCodingService geoCodingService;
 
     //<숙소 정보 변경(호스트만)>
 //    public Accommodation updateAccomm(Long id, AccommodationDto accommDto) {
@@ -85,6 +83,9 @@ public class AccommodationService {
     // <숙소 등록>
     @Transactional
     public Accommodation registerAccomm(List<MultipartFile> files, AccomDto accommDto, Host host) throws IOException {
+        //위도 경도 추가하기
+        Map<String, Double> coordinates = geoCodingService.getCoordinates(accommDto.getAddress());
+
         // Accommodation 엔티티 생성
         Accommodation accommodation = Accommodation.builder()
                 .host(host)
@@ -99,6 +100,8 @@ public class AccommodationService {
                 .checkOut(accommDto.getCheckOut())
                 .content(accommDto.getContent())
                 .createdAt(LocalDateTime.now())
+                .latitude(coordinates.get("latitude"))
+                .longitude(coordinates.get("longitude"))
                 .build();
 
         List<AccommodationImg> accommodationImgs = new ArrayList<>();

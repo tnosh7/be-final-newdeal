@@ -1,5 +1,125 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 초기 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 숙소 리스트 업데이트 요청 함수
+    function updateAccommodationList(category = null, minPrice = null, maxPrice = null) {
+        var checkInDate = document.getElementById('checkInDate').value;
+        var checkOutDate = document.getElementById('checkOutDate').value;
+        var address = document.getElementById('address').value;
+        var maxGuests = document.getElementById('maxGuests').value;
+
+        // 서버로 데이터 전송
+        $.ajax({
+            url: '/search/accommodations',
+            method: 'GET',
+            data: {
+                checkInDate: checkInDate,
+                checkOutDate: checkOutDate,
+                address: address,
+                maxGuests: maxGuests,
+                minPrice: minPrice,
+                maxPrice: maxPrice,
+                category: category
+            },
+            success: function (data) {
+                console.log(data);
+                const accommodationList = document.getElementById('accommodation-list');
+                accommodationList.innerHTML = ''; // 기존 내용을 지우기
+
+                let totalLat = 0;
+                let totalLng = 0;
+                let positions = [];
+                let bounds = new kakao.maps.LatLngBounds();
+
+                data.forEach(accommodation => {
+                    const accommodationDiv = document.createElement('div');
+                    accommodationDiv.classList.add('accom-khs');
+
+                    // 길이가 20자를 넘으면 "..."로 표시
+                    let shortContent = accommodation.content;
+                    if (shortContent.length > 20) {
+                        shortContent = shortContent.substring(0, 20) + '...';
+                    }
+
+                    accommodationDiv.innerHTML = `
+                        <img src="/image/${accommodation.imgUrl}" alt="">
+                        <div class="accomD1-khs">
+                            <div class="accomD1-1-khs">${accommodation.name}</div>
+                            <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;${accommodation.rating}</div>
+                        </div>
+                        <div class="accomD2-khs">${shortContent}</div>
+                        <div class="accomD3-khs">${accommodation.roomCategory}</div>
+                        <div class="accomD4-khs">${accommodation.price} 원 / 박</div>
+                    `;
+                    accommodationDiv.addEventListener('click', function () {
+                        // 클릭된 숙소의 번호를 가져와서 숙소 상세 정보 페이지로 이동
+                        window.location.href = '/accommodation/detailAccom/' + accommodation.id; // 예시 URL
+                    });
+                    accommodationList.appendChild(accommodationDiv);
+
+                    // 위치 정보 수집
+                    const lat = accommodation.latitude;
+                    const lng = accommodation.longitude;
+                    const latlng = new kakao.maps.LatLng(lat, lng);
+                    positions.push({
+                        content: `<div>${accommodation.name}</div>`,
+                        latlng: latlng
+                    });
+                    bounds.extend(latlng); // bounds에 위치 추가
+                    totalLat += lat;
+                    totalLng += lng;
+                });
+
+                // 마커와 인포윈도우 생성
+                positions.forEach(position => {
+                    var marker = new kakao.maps.Marker({
+                        map: map, // 마커를 표시할 지도
+                        position: position.latlng // 마커의 위치
+                    });
+
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: position.content // 인포윈도우에 표시할 내용
+                    });
+
+                    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+                    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+                });
+
+                // 지도의 중심점을 모든 위치의 평균 좌표로 설정하고, 확대 레벨 조정
+                if (positions.length > 0) {
+                    map.setBounds(bounds); // 지도의 범위를 bounds로 설정하여 모든 위치가 보이게 함
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('숙소 목록을 불러오는데 실패했습니다.', error);
+            }
+        });
+    }
+
+    // 초기 로딩 시 숙소 리스트 불러오기
+    updateAccommodationList(null, null, null);
+
+    // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+    function makeOverListener(map, marker, infowindow) {
+        return function () {
+            infowindow.open(map, marker);
+        };
+    }
+
+    // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+    function makeOutListener(infowindow) {
+        return function () {
+            infowindow.close();
+        };
+    }
+
 
     // 오늘 날짜를 가져오는 함수
     function getTodayDate() {
@@ -149,57 +269,63 @@ function applyPriceFilter() {
 }
 
 
-// 숙소 리스트 업데이트 요청 함수
-function updateAccommodationList(category = null, minPrice = null, maxPrice = null) {
-    var checkInDate = document.getElementById('checkInDate').value;
-    var checkOutDate = document.getElementById('checkOutDate').value;
-    var address = document.getElementById('address').value;
-    var maxGuests = document.getElementById('maxGuests').value;
-
-    // 서버로 데이터 전송
-    $.ajax({
-        url: '/search/accommodations',
-        method: 'GET',
-        data: {
-            checkInDate: checkInDate,
-            checkOutDate: checkOutDate,
-            address: address,
-            maxGuests: maxGuests,
-            minPrice: minPrice,
-            maxPrice: maxPrice,
-            category: category
-        },
-        success: function (data) {
-            console.log(data);
-            const accommodationList = document.getElementById('accommodation-list');
-            accommodationList.innerHTML = ''; // 기존 내용을 지우기
-
-            data.forEach(accommodation => {
-                const accommodationDiv = document.createElement('div');
-                accommodationDiv.classList.add('accom-khs');
-
-                accommodationDiv.innerHTML = `
-        <img src="/images/room.png" alt="">
-        <div class="accomD1-khs">
-            <div class="accomD1-1-khs">${accommodation.name}</div>
-            <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;${accommodation.rating}</div>
-        </div>
-        <div class="accomD2-khs">${accommodation.content}</div>
-        <div class="accomD3-khs">${accommodation.roomCategory}</div>
-        <div class="accomD4-khs">${accommodation.price} 원 / 박</div>
-    `;
-                accommodationDiv.addEventListener('click', function () {
-                    // 클릭된 숙소의 번호를 가져와서 숙소 상세 정보 페이지로 이동
-                    window.location.href = '/accommodation/detailAccom/' + accommodation.id; // 예시 URL
-                });
-                accommodationList.appendChild(accommodationDiv);
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error('숙소 목록을 불러오는데 실패했습니다.', error);
-        }
-    });
-}
+// // 숙소 리스트 업데이트 요청 함수
+// function updateAccommodationList(category = null, minPrice = null, maxPrice = null) {
+//     var checkInDate = document.getElementById('checkInDate').value;
+//     var checkOutDate = document.getElementById('checkOutDate').value;
+//     var address = document.getElementById('address').value;
+//     var maxGuests = document.getElementById('maxGuests').value;
+//
+//     // 서버로 데이터 전송
+//     $.ajax({
+//         url: '/search/accommodations',
+//         method: 'GET',
+//         data: {
+//             checkInDate: checkInDate,
+//             checkOutDate: checkOutDate,
+//             address: address,
+//             maxGuests: maxGuests,
+//             minPrice: minPrice,
+//             maxPrice: maxPrice,
+//             category: category
+//         },
+//         success: function (data) {
+//             console.log(data);
+//             const accommodationList = document.getElementById('accommodation-list');
+//             accommodationList.innerHTML = ''; // 기존 내용을 지우기
+//
+//             data.forEach(accommodation => {
+//                 const accommodationDiv = document.createElement('div');
+//                 accommodationDiv.classList.add('accom-khs');
+//
+//                 // 길이가 20자를 넘으면 "..."로 표시
+//                 let shortContent = accommodation.content;
+//                 if (shortContent.length > 15) {
+//                     shortContent = shortContent.substring(0, 15) + '...';
+//                 }
+//
+//                 accommodationDiv.innerHTML = `
+//         <img src="/image/${accommodation.imgUrl}" alt="">
+//         <div class="accomD1-khs">
+//             <div class="accomD1-1-khs">${accommodation.name}</div>
+//             <div class="accomD1-2-khs"><img style="width: 20px; height: 20px" src="/images/star.png" alt="">&nbsp;${accommodation.rating}</div>
+//         </div>
+//         <div class="accomD2-khs">${shortContent}</div>
+//         <div class="accomD3-khs">${accommodation.roomCategory}</div>
+//         <div class="accomD4-khs">${accommodation.price} 원 / 박</div>
+//     `;
+//                 accommodationDiv.addEventListener('click', function () {
+//                     // 클릭된 숙소의 번호를 가져와서 숙소 상세 정보 페이지로 이동
+//                     window.location.href = '/accommodation/detailAccom/' + accommodation.id; // 예시 URL
+//                 });
+//                 accommodationList.appendChild(accommodationDiv);
+//             });
+//         },
+//         error: function (xhr, status, error) {
+//             console.error('숙소 목록을 불러오는데 실패했습니다.', error);
+//         }
+//     });
+// }
 
 // 최소 가격 가져오는 함수
 function getMinPrice() {

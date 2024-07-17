@@ -286,6 +286,10 @@
 
     // 폼 제출 시 처리
     async function submitForm() {
+        if(imgList.length===0) {
+            alert('이미지를 1장 이상 등록해주세요.');
+            return;
+        }
         const token = sessionStorage.getItem('token');
 
         const formData = new FormData();

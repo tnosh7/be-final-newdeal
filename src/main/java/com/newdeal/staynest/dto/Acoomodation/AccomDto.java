@@ -13,7 +13,7 @@ public class AccomDto {
     private String address;
     private String detailAddress;
     private int maxGuests;
-    private String price;
+    private Long price;
     private String checkIn;
     private String checkOut;
     private String content;
