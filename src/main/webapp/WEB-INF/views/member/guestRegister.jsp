@@ -417,7 +417,7 @@
                     <div class="col-12 col-lg-5 d-flex align-items-center">
                         <div class="d-flex gap-3 flex-column" style="align-items: center">
                             <button class="kakao-register-btn"
-                                    onclick="location.href='${contextPath}/oauth2/authorization/naver'">
+                                    onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=86e6c08d30341e605edbbe375230eac2&redirect_uri=http://localhost:8090/login/oauth2/code/kakao&response_type=code'">
                                 <img src="${contextPath}/images/kakao-btn.png" alt="카카오 심볼"
                                      class="kakao-register-symbol">
                                 카카오로 시작하기
@@ -429,10 +429,8 @@
                                 <script type="text/javascript">
                                     var naver_id_login = new naver_id_login("2_jqBMEoBm3D7oNJBMHy", "http://localhost:8090/login/oauth2/code/naver");
                                     var state = naver_id_login.getUniqState();
-                                    naver_id_login.setButton("white", 2,40);
-                                    naver_id_login.setDomain("YOUR_SERVICE_URL");
-                                    naver_id_login.setState(state);
-                                    naver_id_login.setPopup();
+                                    naver_id_login.setDomain("${contextPath}/8090/member/guestLogin-page");
+                                    naver_id_login.setState(${state});
                                     naver_id_login.init_naver_id_login();
                                 </script>
                                 네이버로 시작하기

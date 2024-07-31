@@ -1,17 +1,34 @@
 package com.newdeal.staynest.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newdeal.staynest.dto.HostDto;
 import com.newdeal.staynest.jwt.TokenProvider;
 import com.newdeal.staynest.dto.guest.GuestRequest;
 import com.newdeal.staynest.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 
-
+@Slf4j(topic="memberController")
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -20,6 +37,10 @@ public class MemberController {
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
     private final UserDetailsService userDetailsService;
+    private static final String CLIENT_ID = "2_jqBMEoBm3D7oNJBMHy";
+    private static final String CLIENT_SECRET = "M1_xj5iG26";
+    private static final String REDIRECT_URI = "http://localhost:8090/member/oauth2Register";
+
     public MemberController(MemberService memberService, AuthenticationManager authenticationManager, TokenProvider tokenProvider, UserDetailsService userDetailsService) {
         this.memberService = memberService;
         this.authenticationManager = authenticationManager;
@@ -30,8 +51,21 @@ public class MemberController {
     // 게스트 회원가입 페이지
     @GetMapping("/guestRegister")
     public ModelAndView guestRegister() {
-        return new ModelAndView("member/guestRegister");
+        ModelAndView mv =  new ModelAndView("member/guestRegister");
+        // 상태 토큰으로 사용할 랜덤 문자열 생성
+        String state = generateState();
+        // 세션 또는 별도의 저장 공간에 상태 토큰을 저장
+        mv.addObject("state", state);
+        return mv;
     }
+    
+    //상태코드 생성
+    public String generateState()
+    {
+        SecureRandom random = new SecureRandom();
+        return new BigInteger(130, random).toString(32);
+    }
+
 
     // 호스트 회원가입 페이지
     @GetMapping("/hostRegister")
@@ -73,7 +107,11 @@ public class MemberController {
 
     //게스트 로그인 페이지
     @GetMapping("/guestLogin-page")
-    public ModelAndView guestLogin() {
+    public ModelAndView guestLogin(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        session.removeAttribute("role");
+        session.removeAttribute("token");
         return new ModelAndView("member/guestLogin");
     }
 
@@ -128,10 +166,5 @@ public class MemberController {
         }
         return mv;
     }
-
-    // OAuth2 회원가입 페이지
-    @GetMapping("/oAuth2Register")
-    public ModelAndView oAuth2Register() {
-        return new ModelAndView("member/oAuth2Register");
-    }
 }
+

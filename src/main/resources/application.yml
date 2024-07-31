@@ -21,7 +21,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: update #create ,update ,none
+      ddl-auto: create #create ,update ,none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
@@ -54,10 +54,11 @@ spring:
               - name
               - email
               - mobile
+              - profile_image
             client-name: Naver
 
           kakao:
-            client-id: 1e24036efdf8e99fa6275dc6f09787c8
+            client-id: db33cafde4f4c79aaeb8da57716b6fe6
             client-secret: zUZpKG8g84d2i3XuplBxDQc9YNnNDtca
             redirect-uri: "http://localhost:8090/login/oauth2/code/kakao"
             client-authentication-method: POST
@@ -66,6 +67,7 @@ spring:
               - name
               - account_email
               - phone_number
+              - profile_image
             client-name: Kakao
 
         provider:
@@ -89,7 +91,7 @@ jwt:
   header: JwtAuthorizationFilter
   secret:
     key: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-  token-validity-in-seconds: 86400
+  token-validity-in-seconds: 864000000
   expired-time:
     token:
       access: 2500000000

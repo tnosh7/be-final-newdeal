@@ -2,8 +2,11 @@ package com.newdeal.staynest.controller;
 
 import com.newdeal.staynest.dto.SearchRequestDTO;
 import com.newdeal.staynest.entity.accommodation.Accommodation;
+import com.newdeal.staynest.jwt.TokenProvider;
 import com.newdeal.staynest.service.AccommodationService;
 import com.newdeal.staynest.service.SearchService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -27,8 +30,18 @@ public class HomeController {
     private final SearchService searchService;
 
     @GetMapping("/")
-    public ModelAndView main() {
+    public ModelAndView main(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("main");
+        HttpSession session = request.getSession();
+        if (session == null) {
+            return mav;
+        }
+        else {
+            String token = (String) session.getAttribute(TokenProvider.AUTHORIZATION_HEADER);
+            String role = (String) session.getAttribute("role");
+            session.setAttribute("role", role);
+            session.setAttribute("token", token);
+        }
         return mav;
     }
 

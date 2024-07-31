@@ -47,10 +47,13 @@ public class GuestRequest implements Serializable {
     LocalDateTime joinDt;
 
     @Null
-    LocalDateTime expireDt;
+    String image;
 
     @Null
-    String image;
+    String provider;
+
+    @Null
+    String providerId;
 
     public static Guest toEntity(GuestRequest guestDto) {
         return Guest.builder()
@@ -61,8 +64,9 @@ public class GuestRequest implements Serializable {
                 .phone(guestDto.getPhone())
                 .role(guestDto.getRole())
                 .joinDt(guestDto.getJoinDt())
-                .expireDt(guestDto.getExpireDt())
                 .image(guestDto.getImage())
+                .provider(guestDto.getProvider())
+                .providerId(guestDto.getProviderId())
                 .build();
     }
 

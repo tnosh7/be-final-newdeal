@@ -102,21 +102,21 @@ function loginBtn() {
                             </div>
                         </form>
                     </div>
-                    <div class="col-12 col-lg-2 d-flex align-items-center justify-content-center gap-3 flex-lg-column">
-                        <div class="bg-dark h-100 d-none d-lg-block" style="width: 1px; --bs-bg-opacity: .1;"></div>
-                        <div class="bg-dark w-100 d-lg-none" style="height: 1px; --bs-bg-opacity: .1;"></div>
-                        <div>or</div>
-                        <div class="bg-dark h-100 d-none d-lg-block" style="width: 1px; --bs-bg-opacity: .1;"></div>
-                        <div class="bg-dark w-100 d-lg-none" style="height: 1px; --bs-bg-opacity: .1;"></div>
-                    </div>
-                    <div class="col-12 col-lg-5 d-flex align-items-center">
-                        <div class="d-flex gap-3 flex-column">
-                            <a id="kakao-login-btn"><img src="${contextPath}/images/kakao_login.png" height="50"
-                                                         alt="카카오 로그인 버튼"/></a>
-                            <a id="naver-login-btn"><img src="${contextPath}/images/naver_login.png" height="50"
-                                                         alt="네이버 로그인 버튼"/></a>
-                        </div>
-                    </div>
+<%--                    <div class="col-12 col-lg-2 d-flex align-items-center justify-content-center gap-3 flex-lg-column">--%>
+<%--                        <div class="bg-dark h-100 d-none d-lg-block" style="width: 1px; --bs-bg-opacity: .1;"></div>--%>
+<%--                        <div class="bg-dark w-100 d-lg-none" style="height: 1px; --bs-bg-opacity: .1;"></div>--%>
+<%--                        <div>or</div>--%>
+<%--                        <div class="bg-dark h-100 d-none d-lg-block" style="width: 1px; --bs-bg-opacity: .1;"></div>--%>
+<%--                        <div class="bg-dark w-100 d-lg-none" style="height: 1px; --bs-bg-opacity: .1;"></div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-12 col-lg-5 d-flex align-items-center">--%>
+<%--                        <div class="d-flex gap-3 flex-column">--%>
+<%--                            <a id="kakao-login-btn"><img src="${contextPath}/images/kakao_login.png" height="50"--%>
+<%--                                                         alt="카카오 로그인 버튼"/></a>--%>
+<%--                            <a id="naver-login-btn"><img src="${contextPath}/images/naver_login.png" height="50"--%>
+<%--                                                         alt="네이버 로그인 버튼"/></a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
             </div>
         </div>
