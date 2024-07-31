@@ -7,7 +7,8 @@ import com.newdeal.staynest.filter.LoggingFilter;
 import com.newdeal.staynest.jwt.JwtAuthenticationEntryPoint;
 import com.newdeal.staynest.jwt.JwtAccessDeniedHandler;
 import com.newdeal.staynest.jwt.TokenProvider;
-import com.newdeal.staynest.oauth.OAuth2LoginSuccessHandler;
+import com.newdeal.staynest.oauth.PrincipalOAuth2UserService;
+import com.newdeal.staynest.oauth.PrincipalOauth2User;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -24,7 +25,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
@@ -44,14 +44,16 @@ public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final PrincipalOAuth2UserService principalOAuth2UserService;
 
     @Autowired
-    public SecurityConfig(TokenProvider tokenProvider, PrincipalDetailsService principalDetailsService, AuthenticationConfiguration authenticationConfiguration, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtAccessDeniedHandler jwtAccessDeniedHandler) {
+    public SecurityConfig(TokenProvider tokenProvider, PrincipalDetailsService principalDetailsService, AuthenticationConfiguration authenticationConfiguration, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtAccessDeniedHandler jwtAccessDeniedHandler, PrincipalOAuth2UserService principalOAuth2UserService) {
         this.tokenProvider = tokenProvider;
         this.principalDetailsService = principalDetailsService;
         this.authenticationConfiguration = authenticationConfiguration;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
+        this.principalOAuth2UserService = principalOAuth2UserService;
     }
 
     @Bean
@@ -88,9 +90,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, LoggingFilter loggingFilter) throws Exception {
-        AuthenticationSuccessHandler OAuth2LoginSuccessHandler = new OAuth2LoginSuccessHandler();
-
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, LoggingFilter loggingFilter, PrincipalOAuth2UserService principalOAuth2UserService) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessionManagement -> sessionManagement
@@ -117,15 +117,18 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/member/logout")
                         .deleteCookies("JSESSIONID")
+                        .invalidateHttpSession(true)
                         .logoutSuccessHandler(logoutSuccessHandler())
                         .logoutSuccessUrl("/home")
                         .permitAll())
+
                 .oauth2Login(oauth2Login -> oauth2Login
                         .loginPage("/member/guestLogin-page")
-                        .defaultSuccessUrl("http://localhost:8090/login/oauth2/code/naver")
-                        .successHandler(OAuth2LoginSuccessHandler)
-                  //      .failureUrl()
-                )
+                        .defaultSuccessUrl("/")
+                        .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
+                                        .userService(principalOAuth2UserService)
+                       // .successHandler(new OAuth2AuthenticationSuccessHandler())
+                ))
                 .authorizeHttpRequests((requests) -> requests
                         //핵심 .. 눙물
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()

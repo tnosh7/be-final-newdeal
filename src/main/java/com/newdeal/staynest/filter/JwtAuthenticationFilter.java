@@ -44,7 +44,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         HttpSession session = request.getSession();
         session.setAttribute(TokenProvider.AUTHORIZATION_HEADER, "Bearer " + token);
         session.setAttribute("role", authResult.getAuthorities().iterator().next().getAuthority());
-
     }
 
     @Override

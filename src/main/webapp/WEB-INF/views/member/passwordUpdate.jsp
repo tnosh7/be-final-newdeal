@@ -59,7 +59,6 @@
             type: 'POST',
             data: {email: email},
             success: function (response) {
-                alert(response);
                 if (response === "이미 등록된 이메일입니다."){
                     emailCheckWarn.innerText ="인증번호가 전송되었습니다."
                     emailCheckWarn.style.color = "green";

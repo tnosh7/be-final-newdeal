@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 //package com.newdeal.staynest.oauth;
@@ -39,20 +40,13 @@ import java.util.Map;
 @Slf4j(topic = "Oauth2User 정보 전달")
 public class PrincipalOauth2User extends DefaultOAuth2User {
 
-    private String role;
-
-    /**
-     *
-     * @param authorities
-     * @param attributes
-     * @param nameAttributeKey
-     *
-     */
-    public PrincipalOauth2User(Collection<? extends GrantedAuthority> authorities,
-                               Map<String, Object> attributes,
-                               String nameAttributeKey){
+    public PrincipalOauth2User(Collection<? extends GrantedAuthority> authorities, Map<String, Object> attributes, String nameAttributeKey) {
         super(authorities, attributes, nameAttributeKey);
+    }
+
+    public String sendData() {
         
 
+        return "";
     }
 }

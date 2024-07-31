@@ -54,6 +54,11 @@ public class GuestDto implements Serializable {
 
     @Null
     private String emailCheckYn;
+    @Null
+    private String provider;
+    @Null
+    private String providerId;
+
 
     public static Guest toEntity(GuestDto guestDto) {
         return Guest.builder()
@@ -64,8 +69,9 @@ public class GuestDto implements Serializable {
                 .phone(guestDto.getPhone())
                 .role(guestDto.getRole())
                 .joinDt(guestDto.getJoinDt())
-                .expireDt(guestDto.getExpireDt())
                 .image(guestDto.getImage())
+                .provider(guestDto.getProvider())
+                .providerId(guestDto.getProviderId())
                 .build();
     }
 

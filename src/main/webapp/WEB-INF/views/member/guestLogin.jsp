@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/style.css">
     <link rel="stylesheet" href="${contextPath}/css/member.css">
     <script src="${contextPath}/js/member.js"></script>
@@ -19,7 +19,7 @@
 <script>
 
 $(document).ready(function() {
-    sessionStorage.removeItem("token");
+    sessionStorage.clear();
 });
 
 function loginBtn() {
@@ -49,19 +49,6 @@ function loginBtn() {
         }
     });
 }
-</script>
-<script type="text/javascript">
-    var naver_id_login = new naver_id_login("2_jqBMEoBm3D7oNJBMHy", "http://localhost:8090/login/oauth2/code/naver");
-    // 접근 토큰 값 출력
-    alert(naver_id_login.oauthParams.access_token);
-    // 네이버 사용자 프로필 조회
-    naver_id_login.get_naver_userprofile("naverSignInCallback()");
-    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-    function naverSignInCallback() {
-        alert(naver_id_login.getProfileData('email'));
-        alert(naver_id_login.getProfileData('nickname'));
-        alert(naver_id_login.getProfileData('age'));
-    }
 </script>
 <body>
 <!-- LoginController -->
@@ -125,15 +112,21 @@ function loginBtn() {
                         <div class="d-flex gap-3 flex-column">
                             <a id="kakao-login-btn"><img src="${contextPath}/images/kakao_login.png" height="50"
                                                          alt="카카오 로그인 버튼"/></a>
-                            <a id="naver-login-btn"><img src="${contextPath}/images/naver_login.png" height="50"
-                                                         alt="네이버 로그인 버튼"/></a>
+                            <div id="naver_id_login">
+                            <a id="naver-login-btn">
+                                <img src="${contextPath}/images/naver_login.png" height="50" alt="네이버 로그인 버튼" onclick="location.href='${contextPath}/oauth2/authorization/naver'"/>
+                                <script type="text/javascript">
+                                    var naver_id_login = new naver_id_login("2_jqBMEoBm3D7oNJBMHy", "http://localhost:8090/login/oauth2/code/naver");
+                                </script>
+                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
-</div>
+        </form>
+    </div>
 </section>
 </body>
 </html>

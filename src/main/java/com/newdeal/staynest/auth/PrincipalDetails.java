@@ -13,10 +13,8 @@ import java.util.List;
 
 public class PrincipalDetails implements UserDetails {
 
-    // 게스트 정보를 반환하는 getter 메서드
     @Getter
     private Guest guest;
-    // 호스트 정보를 반환하는 getter 메서드
     @Getter
     private Host host;
     private UserRoleEnum userRoleEnum;
@@ -30,7 +28,6 @@ public class PrincipalDetails implements UserDetails {
         this.host = host;
         this.userRoleEnum = host.getRole();
     }
-    // role에 따라 해당 member정보 리턴
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -47,7 +44,6 @@ public class PrincipalDetails implements UserDetails {
         return authorities;
     }
 
-    // role이 무엇인지에 따라 데이터를 가져옴
     @Override
     public String getPassword() {
         if (guest != null) {

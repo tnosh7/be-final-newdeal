@@ -398,29 +398,29 @@
                             <input type="hidden" name="identi" id="identi" value="guest">
                         </form>
                     </div>
-                    <div class="col-12 col-lg-2 d-flex align-items-center justify-content-center gap-3 flex-lg-column">
-                        <div class="bg-dark h-100 d-none d-lg-block" style="width: 1px; --bs-bg-opacity: .1;"></div>
-                        <div class="bg-dark w-100 d-lg-none" style="height: 1px; --bs-bg-opacity: .1;"></div>
-                        <div>or</div>
-                        <div class="bg-dark h-100 d-none d-lg-block" style="width: 1px; --bs-bg-opacity: .1;"></div>
-                        <div class="bg-dark w-100 d-lg-none" style="height: 1px; --bs-bg-opacity: .1;"></div>
-                    </div>
-                    <div class="col-12 col-lg-5 d-flex align-items-center">
-                        <div class="d-flex gap-3 flex-column" style="align-items: center">
-                            <button class="kakao-register-btn"
-                                    onclick="location.href='${contextPath}/oauth2/authorization/naver'">
-                                <img src="${contextPath}/images/kakao-btn.png" alt="카카오 심볼"
-                                     class="kakao-register-symbol">
-                                카카오로 시작하기
-                            </button>
-                            <button class="naver-register-btn"
-                                    onclick="location.href='${contextPath}/oauth2/authorization/naver'">
-                                <img src="${contextPath}/images/naver-btn.png" width="45px" height="40px" alt="네이버 심볼"
-                                     class="naver-register-symbol">
-                                네이버로 시작하기
-                            </button>
-                        </div>
-                    </div>
+<%--                    <div class="col-12 col-lg-2 d-flex align-items-center justify-content-center gap-3 flex-lg-column">--%>
+<%--                        <div class="bg-dark h-100 d-none d-lg-block" style="width: 1px; --bs-bg-opacity: .1;"></div>--%>
+<%--                        <div class="bg-dark w-100 d-lg-none" style="height: 1px; --bs-bg-opacity: .1;"></div>--%>
+<%--                        <div>or</div>--%>
+<%--                        <div class="bg-dark h-100 d-none d-lg-block" style="width: 1px; --bs-bg-opacity: .1;"></div>--%>
+<%--                        <div class="bg-dark w-100 d-lg-none" style="height: 1px; --bs-bg-opacity: .1;"></div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-12 col-lg-5 d-flex align-items-center">--%>
+<%--                        <div class="d-flex gap-3 flex-column" style="align-items: center">--%>
+<%--                            <button class="kakao-register-btn"--%>
+<%--                                    onclick="location.href='${contextPath}/oauth2/authorization/naver'">--%>
+<%--                                <img src="${contextPath}/images/kakao-btn.png" alt="카카오 심볼"--%>
+<%--                                     class="kakao-register-symbol">--%>
+<%--                                카카오로 시작하기--%>
+<%--                            </button>--%>
+<%--                            <button class="naver-register-btn"--%>
+<%--                                    onclick="location.href='${contextPath}/oauth2/authorization/naver'">--%>
+<%--                                <img src="${contextPath}/images/naver-btn.png" width="45px" height="40px" alt="네이버 심볼"--%>
+<%--                                     class="naver-register-symbol">--%>
+<%--                                네이버로 시작하기--%>
+<%--                            </button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
             </div>
         </div>
