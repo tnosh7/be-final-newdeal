@@ -31,6 +31,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     //  서버 재시작 없이 jsp 수정사항 반영
     implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'mysql:mysql-connector-java:8.0.33'
 
     //jsp 의존성 추가
     implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
