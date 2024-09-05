@@ -40,6 +40,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = tokenProvider.createToken(authResult);
         log.info("토큰: {}", token);
         response.addHeader("Authorization", "Bearer " + token);
+        tokenProvider.getTokenFromRequest(token, response, request); //  쿠키 테스트중
         //세션에 토큰 값 저장(여기서 보냄 - 인가 체크 때문);
         HttpSession session = request.getSession();
         session.setAttribute(TokenProvider.AUTHORIZATION_HEADER, "Bearer " + token);
