@@ -31,6 +31,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     //  서버 재시작 없이 jsp 수정사항 반영
     implementation 'org.springframework.boot:spring-boot-devtools'
+    //  갑자기 빌드 오류 떠서 추가하긴 했는데 확인바람
     implementation 'mysql:mysql-connector-java:8.0.33'
 
     //jsp 의존성 추가
