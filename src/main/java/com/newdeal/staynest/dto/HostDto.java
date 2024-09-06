@@ -46,13 +46,7 @@ public class HostDto implements Serializable {
     LocalDateTime joinDt;
 
     @Null
-    LocalDateTime expireDt;
-
-    @Null
     String image;
-
-    @Null
-    private String emailCheckYn;
 
     public static Host toEntity(HostDto hostDto) {
         return Host.builder()
@@ -63,7 +57,6 @@ public class HostDto implements Serializable {
                 .phone(hostDto.getPhone())
                 .role(hostDto.getRole())
                 .joinDt(hostDto.getJoinDt())
-                .expireDt(hostDto.getExpireDt())
                 .image(hostDto.getImage())
                 .build();
     }
