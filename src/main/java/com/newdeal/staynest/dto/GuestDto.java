@@ -47,13 +47,8 @@ public class GuestDto implements Serializable {
     LocalDateTime joinDt;
 
     @Null
-    LocalDateTime expireDt;
-
-    @Null
     String image;
 
-    @Null
-    private String emailCheckYn;
     @Null
     private String provider;
     @Null

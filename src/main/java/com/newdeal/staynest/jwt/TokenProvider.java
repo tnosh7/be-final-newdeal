@@ -131,6 +131,7 @@ public class TokenProvider implements InitializingBean {
     public Claims getUserInfoFromToken(String token) {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
+
     //세션에서 토큰 추출
     public String getTokenFromSession(HttpServletRequest request) {
         Object token = request.getSession().getAttribute(AUTHORIZATION_HEADER);

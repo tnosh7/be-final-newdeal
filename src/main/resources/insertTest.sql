@@ -12,30 +12,25 @@ DELETE FROM host where 1;
 
 
 -- Guest 데이터 삽입
-INSERT INTO guest (guestName, email, password, phone, role, join_dt, expire_dt, address, image, email_check_yn)
-VALUES ('Guest1', 'guest1@example.com', 'password1', '010-1111-1111', 'GUEST', NOW(), NOW() + INTERVAL 7 DAY,
-        'Address1', 'image1.jpg', 'N'),
-       ('Guest2', 'guest2@example.com', 'password2', '010-2222-2222', 'GUEST', NOW(), NOW() + INTERVAL 7 DAY,
-        'Address2', 'image2.jpg', 'N'),
-       ('Guest3', 'guest3@example.com', 'password3', '010-3333-3333', 'GUEST', NOW(), NOW() + INTERVAL 7 DAY,
-        'Address3', 'image3.jpg', 'N'),
-       ('Guest4', 'guest4@example.com', 'password4', '010-4444-4444', 'GUEST', NOW(), NOW() + INTERVAL 7 DAY,
-        'Address4', 'image4.jpg', 'N'),
-       ('Guest5', 'guest5@example.com', 'password5', '010-5555-5555', 'GUEST', NOW(), NOW() + INTERVAL 7 DAY,
-        'Address5', 'image5.jpg', 'N');
+INSERT INTO guest (guestName, email, password, phone, role, join_dt, address, image)
+VALUES ('Guest1', 'guest1@example.com', 'password1', '010-1111-1111', 'GUEST', NOW(),
+        'Address1', 'image1.jpg'),
+       ('Guest2', 'guest2@example.com', 'password2', '010-2222-2222', 'GUEST', NOW(),
+        'Address2', 'image2.jpg'),
+       ('Guest3', 'guest3@example.com', 'password3', '010-3333-3333', 'GUEST', NOW(),
+        'Address3', 'image3.jpg'),
+       ('Guest4', 'guest4@example.com', 'password4', '010-4444-4444', 'GUEST', NOW(),
+        'Address4', 'image4.jpg'),
+       ('Guest5', 'guest5@example.com', 'password5', '010-5555-5555', 'GUEST', NOW(),
+        'Address5', 'image5.jpg');
 
 -- Host 데이터 삽입
-INSERT INTO host (hostName, email, password, phone, role, join_dt, expire_dt, image, email_check_yn)
-VALUES ('Host1', 'host1@example.com', 'password1', '010-1111-1111', 'HOST', NOW(), NOW() + INTERVAL 7 DAY, 'image1.jpg',
-        'N'),
-       ('Host2', 'host2@example.com', 'password2', '010-2222-2222', 'HOST', NOW(), NOW() + INTERVAL 7 DAY, 'image2.jpg',
-        'N'),
-       ('Host3', 'host3@example.com', 'password3', '010-3333-3333', 'HOST', NOW(), NOW() + INTERVAL 7 DAY, 'image3.jpg',
-        'N'),
-       ('Host4', 'host4@example.com', 'password4', '010-4444-4444', 'HOST', NOW(), NOW() + INTERVAL 7 DAY, 'image4.jpg',
-        'N'),
-       ('Host5', 'host5@example.com', 'password5', '010-5555-5555', 'HOST', NOW(), NOW() + INTERVAL 7 DAY, 'image5.jpg',
-        'N');
+INSERT INTO host (hostName, email, password, phone, role, join_dt, image)
+VALUES ('Host1', 'host1@example.com', 'password1', '010-1111-1111', 'HOST', NOW(), 'image1.jpg'),
+       ('Host2', 'host2@example.com', 'password2', '010-2222-2222', 'HOST', NOW(),'image2.jpg'),
+       ('Host3', 'host3@example.com', 'password3', '010-3333-3333', 'HOST', NOW(), 'image3.jpg'),
+       ('Host4', 'host4@example.com', 'password4', '010-4444-4444', 'HOST', NOW(),  'image4.jpg'),
+       ('Host5', 'host5@example.com', 'password5', '010-5555-5555', 'HOST', NOW(),  'image5.jpg');
 
 -- Accommodation 데이터 삽입 (예제에서는 host 테이블의 존재를 가정하고 있음)
 INSERT INTO accommodation (host_id, accomm_name, accomm_category, room_category, address, detail_address, max_guests,
@@ -51,6 +46,7 @@ VALUES (1, 'Accommodation 1', 'Hotel', 'Single Room', '123 Main St', 'Apt 1', 2,
         'A quaint studio guesthouse.', 4.2, 8, NOW(), 51.5074, -0.1278),
        (5, 'Accommodation 5', 'Villa', 'Three Bedroom', '202 Birch St', 'House', 6, '200.00', '15:00', '12:00',
         'A luxurious three-bedroom villa.', 4.7, 5, NOW(), 48.8566, 2.3522);
+
 -- Reservation 데이터 삽입 (예제에서는 accommodation과 guest 테이블의 존재를 가정하고 있음)
 -- Accommodation 데이터는 미리 삽입되어 있어야 합니다.
 INSERT INTO reservation (accomm_id, guest_id, check_in_date, check_out_date, guests, created_at, message)
@@ -59,6 +55,7 @@ VALUES (1, 1, '2024-07-20', '2024-07-25', 2, NOW(), 'Message 1'),
        (3, 3, '2024-07-22', '2024-07-27', 1, NOW(), 'Message 3'),
        (4, 4, '2024-07-23', '2024-07-28', 4, NOW(), 'Message 4'),
        (5, 5, '2024-07-24', '2024-07-29', 2, NOW(), 'Message 5');
+
 
 -- Review 데이터 삽입 (예제에서는 accommodation과 reservation 테이블의 존재를 가정하고 있음)
 INSERT INTO review (reservation_id, star, content, created_at, accomm_id)

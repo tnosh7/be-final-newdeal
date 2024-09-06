@@ -39,21 +39,13 @@ public class Host {
     @Column(name = "join_dt",nullable = false)
     private LocalDateTime joinDt;
 
-    @Column(name = "expire_dt",nullable = false)
-    private LocalDateTime expireDt;
-
     @Column
     private String image;
-
-    @Column(name="email_check_yn", nullable = false)
-    private String emailCheckYn;
 
 
     @PrePersist
     protected void onCreate() {
         this.joinDt = LocalDateTime.now();
-        this.expireDt = LocalDateTime.now().plusDays(7);
-        this.emailCheckYn = "N";
     }
 
     public HostDto toDto() {
@@ -65,7 +57,6 @@ public class Host {
                 .phone(this.phone)
                 .role(this.role)
                 .joinDt(this.joinDt)
-                .expireDt(this.expireDt)
                 .image(this.image)
                 .build();
     }
